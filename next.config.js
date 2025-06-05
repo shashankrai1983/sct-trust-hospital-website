@@ -1,11 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Removed the 'output: export' line that was causing the build error
   eslint: {
     ignoreDuringBuilds: true,
   },
   experimental: {
     instrumentationHook: false,
+  },
+  // Enable ISR for dynamic content
+  async rewrites() {
+    return [];
   },
   images: {
     unoptimized: true,

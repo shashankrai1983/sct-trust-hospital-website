@@ -22,6 +22,9 @@ import { format } from 'date-fns';
 * - Improved loading experience
 */
 
+// Enable ISR with revalidation for blog listing
+export const revalidate = 1800; // Revalidate every 30 minutes
+
 export default async function Blog() {
   try {
     // Fetch all data server-side

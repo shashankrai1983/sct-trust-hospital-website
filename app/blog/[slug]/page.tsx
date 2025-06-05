@@ -72,16 +72,20 @@ const ptComponents = {
   },
 };
 
-// This function is required for static site generation with dynamic routes
+// Generate static params for ISR - only for essential pages
 export async function generateStaticParams() {
   try {
     const slugs = await getAllPostSlugs();
-    return slugs;
+    // Only pre-generate first 5 posts, others will be generated on-demand
+    return slugs.slice(0, 5);
   } catch (error) {
     console.error("Error generating static params:", error);
     return [];
   }
 }
+
+// Enable ISR with revalidation
+export const revalidate = 3600; // Revalidate every hour
 
 export default async function BlogPost({ params }: PageProps) {
   try {

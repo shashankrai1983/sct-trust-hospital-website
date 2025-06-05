@@ -7,20 +7,14 @@ import {
   ArrowRight, 
   Search,
   Tag,
-  ChevronRight
+  ChevronRight,
+  Filter
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import PostPreview from '@/components/blog/post-preview';
 import { getPosts, getFeaturedPost, getAllCategories } from '@/lib/api';
 import { format } from 'date-fns';
-
-/*
-* Converted to Server Component for better performance and SEO
-* - Moved data fetching to server-side
-* - Fixed client-side rendering issues
-* - Improved loading experience
-*/
 
 // Enable ISR with revalidation for blog listing
 export const revalidate = 1800; // Revalidate every 30 minutes
@@ -39,258 +33,227 @@ export default async function Blog() {
       (category: { slug?: { current?: string } }) => category?.slug && category.slug.current
     );
 
-    const formattedDate = featuredPost?.publishedAt 
-      ? format(new Date(featuredPost.publishedAt), 'MMMM d, yyyy')
-      : '';
+    // Sort posts by publishedAt to show latest first
+    const sortedPosts = blogPosts.sort((a: any, b: any) => 
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
+
+    const latestPosts = sortedPosts.slice(0, 12); // Show first 12 posts
 
     return (
-      <div className="pt-24 pb-16">
-        {/* Hero Section */}
-        <section className="py-16 bg-accent-cream/30">
+      <div className="pt-24 pb-16 bg-gray-50/50">
+        {/* Compact Header */}
+        <section className="py-12 bg-white border-b">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 green-title-text">
-                Health & Wellness Blog
-              </h1>
-              <p className="text-lg text-text-brown/80 mb-6">
-                Informative articles on women's health, pregnancy, and gynecological care
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Post Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 green-title-text">
-                Featured Article
-              </h2>
-            </div>
-
-            {featuredPost ? (
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                <div className="lg:col-span-3 order-2 lg:order-1">
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary-green/10 text-primary-green text-sm font-medium mb-4">
-                    {featuredPost.category}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-text-brown">
-                    {featuredPost.title}
-                  </h3>
-                  <p className="text-lg text-text-brown/80 mb-6">
-                    {featuredPost.excerpt}
+            <div className="max-w-7xl mx-auto">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold mb-3 green-title-text">
+                    Health & Wellness Blog
+                  </h1>
+                  <p className="text-lg text-text-brown/70">
+                    Latest insights on women's health, pregnancy, and wellness
                   </p>
-
-                  <div className="flex flex-wrap items-center text-sm text-text-brown/70 mb-6 gap-4">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>{formattedDate}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <User className="h-4 w-4 mr-1" />
-                      <span>{featuredPost.author}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      <span>{featuredPost.readTime} min read</span>
-                    </div>
-                  </div>
-
-                  <Button asChild className="btn-green">
-                    <Link href={`/blog/${featuredPost.slug?.current || '#'}`}>
-                      Read Full Article <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
                 </div>
 
-                <div className="lg:col-span-2 order-1 lg:order-2">
-                  <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-warm">
-                    <Image
-                      src={featuredPost.mainImage}
-                      alt={featuredPost.title}
-                      fill
-                      className="object-cover"
+                {/* Modern Search Bar */}
+                <div className="flex-shrink-0 w-full lg:w-96">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-text-brown/40" />
+                    <Input
+                      type="text"
+                      placeholder="Search articles..."
+                      className="pl-10 pr-4 py-3 bg-gray-50 border-gray-200 focus:bg-white focus:border-primary-green transition-all"
                     />
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="text-center py-8">
-                <p className="text-text-brown/70">No featured article available.</p>
-              </div>
-            )}
-          </div>
-        </section>
 
-        {/* Blog List Section */}
-        <section className="py-16 bg-accent-cream/30">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Blog Posts */}
-              <div className="lg:col-span-2">
-                <div className="mb-8">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-6 green-title-text">
-                    Latest Articles
-                  </h2>
-                </div>
-
-                {blogPosts.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {blogPosts.slice(1).map((post: any, i: number) => (
-                      <PostPreview 
-                        key={post._id} 
-                        post={post} 
-                        index={i} 
-                        inView={true} 
-                      />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <p className="text-text-brown/70">No blog posts found. Check back soon for new content!</p>
-                  </div>
-                )}
-
-                {blogPosts.length > 6 && (
-                  <div className="mt-12 flex justify-center">
-                    <Button variant="outline" className="px-6">
-                      Load More Articles
-                    </Button>
-                  </div>
-                )}
-              </div>
-
-              {/* Sidebar */}
-              <div className="lg:col-span-1">
-                <div className="space-y-8">
-                  {/* Search Box */}
-                  <div className="bg-white p-6 rounded-xl shadow-warm">
-                    <h3 className="text-lg font-bold mb-4 text-text-brown">Search Articles</h3>
-                    <div className="relative">
-                      <Input
-                        type="text"
-                        placeholder="Search..."
-                        className="pr-10"
-                      />
-                      <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-text-brown/50" />
-                    </div>
-                  </div>
-
-                  {/* Categories */}
-                  <div className="bg-white p-6 rounded-xl shadow-warm">
-                    <h3 className="text-lg font-bold mb-4 text-text-brown">Categories</h3>
-                    {validCategories.length > 0 ? (
-                      <ul className="space-y-2">
-                        {validCategories.map((category: any) => (
-                          <li key={category._id}>
-                            <Link 
-                              href={`/blog/category/${category.slug?.current || ''}`}
-                              className="flex justify-between items-center py-2 px-3 rounded-md hover:bg-accent-cream/50 transition-colors"
-                            >
-                              <span className="flex items-center text-text-brown">
-                                <Tag className="h-3 w-3 mr-2" />
-                                {category.title}
-                              </span>
-                              <span className="text-sm text-text-brown/60">{category.count}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-text-brown/70 text-center py-4">No categories found</p>
-                    )}
-                  </div>
-
-                  {/* Recent Posts */}
-                  <div className="bg-white p-6 rounded-xl shadow-warm">
-                    <h3 className="text-lg font-bold mb-4 text-text-brown">Recent Posts</h3>
-                    {blogPosts.length > 0 ? (
-                      <div className="space-y-4">
-                        {blogPosts.slice(0, 3).map((post: any) => (
-                          <Link href={`/blog/${post.slug?.current || '#'}`} key={post._id} className="group">
-                            <div className="flex items-start gap-3">
-                              <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">
-                                <Image
-                                  src={post.mainImage}
-                                  alt={post.title}
-                                  fill
-                                  className="object-cover"
-                                />
-                              </div>
-                              <div>
-                                <h4 className="text-sm font-medium text-text-brown group-hover:text-primary-green transition-colors line-clamp-2">
-                                  {post.title}
-                                </h4>
-                                <p className="text-xs text-text-brown/60 mt-1">
-                                  {format(new Date(post.publishedAt), 'MMMM d, yyyy')}
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    ) : (
-                      <p className="text-text-brown/70 text-center py-4">No recent posts</p>
-                    )}
-                  </div>
-
-                  {/* Newsletter */}
-                  <div className="bg-primary-green/10 p-6 rounded-xl shadow-warm">
-                    <h3 className="text-lg font-bold mb-2 text-text-brown">Subscribe to Our Newsletter</h3>
-                    <p className="text-text-brown/80 text-sm mb-4">Stay updated with the latest health tips and news</p>
-                    <div className="space-y-4">
-                      <Input
-                        type="email"
-                        placeholder="Your email address"
-                      />
-                      <Button className="w-full btn-green">
-                        Subscribe
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Topics Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 green-title-text">
-                  Popular Topics
-                </h2>
-                <p className="text-text-brown/80">
-                  Explore our most commonly covered health topics
-                </p>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-4">
-                {['Pregnancy', 'Fertility', 'PCOS', 'Women\'s Health', 'Menopause', 'Nutrition', 'Exercise', 'Mental Health'].map((topic) => (
-                  <Link 
-                    key={topic} 
-                    href={`/blog/tag/${topic.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="px-6 py-3 rounded-full bg-accent-cream hover:bg-primary-green/10 text-text-brown transition-colors"
+              {/* Category Pills */}
+              <div className="mt-8 flex flex-wrap gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="rounded-full bg-primary-green text-white border-primary-green hover:bg-primary-green/90"
+                >
+                  All Posts
+                </Button>
+                {validCategories.slice(0, 6).map((category: any) => (
+                  <Button 
+                    key={category._id}
+                    variant="outline" 
+                    size="sm" 
+                    asChild
+                    className="rounded-full hover:bg-primary-green hover:text-white hover:border-primary-green transition-all"
                   >
-                    {topic}
-                  </Link>
+                    <Link href={`/blog/category/${category.slug?.current || ''}`}>
+                      {category.title}
+                    </Link>
+                  </Button>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 bg-primary-green/10">
+        {/* Main Content */}
+        <section className="py-12">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto">
+              
+              {/* Featured Post - More Compact */}
+              {featuredPost && (
+                <div className="mb-12">
+                  <div className="bg-white rounded-2xl shadow-sm border overflow-hidden">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                      <div className="relative h-64 lg:h-80">
+                        <Image
+                          src={featuredPost.mainImage}
+                          alt={featuredPost.title}
+                          fill
+                          className="object-cover"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-block px-3 py-1 rounded-full bg-primary-green text-white text-xs font-medium">
+                            Featured
+                          </span>
+                        </div>
+                      </div>
+                      <div className="p-8 flex flex-col justify-center">
+                        <div className="flex items-center gap-4 text-sm text-text-brown/60 mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3" />
+                            {featuredPost.publishedAt && format(new Date(featuredPost.publishedAt), 'MMM d, yyyy')}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" />
+                            {featuredPost.readTime} min read
+                          </span>
+                        </div>
+                        <h2 className="text-xl md:text-2xl font-bold mb-3 text-text-brown line-clamp-2">
+                          {featuredPost.title}
+                        </h2>
+                        <p className="text-text-brown/70 mb-6 line-clamp-3">
+                          {featuredPost.excerpt}
+                        </p>
+                        <Button asChild className="btn-green w-fit">
+                          <Link href={`/blog/${featuredPost.slug?.current || '#'}`}>
+                            Read Article <ArrowRight className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Blog Grid - Modern and Compact */}
+              <div>
+                <div className="flex items-center justify-between mb-8">
+                  <h2 className="text-2xl font-bold text-text-brown">
+                    Latest Articles ({latestPosts.length})
+                  </h2>
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Filter className="h-4 w-4" />
+                    Filter
+                  </Button>
+                </div>
+
+                {latestPosts.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {latestPosts.map((post: any, index: number) => (
+                      <article key={post._id} className="group">
+                        <div className="bg-white rounded-xl shadow-sm border hover:shadow-md transition-all duration-300 overflow-hidden">
+                          {/* Image */}
+                          <div className="relative h-48 overflow-hidden">
+                            <Image
+                              src={post.mainImage}
+                              alt={post.title}
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            {post.category && (
+                              <div className="absolute top-3 left-3">
+                                <span className="inline-block px-2 py-1 rounded-md bg-white/90 text-xs font-medium text-text-brown">
+                                  {post.category}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Content */}
+                          <div className="p-6">
+                            {/* Meta */}
+                            <div className="flex items-center gap-4 text-xs text-text-brown/60 mb-3">
+                              <span className="flex items-center gap-1">
+                                <Calendar className="h-3 w-3" />
+                                {format(new Date(post.publishedAt), 'MMM d, yyyy')}
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <Clock className="h-3 w-3" />
+                                {post.readTime} min
+                              </span>
+                            </div>
+
+                            {/* Title */}
+                            <h3 className="font-bold text-text-brown mb-3 line-clamp-2 group-hover:text-primary-green transition-colors">
+                              <Link href={`/blog/${post.slug?.current || '#'}`}>
+                                {post.title}
+                              </Link>
+                            </h3>
+
+                            {/* Excerpt */}
+                            <p className="text-sm text-text-brown/70 line-clamp-3 mb-4">
+                              {post.excerpt}
+                            </p>
+
+                            {/* Author & Read More */}
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2 text-xs text-text-brown/60">
+                                <User className="h-3 w-3" />
+                                <span>{post.author}</span>
+                              </div>
+                              <Link 
+                                href={`/blog/${post.slug?.current || '#'}`}
+                                className="text-primary-green text-sm font-medium hover:text-primary-green/80 transition-colors flex items-center gap-1"
+                              >
+                                Read more
+                                <ArrowRight className="h-3 w-3" />
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-16">
+                    <p className="text-text-brown/60 text-lg">No blog posts found. Check back soon for new content!</p>
+                  </div>
+                )}
+
+                {/* Load More */}
+                {blogPosts.length > 12 && (
+                  <div className="mt-12 text-center">
+                    <Button variant="outline" className="px-8 py-3">
+                      Load More Articles
+                    </Button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Compact CTA */}
+        <section className="py-12 bg-primary-green/5 border-t">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 green-title-text">
+              <h2 className="text-2xl font-bold mb-3 green-title-text">
                 Have a Health Question?
               </h2>
-              <p className="text-lg text-text-brown/80 mb-8">
-                Schedule a consultation with Dr. Amita Shukla for personalized care and expert advice
+              <p className="text-text-brown/70 mb-6">
+                Schedule a consultation with Dr. Amita Shukla for personalized care
               </p>
               <Button asChild className="btn-green">
                 <Link href="/contact">Book an Appointment</Link>
@@ -302,15 +265,15 @@ export default async function Blog() {
         {/* Breadcrumbs */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <nav className="flex" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+            <ol className="inline-flex items-center space-x-1 md:space-x-2">
               <li className="inline-flex items-center">
-                <Link href="/" className="inline-flex items-center text-sm font-medium text-text-brown hover:text-primary-green">
+                <Link href="/" className="text-sm font-medium text-text-brown/60 hover:text-primary-green transition-colors">
                   Home
                 </Link>
               </li>
               <li>
                 <div className="flex items-center">
-                  <ChevronRight className="h-4 w-4 text-text-brown/50" />
+                  <ChevronRight className="h-4 w-4 text-text-brown/40" />
                   <span className="ms-1 text-sm font-medium text-text-brown md:ms-2">Blog</span>
                 </div>
               </li>
@@ -323,7 +286,7 @@ export default async function Blog() {
     console.error("Error fetching blog data:", error);
     return (
       <div className="pt-24 pb-16">
-        <section className="py-16 bg-accent-cream/30">
+        <section className="py-16 bg-gray-50/50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 green-title-text">

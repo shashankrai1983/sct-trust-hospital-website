@@ -133,7 +133,7 @@ export default async function Blog() {
 
                 {blogPosts.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {blogPosts.slice(1).map((post, i) => (
+                    {blogPosts.slice(1).map((post: any, i: number) => (
                       <PostPreview 
                         key={post._id} 
                         post={post} 
@@ -178,7 +178,7 @@ export default async function Blog() {
                     <h3 className="text-lg font-bold mb-4 text-text-brown">Categories</h3>
                     {validCategories.length > 0 ? (
                       <ul className="space-y-2">
-                        {validCategories.map((category) => (
+                        {validCategories.map((category: any) => (
                           <li key={category._id}>
                             <Link 
                               href={`/blog/category/${category.slug?.current || ''}`}
@@ -203,7 +203,7 @@ export default async function Blog() {
                     <h3 className="text-lg font-bold mb-4 text-text-brown">Recent Posts</h3>
                     {blogPosts.length > 0 ? (
                       <div className="space-y-4">
-                        {blogPosts.slice(0, 3).map(post => (
+                        {blogPosts.slice(0, 3).map((post: any) => (
                           <Link href={`/blog/${post.slug?.current || '#'}`} key={post._id} className="group">
                             <div className="flex items-start gap-3">
                               <div className="relative w-16 h-16 flex-shrink-0 rounded-md overflow-hidden">

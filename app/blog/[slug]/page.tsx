@@ -170,7 +170,7 @@ export default async function BlogPost({ params }: PageProps) {
               {/* Categories */}
               {post.categories && post.categories.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {post.categories.map((category, index) => (
+                  {post.categories.map((category: { title: string }, index: number) => (
                     <span 
                       key={index}
                       className="inline-block px-3 py-1 rounded-full bg-primary-green/10 text-primary-green text-sm font-medium"

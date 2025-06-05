@@ -3,20 +3,5 @@
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[functions]
-  node_bundler = "esbuild"
-
-# Optional: Set up branch deploys
-[context.deploy-preview]
-  command = "npm ci && npm run build"
-
-[context.branch-deploy]
-  command = "npm ci && npm run build"
+  NODE_VERSION = "20"
+  NPM_VERSION = "10"

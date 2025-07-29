@@ -40,7 +40,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="https://i.ibb.co/Xk4ZJ7K1/doctor-image.jpg" />
       </head>
-      <body className={`${inter.variable} ${lato.variable} font-sans bg-background`}>
+      <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <div className="relative overflow-hidden min-h-screen">
             <div className="relative">

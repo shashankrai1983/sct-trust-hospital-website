@@ -70,22 +70,54 @@ const AppointmentForm = () => {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSuccess(true);
-    
-    toast({
-      title: "Appointment Booked",
-      description: `Your appointment has been scheduled for ${format(data.date, 'PPP')} at ${data.time}.`,
-    });
-    
-    // Reset form after showing success for a moment
-    setTimeout(() => {
-      form.reset();
-      setIsSuccess(false);
-    }, 3000);
+    try {
+      // Prepare the data for API submission
+      const appointmentData = {
+        ...data,
+        date: format(data.date, 'yyyy-MM-dd'), // Convert date to string format
+      };
+
+      // Make API call to submit appointment
+      const response = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to book appointment');
+      }
+
+      // Success
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      
+      toast({
+        title: "Appointment Booked Successfully!",
+        description: `Your appointment has been scheduled for ${format(data.date, 'PPP')} at ${data.time}. We'll contact you soon to confirm.`,
+      });
+      
+      // Reset form after showing success for a moment
+      setTimeout(() => {
+        form.reset();
+        setIsSuccess(false);
+      }, 3000);
+
+    } catch (error) {
+      setIsSubmitting(false);
+      
+      const errorMessage = error instanceof Error ? error.message : 'Failed to book appointment';
+      
+      toast({
+        title: "Booking Failed",
+        description: errorMessage + ". Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    }
   };
 
   const services = [

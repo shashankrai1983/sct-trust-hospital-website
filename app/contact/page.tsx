@@ -11,9 +11,7 @@ import {
   CheckCircle,
   Stethoscope
 } from 'lucide-react';
-import ContactForm from '@/components/contact/contact-form';
 import AppointmentForm from '@/components/contact/appointment-form';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Contact() {
   const mapRef = useRef<HTMLDivElement>(null);
@@ -98,23 +96,38 @@ export default function Contact() {
             {/* Map */}
             <motion.div 
               ref={mapRef}
-              className="h-[500px] rounded-xl overflow-hidden shadow-warm relative"
+              className="h-full min-h-[600px] relative"
               initial={{ opacity: 0, x: -30 }}
               animate={isMapInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.7 }}
             >
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.2041290568392!2d80.9404!3d26.8929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd97c4b5ef81%3A0x5c7efd75d47eb1ad!2sSCT%20Trust%20Hospital!5e0!3m2!1sen!2sin!4v1621234567890!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              {/* Gradient border container */}
+              <div className="h-full p-1 rounded-xl bg-gradient-to-br from-primary-green/30 via-primary-beige/40 to-accent-cream/30 shadow-2xl">
+                <div className="h-full bg-white rounded-lg overflow-hidden relative shadow-inner">
+                  {/* Luxury overlay effect */}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-primary-green/5 via-transparent to-primary-beige/5 pointer-events-none z-10"></div>
+                
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.376856371708!2d80.94394227543874!3d26.891532476659734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39995779b534628b%3A0x3b80d7bd20d574bd!2sDr.%20Amita%20Shukla%20(SCT%20TRUST%20HOSPITAL)-%20Best%20Gynaecologist%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1753732175451!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full rounded-lg relative z-0"
+                  ></iframe>
+                  
+                  {/* Decorative corner elements */}
+                  <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-primary-green/40 rounded-tl-lg z-30"></div>
+                  <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-primary-green/40 rounded-tr-lg z-30"></div>
+                  <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-primary-green/40 rounded-bl-lg z-30"></div>
+                  <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-primary-green/40 rounded-br-lg z-30"></div>
+                </div>
+              </div>
             </motion.div>
 
-            {/* Contact and Appointment Form */}
+            {/* Appointment Form */}
             <motion.div 
               ref={formRef}
               initial={{ opacity: 0, x: 30 }}
@@ -122,32 +135,11 @@ export default function Contact() {
               transition={{ duration: 0.7 }}
             >
               <div className="bg-white rounded-xl shadow-warm p-8">
-                <Tabs defaultValue="appointment">
-                  <TabsList className="grid grid-cols-2 mb-6">
-                    <TabsTrigger value="appointment" className="text-base">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      Book Appointment
-                    </TabsTrigger>
-                    <TabsTrigger value="contact" className="text-base">
-                      <Mail className="h-4 w-4 mr-2" />
-                      Contact Us
-                    </TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="appointment">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-text-brown mb-2">Book Your Appointment</h2>
-                      <p className="text-text-brown/80">Fill out the form below to schedule a consultation with Dr. Amita Shukla</p>
-                    </div>
-                    <AppointmentForm />
-                  </TabsContent>
-                  <TabsContent value="contact">
-                    <div className="mb-6">
-                      <h2 className="text-2xl font-bold text-text-brown mb-2">Get in Touch</h2>
-                      <p className="text-text-brown/80">Have questions? Send us a message and we'll get back to you</p>
-                    </div>
-                    <ContactForm />
-                  </TabsContent>
-                </Tabs>
+                <div className="mb-6">
+                  <h2 className="text-2xl font-bold text-text-brown mb-2">Book Your Appointment</h2>
+                  <p className="text-text-brown/80">Fill out the form below to schedule a consultation with Dr. Amita Shukla</p>
+                </div>
+                <AppointmentForm />
               </div>
             </motion.div>
           </div>

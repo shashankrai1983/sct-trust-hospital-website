@@ -81,7 +81,7 @@ export default function About() {
             <div className="relative">
               <div className="relative h-[600px] rounded-2xl overflow-hidden shadow-warm-lg">
                 <Image 
-                  src="https://images.pexels.com/photos/5214961/pexels-photo-5214961.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                  src="https://i.ibb.co/wNcyfqGS/Amita-Shukla-website-image.png" 
                   alt="Dr. Amita Shukla" 
                   fill
                   className="object-cover"
@@ -103,7 +103,7 @@ export default function About() {
                 Meet Dr. Amita Shukla
               </h2>
               <p className="text-lg text-text-brown/80 mb-6">
-                Dr. Amita Shukla is a distinguished gynecologist and obstetrician with over a decade of experience in providing exceptional care to women across all age groups. As a Gold Medalist in MBBS and with specialized training in gynecological surgeries, Dr. Amita combines clinical excellence with a compassionate approach.
+                Dr. Amita Shukla is a distinguished gynecologist and obstetrician with 10+ years of experience in providing exceptional care to women across all age groups. As a Gold Medalist in MBBS and with specialized training in gynecological surgeries, Dr. Amita combines clinical excellence with a compassionate approach.
               </p>
               <p className="text-lg text-text-brown/80 mb-6">
                 Her practice at SCT Trust Hospital in Aliganj, Lucknow, focuses on providing personalized care for high-risk pregnancies, infertility issues, PCOS/PCOD management, and advanced laparoscopic procedures. Dr. Amita is known for her patient-centered approach, taking time to understand each patient's unique needs and concerns.

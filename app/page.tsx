@@ -89,7 +89,7 @@ export default function Home() {
   ];
 
   const stats = [
-    { label: 'Years Experience', value: 15, suffix: '+' },
+    { label: 'Years Experience', value: 10, suffix: '+' },
     { label: 'Successful Deliveries', value: 10000, suffix: '+' },
     { label: 'Consultations', value: 60000, suffix: '+' },
     { label: 'Happy Patients', value: 15000, suffix: '+' }
@@ -97,28 +97,28 @@ export default function Home() {
 
   const galleryImages = [
     {
-      src: "https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Building",
+      src: "https://i.ibb.co/8gGt9HFG/1.png",
+      alt: "Hospital Gallery Image 1",
     },
     {
-      src: "https://images.pexels.com/photos/247786/pexels-photo-247786.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Lobby",
+      src: "https://i.ibb.co/W4zLWNP2/3.jpg",
+      alt: "Hospital Gallery Image 2",
     },
     {
-      src: "https://images.pexels.com/photos/1692693/pexels-photo-1692693.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Consultation Room",
+      src: "https://i.ibb.co/rRgGgfzF/2.jpg",
+      alt: "Hospital Gallery Image 3",
     },
     {
-      src: "https://images.pexels.com/photos/3376799/pexels-photo-3376799.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Examination Room",
+      src: "https://i.ibb.co/cK4m5zrD/Whats-App-Image-2025-05-02-at-2-15-39-PM.jpg",
+      alt: "Hospital Gallery Image 4",
     },
     {
-      src: "https://images.pexels.com/photos/163714/hospital-laboratory-analysis-medical-163714.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Laboratory",
+      src: "https://i.ibb.co/Tq2DgD8F/t3.jpg",
+      alt: "Hospital Gallery Image 5",
     },
     {
-      src: "https://images.pexels.com/photos/1250655/pexels-photo-1250655.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Waiting Area",
+      src: "https://i.ibb.co/G4C9tm8g/30-3.jpg",
+      alt: "Hospital Gallery Image 6",
     }
   ];
 
@@ -192,7 +192,7 @@ export default function Home() {
                 Gynecologist & Obstetrician
               </div>
               <p className="text-lg text-text-brown/80 mb-8 max-w-xl">
-                With over 10 years of experience, Dr. Amita provides compassionate and comprehensive 
+                With 10+ years of experience, Dr. Amita provides compassionate and comprehensive 
                 care for women at every stage of life, specializing in high-risk pregnancies, 
                 infertility, and minimally invasive surgeries.
               </p>
@@ -395,7 +395,7 @@ export default function Home() {
                 About Dr. Amita Shukla
               </h2>
               <p className="text-lg text-text-brown/80 mb-6">
-                Dr. Amita Shukla is a highly qualified and experienced Gynecologist and Obstetrician practicing at SCT Trust Hospital in Lucknow. With over a decade of experience, she has helped thousands of women with various gynecological issues and has successfully delivered over 4,000 babies.
+                Dr. Amita Shukla is a highly qualified and experienced Gynecologist and Obstetrician practicing at SCT Trust Hospital in Lucknow. With 10+ years of experience, she has helped thousands of women with various gynecological issues and has successfully delivered over 4,000 babies.
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-2">

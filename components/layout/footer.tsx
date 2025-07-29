@@ -136,6 +136,23 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Google Maps Section */}
+        <div className="mt-12 border-t border-accent-cream/20 pt-8">
+          <h3 className="text-lg font-bold mb-6 text-center text-white">Find Us</h3>
+          <div className="rounded-xl overflow-hidden shadow-xl">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.376856371708!2d80.94394227543874!3d26.891532476659734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39995779b534628b%3A0x3b80d7bd20d574bd!2sDr.%20Amita%20Shukla%20(SCT%20TRUST%20HOSPITAL)-%20Best%20Gynaecologist%20in%20Lucknow!5e0!3m2!1sen!2sin!4v1753732175451!5m2!1sen!2sin" 
+              width="100%" 
+              height="350" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full"
+            />
+          </div>
+        </div>
+
         <div className="border-t border-accent-cream/20 mt-12 pt-8 text-center text-sm text-accent-cream/70">
           <p>© {new Date().getFullYear()} Dr. Amita Shukla. All rights reserved.</p>
         </div>

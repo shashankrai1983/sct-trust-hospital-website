@@ -7,27 +7,21 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    name: 'Priya Sharma',
-    content: 'Dr. Amita is amazing! Her expertise and compassionate care helped me through a complicated pregnancy. She was always available to answer my questions and provide reassurance.',
-    title: 'Mother of twins'
+    name: 'Salman Shakeel',
+    content: 'Doctor is very experienced and has a good behaviour and she is very good in consoling the patient and explaining and I\'m happy with all the services. And the staff is very good and their behaviour with the patient and attendant is very polite.',
+    title: 'Google Review'
   },
   {
     id: 2,
-    name: 'Neha Gupta',
-    content: 'After struggling with PCOS for years, Dr. Amita\'s treatment plan has made a tremendous difference. She takes time to explain everything and really listens to her patients.',
-    title: 'PCOS Patient'
+    name: 'Manvendra Pratap',
+    content: 'Honestly, I was surprised at how nice the hospital room was. Super clean, well-ventilated, and those big fancy windows made the whole place feel fresh and open. At Sct trust hospital, I had great vibes and really made the stay a lot more pleasant. Thanks to Dr. Amita Shukla ma\'am for such facility.',
+    title: 'Google Review'
   },
   {
     id: 3,
-    name: 'Anjali Patel',
-    content: 'Dr. Amita\'s laparoscopic surgery skills are exceptional. I had minimal discomfort and recovered quickly. Her follow-up care was thorough and personalized.',
-    title: 'Laparoscopy Patient'
-  },
-  {
-    id: 4,
-    name: 'Ritu Agarwal',
-    content: 'After years of struggling with infertility, Dr. Amita\'s expertise and care helped us welcome our beautiful baby girl. We\'re forever grateful for her support throughout our journey.',
-    title: 'Infertility Patient'
+    name: 'Lal Govind',
+    content: 'Hospital balcony at SCT trust hospital offers fresh air, sunlight, and peace making you feel human, not just a patient. It truly supports emotional well-being and accelerates healing. Thanks to Dr. Amita Shukla for such infrastructure in hospital.',
+    title: 'Google Review'
   }
 ];
 

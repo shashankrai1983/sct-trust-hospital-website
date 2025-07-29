@@ -15,164 +15,64 @@ export default function GalleryPage() {
   // Comprehensive gallery with many more images
   const allGalleryImages = [
     {
-      src: "https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Building",
+      src: "https://i.ibb.co/8gGt9HFG/1.png",
+      alt: "Hospital Gallery Image 1",
     },
     {
-      src: "https://images.pexels.com/photos/247786/pexels-photo-247786.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Lobby",
+      src: "https://i.ibb.co/W4zLWNP2/3.jpg",
+      alt: "Hospital Gallery Image 2",
     },
     {
-      src: "https://images.pexels.com/photos/1692693/pexels-photo-1692693.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Consultation Room",
+      src: "https://i.ibb.co/rRgGgfzF/2.jpg",
+      alt: "Hospital Gallery Image 3",
     },
     {
-      src: "https://images.pexels.com/photos/3376799/pexels-photo-3376799.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Examination Room",
+      src: "https://i.ibb.co/cK4m5zrD/Whats-App-Image-2025-05-02-at-2-15-39-PM.jpg",
+      alt: "Hospital Gallery Image 4",
     },
     {
-      src: "https://images.pexels.com/photos/163714/hospital-laboratory-analysis-medical-163714.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Laboratory",
+      src: "https://i.ibb.co/Tq2DgD8F/t3.jpg",
+      alt: "Hospital Gallery Image 5",
     },
     {
-      src: "https://images.pexels.com/photos/1250655/pexels-photo-1250655.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Waiting Area",
+      src: "https://i.ibb.co/G4C9tm8g/30-3.jpg",
+      alt: "Hospital Gallery Image 6",
     },
     {
-      src: "https://images.pexels.com/photos/3938023/pexels-photo-3938023.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Reception",
+      src: "https://i.ibb.co/Df5wnLg1/30-2.jpg",
+      alt: "Hospital Gallery Image 7",
     },
     {
-      src: "https://images.pexels.com/photos/2324837/pexels-photo-2324837.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Maternity Ward",
+      src: "https://i.ibb.co/Z1NtY7M3/17-May2025-3.jpg",
+      alt: "Hospital Gallery Image 8",
     },
     {
-      src: "https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Nursing Station",
+      src: "https://i.ibb.co/0y8mnc5C/17-May2025-2.jpg",
+      alt: "Hospital Gallery Image 9",
     },
     {
-      src: "https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Private Patient Room",
+      src: "https://i.ibb.co/tPPZwQJv/14may2025-1.jpg",
+      alt: "Hospital Gallery Image 10",
     },
     {
-      src: "https://images.pexels.com/photos/127873/pexels-photo-127873.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Corridor",
+      src: "https://i.ibb.co/bgjcwJZg/9may2025-3.jpg",
+      alt: "Hospital Gallery Image 11",
     },
     {
-      src: "https://images.pexels.com/photos/3845152/pexels-photo-3845152.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Ultrasound Room",
+      src: "https://i.ibb.co/2YfJfp59/3may2025-3.jpg",
+      alt: "Hospital Gallery Image 12",
     },
     {
-      src: "https://images.pexels.com/photos/4386464/pexels-photo-4386464.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Medical Equipment",
+      src: "https://i.ibb.co/TBqLVrn3/3may2025-2.jpg",
+      alt: "Hospital Gallery Image 13",
     },
     {
-      src: "https://images.pexels.com/photos/263337/pexels-photo-263337.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Recovery Room",
+      src: "https://i.ibb.co/TDbpQ4Pv/4june2025-6.jpg",
+      alt: "Hospital Gallery Image 14",
     },
     {
-      src: "https://images.pexels.com/photos/3938022/pexels-photo-3938022.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Exterior View",
-    },
-    {
-      src: "https://images.pexels.com/photos/935869/pexels-photo-935869.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Garden",
-    },
-    {
-      src: "https://images.pexels.com/photos/3279196/pexels-photo-3279196.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Medical Consultation",
-    },
-    {
-      src: "https://images.pexels.com/photos/4226215/pexels-photo-4226215.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Patient Checkup",
-    },
-    {
-      src: "https://images.pexels.com/photos/4226264/pexels-photo-4226264.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Doctor's Office",
-    },
-    {
-      src: "https://images.pexels.com/photos/5725516/pexels-photo-5725516.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "NICU Facility",
-    },
-    {
-      src: "https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Cafeteria",
-    },
-    {
-      src: "https://images.pexels.com/photos/139398/pexels-photo-139398.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Waiting Lounge",
-    },
-    {
-      src: "https://images.pexels.com/photos/2466444/pexels-photo-2466444.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Administration Office",
-    },
-    {
-      src: "https://images.pexels.com/photos/3769151/pexels-photo-3769151.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Modern Hospital Wing",
-    },
-    {
-      src: "https://images.pexels.com/photos/905874/pexels-photo-905874.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Patient Room",
-    },
-    {
-      src: "https://images.pexels.com/photos/1250665/pexels-photo-1250665.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Equipment",
-    },
-    {
-      src: "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Nursing Staff",
-    },
-    {
-      src: "https://images.pexels.com/photos/5327916/pexels-photo-5327916.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Patient Care",
-    },
-    {
-      src: "https://images.pexels.com/photos/4386467/pexels-photo-4386467.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Medication Dispensary",
-    },
-    {
-      src: "https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Medical Lab",
-    },
-    {
-      src: "https://images.pexels.com/photos/3259624/pexels-photo-3259624.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "X-Ray Department",
-    },
-    {
-      src: "https://images.pexels.com/photos/4098761/pexels-photo-4098761.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Pharmacy",
-    },
-    {
-      src: "https://images.pexels.com/photos/3771098/pexels-photo-3771098.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Staff Meeting Room",
-    },
-    {
-      src: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Information Desk",
-    },
-    {
-      src: "https://images.pexels.com/photos/5327870/pexels-photo-5327870.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Birthing Suite",
-    },
-    {
-      src: "https://images.pexels.com/photos/5327869/pexels-photo-5327869.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Gynecology Department",
-    },
-    {
-      src: "https://images.pexels.com/photos/7089401/pexels-photo-7089401.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Sonography Room",
-    },
-    {
-      src: "https://images.pexels.com/photos/7089614/pexels-photo-7089614.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Labor Room",
-    },
-    {
-      src: "https://images.pexels.com/photos/5214949/pexels-photo-5214949.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Prenatal Checkup Room",
-    },
-    {
-      src: "https://images.pexels.com/photos/3846035/pexels-photo-3846035.jpeg?auto=compress&cs=tinysrgb&w=800",
-      alt: "Hospital Entrance",
+      src: "https://i.ibb.co/6chtWg6y/4-June2025-4.jpg",
+      alt: "Hospital Gallery Image 15",
     }
   ];
 

@@ -312,7 +312,7 @@ export default function About() {
             >
               <div className="rounded-2xl overflow-hidden shadow-warm-lg h-full">
                 <Image 
-                  src="https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                  src="https://i.ibb.co/8gGt9HFG/1.png" 
                   alt="SCT Trust Hospital" 
                   fill
                   className="object-cover"

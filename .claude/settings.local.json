@@ -16,7 +16,9 @@
       "Bash(NODE_OPTIONS=\"--openssl-legacy-provider --max-old-space-size=4096\" npm run build)",
       "Bash(ls:*)",
       "Bash(mv:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git remote:*)",
+      "Bash(git remote add:*)"
     ],
     "deny": []
   }

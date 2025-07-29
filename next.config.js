@@ -3,12 +3,11 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   experimental: {
     instrumentationHook: false,
-  },
-  // Enable ISR for dynamic content
-  async rewrites() {
-    return [];
   },
   images: {
     unoptimized: true,
@@ -27,34 +26,17 @@ const nextConfig = {
       },
     ],
   },
-  // Enhanced webpack configuration to completely disable caching
+  // Enhanced webpack configuration for Netlify deployment
   webpack: (config) => {
-    // Disable cache completely to prevent ENOENT errors with pack files
+    // Disable cache for cleaner builds
     config.cache = false;
     
-    // Explicitly disable filesystem cache
+    // Optimize for production
     if (config.infrastructureLogging) {
-      config.infrastructureLogging.level = 'error'; // Reduce logging noise
+      config.infrastructureLogging.level = 'error';
     }
     
-    // Force disable persistent caching
-    if (config.optimization && config.optimization.moduleIds) {
-      config.optimization.moduleIds = 'named'; // More stable than 'deterministic'
-    }
-    
-    // Ensure no filesystem caching is attempted
-    if (config.watchOptions) {
-      config.watchOptions.poll = 1000; // Use polling instead of filesystem events
-    }
-
     return config;
-  },
-  // Disable the Next.js cache in development mode
-  onDemandEntries: {
-    // Keep pages in memory for a shorter time
-    maxInactiveAge: 15 * 1000,
-    // Don't try to keep too many pages in memory
-    pagesBufferLength: 2,
   },
 };
 

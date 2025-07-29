@@ -1,6 +1,16 @@
 [build]
-  command = "npm ci && npm run build"
+  command = "npm install && NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096' npm run build"
+  publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"
-  NPM_VERSION = "10"
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
+  NODE_OPTIONS = "--openssl-legacy-provider --max-old-space-size=4096"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

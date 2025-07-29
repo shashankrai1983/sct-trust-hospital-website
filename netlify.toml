@@ -1,16 +1,28 @@
 [build]
-  command = "npm install && NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096' npm run build"
+  command = "npm ci && NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096' npm run build"
   publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18"
   NPM_VERSION = "9"
   NODE_OPTIONS = "--openssl-legacy-provider --max-old-space-size=4096"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Handle client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  condition = "not_static"
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"

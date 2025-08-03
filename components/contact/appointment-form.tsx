@@ -47,9 +47,7 @@ const formSchema = z.object({
     message: "Please select a time slot.",
   }),
   message: z.string().optional(),
-  captchaToken: z.string().min(1, {
-    message: 'Please complete the CAPTCHA verification.',
-  }),
+  captchaToken: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -76,25 +74,11 @@ const AppointmentForm = () => {
   React.useEffect(() => {
     const loadRecaptcha = () => {
       if (typeof window !== 'undefined' && !window.grecaptcha) {
-        console.log('🔧 Loading reCAPTCHA V3 script...');
-        console.log('Site Key:', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
-        
         const script = document.createElement('script');
         script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
         script.async = true;
         script.defer = true;
-        
-        script.onload = () => {
-          console.log('✅ reCAPTCHA V3 script loaded successfully');
-        };
-        
-        script.onerror = (error) => {
-          console.error('❌ Failed to load reCAPTCHA V3 script:', error);
-        };
-        
         document.head.appendChild(script);
-      } else if (window.grecaptcha) {
-        console.log('✅ reCAPTCHA already loaded');
       }
     };
     loadRecaptcha();
@@ -102,28 +86,17 @@ const AppointmentForm = () => {
 
   const executeRecaptcha = async (): Promise<string | null> => {
     return new Promise((resolve) => {
-      console.log('🔧 Attempting to execute reCAPTCHA V3...');
-      
       if (typeof window !== 'undefined' && window.grecaptcha) {
-        console.log('✅ grecaptcha object found, executing...');
-        
         window.grecaptcha.ready(() => {
-          console.log('✅ reCAPTCHA ready, executing with action: appointment_booking');
-          
           window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'appointment_booking' })
             .then((token: string) => {
-              console.log('✅ reCAPTCHA token generated successfully:', token.substring(0, 20) + '...');
               resolve(token);
             })
-            .catch((error: any) => {
-              console.error('❌ reCAPTCHA execution failed:', error);
+            .catch(() => {
               resolve(null);
             });
         });
       } else {
-        console.error('❌ grecaptcha not found or window undefined');
-        console.log('Window type:', typeof window);
-        console.log('grecaptcha exists:', !!(window as any)?.grecaptcha);
         resolve(null);
       }
     });
@@ -377,22 +350,16 @@ const AppointmentForm = () => {
         />
         
         {/* reCAPTCHA V3 - Invisible, runs automatically */}
-        <div className="space-y-2">
-          <FormField
-            control={form.control}
-            name="captchaToken"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <div className="text-center text-sm text-muted-foreground">
-                    <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" className="underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" className="underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>
-                  </div>
-                </FormControl>
-                <FormMessage className="text-center" />
-              </FormItem>
-            )}
-          />
+        <div className="text-center text-sm text-muted-foreground">
+          <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" className="underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" className="underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>
         </div>
+        
+        {/* Show reCAPTCHA errors only during submission */}
+        {form.formState.errors.captchaToken && (
+          <div className="text-center text-sm text-red-600">
+            {form.formState.errors.captchaToken.message}
+          </div>
+        )}
         
         <Button 
           type="submit" 

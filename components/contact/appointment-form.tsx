@@ -76,11 +76,25 @@ const AppointmentForm = () => {
   React.useEffect(() => {
     const loadRecaptcha = () => {
       if (typeof window !== 'undefined' && !window.grecaptcha) {
+        console.log('🔧 Loading reCAPTCHA V3 script...');
+        console.log('Site Key:', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
+        
         const script = document.createElement('script');
         script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
         script.async = true;
         script.defer = true;
+        
+        script.onload = () => {
+          console.log('✅ reCAPTCHA V3 script loaded successfully');
+        };
+        
+        script.onerror = (error) => {
+          console.error('❌ Failed to load reCAPTCHA V3 script:', error);
+        };
+        
         document.head.appendChild(script);
+      } else if (window.grecaptcha) {
+        console.log('✅ reCAPTCHA already loaded');
       }
     };
     loadRecaptcha();
@@ -88,17 +102,28 @@ const AppointmentForm = () => {
 
   const executeRecaptcha = async (): Promise<string | null> => {
     return new Promise((resolve) => {
+      console.log('🔧 Attempting to execute reCAPTCHA V3...');
+      
       if (typeof window !== 'undefined' && window.grecaptcha) {
+        console.log('✅ grecaptcha object found, executing...');
+        
         window.grecaptcha.ready(() => {
+          console.log('✅ reCAPTCHA ready, executing with action: appointment_booking');
+          
           window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'appointment_booking' })
             .then((token: string) => {
+              console.log('✅ reCAPTCHA token generated successfully:', token.substring(0, 20) + '...');
               resolve(token);
             })
-            .catch(() => {
+            .catch((error: any) => {
+              console.error('❌ reCAPTCHA execution failed:', error);
               resolve(null);
             });
         });
       } else {
+        console.error('❌ grecaptcha not found or window undefined');
+        console.log('Window type:', typeof window);
+        console.log('grecaptcha exists:', !!(window as any)?.grecaptcha);
         resolve(null);
       }
     });

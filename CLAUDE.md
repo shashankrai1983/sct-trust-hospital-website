@@ -211,10 +211,47 @@ RECAPTCHA_SECRET_KEY=
 ```
 
 ### Development Workflow
-1. **Feature Development**: Create feature branch, use staging database
+
+#### Git Branch Strategy
+```
+master (production) ← merge after staging validation
+  ↑
+staging (testing) ← merge from feature branch
+  ↑
+feature/development (active development) ← all new work
+```
+
+#### Development Process
+1. **Feature Development**: Work on `feature/development` branch, use staging database
 2. **Local Testing**: Full application functionality with staging data
-3. **Staging Deployment**: Merge to staging branch for testing
-4. **Production Deployment**: Merge staging to master after validation
+3. **Staging Deployment**: Merge `feature/development` to `staging` branch for testing
+4. **Production Deployment**: Merge `staging` to `master` after validation
+
+#### Git Commands for Feature Development
+```bash
+# Switch to feature branch (already created)
+git checkout feature/development
+
+# Pull latest changes
+git pull origin feature/development
+
+# Work on your features, then commit
+git add .
+git commit -m "feat: your feature description"
+git push origin feature/development
+
+# When ready for staging testing
+git checkout staging
+git pull origin staging
+git merge feature/development
+git push origin staging
+
+# After staging validation, deploy to production
+git checkout master
+git pull origin master
+git merge staging
+git push origin master
+```
 
 ## Key Implementation Notes
 

@@ -166,35 +166,35 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard Overview</h1>
-          <p className="text-gray-600">Welcome to SCT Trust Hospital Admin Dashboard</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+          <p className="text-sm sm:text-base text-gray-600">Welcome to SCT Trust Hospital Admin Dashboard</p>
         </div>
         
         {/* View Toggle */}
-        <div className="flex bg-gray-100 rounded-lg p-1">
+        <div className="flex bg-gray-100 rounded-lg p-1 w-full sm:w-auto">
           <button
             onClick={() => setViewMode('dashboard')}
-            className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex items-center justify-center px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
               viewMode === 'dashboard'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            <ViewColumnsIcon className="w-4 h-4 mr-2" />
-            Dashboard
+            <ViewColumnsIcon className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">Dashboard</span>
           </button>
           <button
             onClick={() => setViewMode('calendar')}
-            className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+            className={`flex items-center justify-center px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
               viewMode === 'calendar'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
-            <CalendarDaysIcon className="w-4 h-4 mr-2" />
-            Calendar
+            <CalendarDaysIcon className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">Calendar</span>
           </button>
         </div>
       </div>
@@ -202,7 +202,7 @@ export default function DashboardPage() {
       {viewMode === 'dashboard' ? (
         <>
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" data-testid="stats">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4" data-testid="stats">
             {statCards.map((stat, index) => (
               <div key={stat.name} className="bg-white overflow-hidden shadow rounded-lg stat-card" data-testid={`stat-card-${index}`}>
                 <div className="p-5">
@@ -229,9 +229,9 @@ export default function DashboardPage() {
           </div>
 
           {/* Search and Filters */}
-          <div className="bg-white p-6 rounded-lg shadow space-y-4">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow space-y-4">
             {/* Search Bar */}
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
               <div className="flex-1 relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
@@ -239,7 +239,7 @@ export default function DashboardPage() {
                 <input
                   type="text"
                   placeholder="Search by name, email, phone, or service..."
-                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                  className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -251,80 +251,84 @@ export default function DashboardPage() {
                   setServiceFilter('')
                   setFilter('all')
                 }}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 whitespace-nowrap"
               >
                 Clear All
               </button>
             </div>
 
             {/* Column Filters */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <div className="flex items-center space-x-2">
                 <FunnelIcon className="h-4 w-4 text-gray-400" />
                 <span className="text-sm font-medium text-gray-700">Filters:</span>
               </div>
               
-              {/* Date Filter */}
-              <select
-                value={dateFilter}
-                onChange={(e) => setDateFilter(e.target.value)}
-                className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Dates</option>
-                {uniqueDates.map(date => (
-                  <option key={date} value={date}>{date}</option>
-                ))}
-              </select>
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 flex-1">
+                {/* Date Filter */}
+                <select
+                  value={dateFilter}
+                  onChange={(e) => setDateFilter(e.target.value)}
+                  className="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 flex-1 sm:flex-none"
+                >
+                  <option value="">All Dates</option>
+                  {uniqueDates.map(date => (
+                    <option key={date} value={date}>{date}</option>
+                  ))}
+                </select>
 
-              {/* Service Filter */}
-              <select
-                value={serviceFilter}
-                onChange={(e) => setServiceFilter(e.target.value)}
-                className="px-3 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="">All Services</option>
-                {uniqueServices.map(service => (
-                  <option key={service} value={service}>{service}</option>
-                ))}
-              </select>
+                {/* Service Filter */}
+                <select
+                  value={serviceFilter}
+                  onChange={(e) => setServiceFilter(e.target.value)}
+                  className="px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 flex-1 sm:flex-none"
+                >
+                  <option value="">All Services</option>
+                  {uniqueServices.map(service => (
+                    <option key={service} value={service}>{service}</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Status Filters */}
-            <div className="flex space-x-4">
-              <button
-                onClick={() => setFilter('all')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === 'all'
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                All ({appointments.length})
-              </button>
-              <button
-                onClick={() => setFilter('pending')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === 'pending'
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Pending ({appointments.filter(a => a.status.toLowerCase() === 'pending').length})
-              </button>
-              <button
-                onClick={() => setFilter('confirmed')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  filter === 'confirmed'
-                    ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Confirmed ({appointments.filter(a => a.status.toLowerCase() === 'confirmed').length})
-              </button>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setFilter('all')}
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'all'
+                      ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  All ({appointments.length})
+                </button>
+                <button
+                  onClick={() => setFilter('pending')}
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'pending'
+                      ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Pending ({appointments.filter(a => a.status.toLowerCase() === 'pending').length})
+                </button>
+                <button
+                  onClick={() => setFilter('confirmed')}
+                  className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'confirmed'
+                      ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Confirmed ({appointments.filter(a => a.status.toLowerCase() === 'confirmed').length})
+                </button>
+              </div>
               
               {/* Show filtered results count */}
               {(searchTerm || dateFilter || serviceFilter || filter !== 'all') && (
-                <div className="flex items-center px-3 py-2 text-sm text-gray-600 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <div className="flex items-center px-3 py-2 text-sm text-gray-600 bg-yellow-50 border border-yellow-200 rounded-lg self-start">
                   Showing {filteredAppointments.length} of {appointments.length} appointments
                 </div>
               )}
@@ -334,7 +338,7 @@ export default function DashboardPage() {
           {/* All Appointments Table */}
           <div className="bg-white shadow rounded-lg overflow-hidden">
             {filteredAppointments.length === 0 ? (
-              <div className="text-center py-12">
+              <div className="text-center py-12 px-4">
                 <CalendarIcon className="mx-auto h-12 w-12 text-gray-400" />
                 <h3 className="mt-2 text-sm font-medium text-gray-900">No appointments</h3>
                 <p className="mt-1 text-sm text-gray-500">
@@ -349,25 +353,25 @@ export default function DashboardPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                         Patient Details
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                         Contact
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                         Appointment
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                         Service
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden sm:table-cell">
                         Message
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap hidden lg:table-cell">
                         Booked On
                       </th>
                     </tr>
@@ -375,46 +379,46 @@ export default function DashboardPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredAppointments.map((appointment) => (
                       <tr key={appointment._id} className="hover:bg-gray-50 appointment-item" data-testid={`appointment-${appointment._id}`}>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="flex-shrink-0 h-10 w-10">
-                              <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                <span className="text-sm font-medium text-gray-700">
+                            <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
+                              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <span className="text-xs sm:text-sm font-medium text-gray-700">
                                   {appointment.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase()}
                                 </span>
                               </div>
                             </div>
-                            <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900" data-testid={`appointment-name`}>
+                            <div className="ml-3 sm:ml-4 min-w-0">
+                              <div className="text-sm font-medium text-gray-900 truncate" data-testid={`appointment-name`}>
                                 {appointment.name}
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{appointment.email}</div>
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 truncate max-w-32 sm:max-w-none">{appointment.email}</div>
                           <div className="text-sm text-gray-500">{appointment.phone}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">{appointment.date}</div>
                           <div className="text-sm text-gray-500">{appointment.time}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                          <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 max-w-24 sm:max-w-none truncate">
                             {appointment.service}
                           </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                           <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(appointment.status)}`}>
                             {appointment.status}
                           </span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-4 sm:px-6 py-4 hidden sm:table-cell">
                           <div className="text-sm text-gray-900 max-w-xs truncate" title={appointment.message || 'No message'}>
                             {appointment.message || 'No message'}
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">
                           {new Date(appointment.createdAt).toLocaleDateString()}
                         </td>
                       </tr>

@@ -73,7 +73,7 @@ export default function CalendarView({ appointments }: CalendarViewProps) {
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDayOfMonth; i++) {
       days.push(
-        <div key={`empty-${i}`} className="min-h-[120px] bg-gray-50"></div>
+        <div key={`empty-${i}`} className="min-h-[80px] sm:min-h-[120px] bg-gray-50"></div>
       )
     }
 
@@ -86,29 +86,38 @@ export default function CalendarView({ appointments }: CalendarViewProps) {
       days.push(
         <div
           key={day}
-          className={`min-h-[120px] p-2 border border-gray-200 bg-white hover:bg-gray-50 transition-colors ${
+          className={`min-h-[80px] sm:min-h-[120px] p-1 sm:p-2 border border-gray-200 bg-white hover:bg-gray-50 transition-colors ${
             isToday ? 'bg-blue-50 border-blue-200' : ''
           }`}
         >
-          <div className={`font-medium text-sm mb-2 ${isToday ? 'text-blue-600' : 'text-gray-900'}`}>
+          <div className={`font-medium text-xs sm:text-sm mb-1 sm:mb-2 ${isToday ? 'text-blue-600' : 'text-gray-900'}`}>
             {day}
           </div>
           
           <div className="space-y-1">
+            {/* Show first 1-3 events based on screen size */}
             {dayEvents.slice(0, 3).map((event, index) => (
               <div
                 key={event._id}
-                className="text-xs p-1 rounded bg-blue-100 text-blue-800 truncate cursor-pointer hover:bg-blue-200 transition-colors"
+                className={`text-xs p-1 rounded bg-blue-100 text-blue-800 truncate cursor-pointer hover:bg-blue-200 transition-colors ${
+                  index >= 1 ? 'hidden sm:block' : ''
+                }`}
                 title={`${event.name} - ${event.service} at ${event.time}`}
               >
-                <div className="font-medium">{event.time}</div>
-                <div className="truncate">{event.name}</div>
+                <div className="font-medium hidden sm:block">{event.time}</div>
+                <div className="truncate text-xs">
+                  <span className="sm:hidden">{event.time} - </span>
+                  {event.name}
+                </div>
               </div>
             ))}
             
-            {dayEvents.length > 3 && (
+            {dayEvents.length > 1 && (
               <div className="text-xs text-gray-500 font-medium">
-                +{dayEvents.length - 3} more
+                <span className="sm:hidden">+{dayEvents.length - 1} more</span>
+                <span className="hidden sm:inline">
+                  {dayEvents.length > 3 ? `+${dayEvents.length - 3} more` : ''}
+                </span>
               </div>
             )}
           </div>
@@ -129,13 +138,14 @@ export default function CalendarView({ appointments }: CalendarViewProps) {
   return (
     <div className="bg-white rounded-lg shadow">
       {/* Calendar Header */}
-      <div className="flex items-center justify-between p-6 border-b border-gray-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 sm:p-6 border-b border-gray-200 gap-4">
         <h2 className="text-lg font-semibold text-gray-900 flex items-center">
           <CalendarIcon className="w-5 h-5 mr-2" />
-          Appointments Calendar
+          <span className="hidden sm:inline">Appointments Calendar</span>
+          <span className="sm:hidden">Calendar</span>
         </h2>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center justify-center space-x-4">
           <button
             onClick={() => navigateMonth('prev')}
             className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
@@ -143,7 +153,7 @@ export default function CalendarView({ appointments }: CalendarViewProps) {
             <ChevronLeftIcon className="w-5 h-5" />
           </button>
           
-          <h3 className="text-lg font-medium text-gray-900 min-w-[140px] text-center">
+          <h3 className="text-base sm:text-lg font-medium text-gray-900 min-w-[120px] sm:min-w-[140px] text-center">
             {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
           </h3>
           
@@ -157,12 +167,13 @@ export default function CalendarView({ appointments }: CalendarViewProps) {
       </div>
 
       {/* Calendar Grid */}
-      <div className="p-6">
+      <div className="p-2 sm:p-6">
         {/* Day headers */}
         <div className="grid grid-cols-7 gap-0 mb-2">
           {dayNames.map(day => (
-            <div key={day} className="p-3 text-center text-sm font-medium text-gray-500 bg-gray-50 border border-gray-200">
-              {day}
+            <div key={day} className="p-2 sm:p-3 text-center text-xs sm:text-sm font-medium text-gray-500 bg-gray-50 border border-gray-200">
+              <span className="hidden sm:inline">{day}</span>
+              <span className="sm:hidden">{day.slice(0, 1)}</span>
             </div>
           ))}
         </div>

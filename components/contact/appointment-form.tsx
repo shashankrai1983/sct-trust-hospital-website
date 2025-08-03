@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle2, CalendarIcon } from 'lucide-react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -47,6 +48,9 @@ const formSchema = z.object({
     message: "Please select a time slot.",
   }),
   message: z.string().optional(),
+  captchaToken: z.string().min(1, {
+    message: 'Please complete the CAPTCHA verification.',
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -54,6 +58,8 @@ type FormValues = z.infer<typeof formSchema>;
 const AppointmentForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -64,10 +70,27 @@ const AppointmentForm = () => {
       phone: '',
       service: '',
       message: '',
+      captchaToken: '',
     },
   });
 
+  const onCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+    if (token) {
+      form.setValue('captchaToken', token);
+      form.clearErrors('captchaToken');
+    }
+  };
+
   const onSubmit = async (data: FormValues) => {
+    if (!captchaToken) {
+      form.setError('captchaToken', {
+        type: 'manual',
+        message: 'Please complete the CAPTCHA verification.',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
@@ -75,6 +98,7 @@ const AppointmentForm = () => {
       const appointmentData = {
         ...data,
         date: format(data.date, 'yyyy-MM-dd'), // Convert date to string format
+        captchaToken: captchaToken,
       };
 
       // Make API call to submit appointment
@@ -105,6 +129,8 @@ const AppointmentForm = () => {
       setTimeout(() => {
         form.reset();
         setIsSuccess(false);
+        setCaptchaToken(null);
+        recaptchaRef.current?.reset();
       }, 3000);
 
     } catch (error) {
@@ -297,6 +323,29 @@ const AppointmentForm = () => {
             </FormItem>
           )}
         />
+        
+        {/* CAPTCHA */}
+        <div className="space-y-2">
+          <FormField
+            control={form.control}
+            name="captchaToken"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div className="flex justify-center">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                      onChange={onCaptchaChange}
+                      theme="light"
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage className="text-center" />
+              </FormItem>
+            )}
+          />
+        </div>
         
         <Button 
           type="submit" 

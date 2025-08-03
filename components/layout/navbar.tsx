@@ -74,8 +74,8 @@ const Navbar = () => {
 
   return (
     <header className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-      isScrolled ? "bg-white shadow-warm py-2" : "bg-transparent py-4"
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 navbar-container",
+      isScrolled ? "bg-white shadow-warm py-2" : "bg-white/90 backdrop-blur-sm py-4"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
@@ -97,7 +97,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation - Tubelight Style */}
           <div className="hidden md:block">
-            <div className="flex items-center gap-2 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
+            <div className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-lg py-1 px-1 rounded-full shadow-lg">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const isActive = activeTab === link.title;

@@ -23,7 +23,36 @@ const appointmentSchema = z.object({
     message: "Please select a time slot.",
   }),
   message: z.string().optional(),
+  captchaToken: z.string().min(1, {
+    message: 'Please complete the CAPTCHA verification.',
+  }),
 });
+
+// Function to verify reCAPTCHA token
+async function verifyRecaptcha(token: string): Promise<boolean> {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  
+  if (!secretKey) {
+    console.error('RECAPTCHA_SECRET_KEY is not configured');
+    return false;
+  }
+
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `secret=${secretKey}&response=${token}`,
+    });
+
+    const data = await response.json();
+    return data.success === true;
+  } catch (error) {
+    console.error('Error verifying reCAPTCHA:', error);
+    return false;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -33,12 +62,25 @@ export async function POST(request: NextRequest) {
     // Validate the data using Zod schema
     const validatedData = appointmentSchema.parse(body);
     
+    // Verify reCAPTCHA token
+    const isValidCaptcha = await verifyRecaptcha(validatedData.captchaToken);
+    
+    if (!isValidCaptcha) {
+      return NextResponse.json({
+        success: false,
+        message: 'Invalid CAPTCHA verification. Please try again.',
+      }, { status: 400 });
+    }
+    
+    // Remove captchaToken from the data to be stored
+    const { captchaToken, ...appointmentData } = validatedData;
+    
     // Get the appointments collection
     const collection = await getAppointmentsCollection();
     
     // Prepare the appointment document
     const appointmentDoc = {
-      ...validatedData,
+      ...appointmentData,
       status: 'pending',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -95,5 +137,6 @@ export async function GET() {
     message: 'Appointments API is working',
     endpoint: '/api/appointments',
     methods: ['POST'],
+    captchaRequired: true,
   });
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
@@ -8,13 +8,13 @@ const testimonials = [
   {
     id: 1,
     name: 'Salman Shakeel',
-    content: 'Doctor is very experienced and has a good behaviour and she is very good in consoling the patient and explaining and I\'m happy with all the services. And the staff is very good and their behaviour with the patient and attendant is very polite.',
+    content: 'Doctor is very experienced and has a good behaviour and she is very good in consoling the patient and explaining and I&apos;m happy with all the services. And the staff is very good and their behaviour with the patient and attendant is very polite.',
     title: 'Google Review'
   },
   {
     id: 2,
     name: 'Manvendra Pratap',
-    content: 'Honestly, I was surprised at how nice the hospital room was. Super clean, well-ventilated, and those big fancy windows made the whole place feel fresh and open. At Sct trust hospital, I had great vibes and really made the stay a lot more pleasant. Thanks to Dr. Amita Shukla ma\'am for such facility.',
+    content: 'Honestly, I was surprised at how nice the hospital room was. Super clean, well-ventilated, and those big fancy windows made the whole place feel fresh and open. At Sct trust hospital, I had great vibes and really made the stay a lot more pleasant. Thanks to Dr. Amita Shukla ma&apos;am for such facility.',
     title: 'Google Review'
   },
   {
@@ -29,10 +29,10 @@ const TestimonialSlider = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
   
-  const nextTestimonial = () => {
+  const nextTestimonial = useCallback(() => {
     setDirection(1);
     setCurrent((current + 1) % testimonials.length);
-  };
+  }, [current]);
   
   const prevTestimonial = () => {
     setDirection(-1);
@@ -46,7 +46,7 @@ const TestimonialSlider = () => {
     }, 7000);
     
     return () => clearTimeout(timer);
-  }, [current]);
+  }, [nextTestimonial]);
   
   const variants = {
     enter: (direction: number) => ({
@@ -84,7 +84,7 @@ const TestimonialSlider = () => {
             className="text-center"
           >
             <p className="text-lg md:text-xl text-text-brown/90 mb-8 relative z-10">
-              "{testimonial.content}"
+              &quot;{testimonial.content}&quot;
             </p>
             <div>
               <p className="font-bold text-secondary-brown text-lg">{testimonial.name}</p>

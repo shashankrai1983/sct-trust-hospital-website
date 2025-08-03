@@ -79,11 +79,11 @@ export default function LuxuryHighRiskPregnancy() {
   const faqs = [
     {
       question: "What exactly is a high-risk pregnancy?",
-      answer: "A high-risk pregnancy is one where the mother or baby has an increased chance of health problems during pregnancy, labor, or delivery. The term 'high-risk' doesn't mean something will definitely go wrong, but rather indicates that closer monitoring and specialized care are needed to ensure the best outcomes for both mother and baby."
+      answer: "A high-risk pregnancy is one where the mother or baby has an increased chance of health problems during pregnancy, labor, or delivery. The term &apos;high-risk&apos; doesn&apos;t mean something will definitely go wrong, but rather indicates that closer monitoring and specialized care are needed to ensure the best outcomes for both mother and baby."
     },
     {
       question: "Does having a high-risk pregnancy mean my baby will have problems?",
-      answer: "No, being classified as high-risk doesn't mean your baby will definitely have problems. Many women with high-risk pregnancies deliver healthy babies with proper care and monitoring. The classification simply means you need extra attention and specialized care to ensure the best possible outcomes."
+      answer: "No, being classified as high-risk doesn&apos;t mean your baby will definitely have problems. Many women with high-risk pregnancies deliver healthy babies with proper care and monitoring. The classification simply means you need extra attention and specialized care to ensure the best possible outcomes."
     },
     {
       question: "How often will I need to visit the doctor during a high-risk pregnancy?",
@@ -107,11 +107,11 @@ export default function LuxuryHighRiskPregnancy() {
     },
     {
       question: "Will I need to stop working or restrict my activities?",
-      answer: "Activity restrictions depend on your specific condition and risk factors. Some women can continue normal activities with modifications, while others may need bed rest or work restrictions. We'll provide personalized guidance based on your situation and monitor your response to activities throughout pregnancy."
+      answer: "Activity restrictions depend on your specific condition and risk factors. Some women can continue normal activities with modifications, while others may need bed rest or work restrictions. We&apos;ll provide personalized guidance based on your situation and monitor your response to activities throughout pregnancy."
     },
     {
       question: "What foods and activities should I avoid during high-risk pregnancy?",
-      answer: "You should avoid alcohol, smoking, raw fish, undercooked meats, unpasteurized dairy, and excessive caffeine. Activity restrictions vary by condition - some may need to avoid heavy lifting or high-impact exercise. We'll provide you with a comprehensive list based on your specific risk factors."
+      answer: "You should avoid alcohol, smoking, raw fish, undercooked meats, unpasteurized dairy, and excessive caffeine. Activity restrictions vary by condition - some may need to avoid heavy lifting or high-impact exercise. We&apos;ll provide you with a comprehensive list based on your specific risk factors."
     },
     {
       question: "What will my high-risk pregnancy care cost?",
@@ -152,7 +152,7 @@ export default function LuxuryHighRiskPregnancy() {
                 
                 <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/90 backdrop-blur-md rounded-full shadow-warm">
                   <Heart className="h-5 w-5 text-primary-green" />
-                  <span className="text-primary-green font-semibold text-sm">You're Not Alone in This Journey</span>
+                  <span className="text-primary-green font-semibold text-sm">You&apos;re Not Alone in This Journey</span>
                 </div>
               </div>
 
@@ -296,7 +296,7 @@ export default function LuxuryHighRiskPregnancy() {
                 </div>
                 <h3 className="text-xl font-bold text-text-brown mb-4">What It Means</h3>
                 <p className="text-text-brown/80 leading-relaxed">
-                  Pregnancies can range from straightforward and low-risk, requiring routine antenatal care, to high-risk, which necessitates more intensive monitoring and care. The term "high-risk" indicates that the pregnancy needs extra attention to ensure the health and safety of both mother and baby.
+                  Pregnancies can range from straightforward and low-risk, requiring routine antenatal care, to high-risk, which necessitates more intensive monitoring and care. The term &quot;high-risk&quot; indicates that the pregnancy needs extra attention to ensure the health and safety of both mother and baby.
                 </p>
               </div>
               
@@ -610,10 +610,10 @@ export default function LuxuryHighRiskPregnancy() {
                 <div className="p-2 bg-gradient-to-br from-primary-green to-forest-green rounded-full">
                   <Heart className="h-4 w-4 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-text-brown">You're in Expert Hands</h3>
+                <h3 className="text-lg font-bold text-text-brown">You&apos;re in Expert Hands</h3>
               </div>
               <p className="text-base text-text-brown/80 leading-relaxed">
-                Having risk factors doesn't mean complications will occur. With Dr. Amita Shukla's specialized care, 
+                Having risk factors doesn&apos;t mean complications will occur. With Dr. Amita Shukla&apos;s specialized care, 
                 most high-risk pregnancies result in healthy outcomes.
               </p>
             </div>
@@ -659,7 +659,7 @@ export default function LuxuryHighRiskPregnancy() {
                     <h3 className="text-lg font-bold text-primary-green">CRITICAL - Call Immediately</h3>
                   </div>
                   <p className="text-text-brown/80 text-sm leading-relaxed">
-                    Don't wait - call <strong>+91 8303222222</strong> right away or go to the nearest emergency room
+                    Don&apos;t wait - call <strong>+91 8303222222</strong> right away or go to the nearest emergency room
                   </p>
                 </div>
                 
@@ -678,7 +678,7 @@ export default function LuxuryHighRiskPregnancy() {
               
               <div className="mt-6 p-4 bg-accent-cream/50 rounded-xl border border-primary-green/10 text-center">
                 <p className="text-text-brown/80 text-sm">
-                  <strong>When in doubt, always call.</strong> It's better to be safe than sorry. 
+                  <strong>When in doubt, always call.</strong> It&apos;s better to be safe than sorry. 
                   Our team is here to support you 24/7 during your pregnancy journey.
                 </p>
               </div>
@@ -723,7 +723,7 @@ export default function LuxuryHighRiskPregnancy() {
                     <span className="font-semibold">Emergency Protocol</span>
                   </div>
                   <p className="text-xl font-bold mb-2">If you experience any of these symptoms</p>
-                  <p className="text-white/90">Contact your doctor immediately - Don't wait!</p>
+                  <p className="text-white/90">Contact your doctor immediately - Don&apos;t wait!</p>
                 </div>
                 
                 <Button asChild className="bg-white text-secondary-brown hover:bg-gray-100 px-8 py-4 rounded-full shadow-xl font-bold text-lg">
@@ -1031,7 +1031,7 @@ export default function LuxuryHighRiskPregnancy() {
               </h2>
               
               <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-                Don't wait to get the specialized care you and your baby deserve. 
+                Don&apos;t wait to get the specialized care you and your baby deserve. 
                 Schedule your consultation with Dr. Amita Shukla today and take the first step 
                 towards a healthy pregnancy journey with comprehensive monitoring and expert care.
               </p>

@@ -2,6 +2,9 @@
   command = "npm install --legacy-peer-deps && NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096' npm run build"
   publish = ".next"
 
+[functions]
+  directory = "netlify/functions"
+
 [build.environment]
   NODE_VERSION = "18.19.0"
   NPM_VERSION = "10"
@@ -15,17 +18,57 @@
   package = "@netlify/plugin-nextjs"
 
 # Handle client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  condition = "not_static"
 
-# Security headers
+# HIPAA-Compliant Security Headers for Healthcare
 [[headers]]
   for = "/*"
   [headers.values]
+    # Prevent clickjacking attacks
+    X-Frame-Options = "DENY"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # XSS Protection
+    X-XSS-Protection = "1; mode=block"
+    
+    # Referrer Policy for privacy
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Strict Transport Security (HSTS) for HTTPS enforcement
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy for healthcare compliance
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://cdn.sanity.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.sanity.io https://*.sanity.io https://www.google.com; frame-src 'self' https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    
+    # Permissions Policy (Feature Policy) - restrictive for healthcare
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), ambient-light-sensor=()"
+    
+    # Cache Control for sensitive pages
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    
+    # Additional security headers
+    X-Permitted-Cross-Domain-Policies = "none"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# Specific headers for API routes (more restrictive)
+[[headers]]
+  for = "/api/*"
+  [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer"
+    Cache-Control = "no-cache, no-store, must-revalidate, private"
+    Pragma = "no-cache"
+    Expires = "0"
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# Headers for static assets (can be cached)
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"

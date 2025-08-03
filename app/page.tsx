@@ -171,7 +171,7 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen pt-24 pb-16 flex items-center bg-gradient-to-b from-bg-offwhite to-accent-cream/30">
+      <section className="relative min-h-screen pt-24 pb-16 flex items-center bg-gradient-to-b from-accent-cream to-accent-cream/30">
         <div 
           ref={heroRef}
           className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
@@ -201,7 +201,7 @@ export default function Home() {
                   <Link href="/contact">Book Appointment</Link>
                 </Button>
                 <Button asChild variant="outline" className="btn-outline">
-                  <Link href="/about">Dr. Amita's Bio</Link>
+                  <Link href="/about">Dr. Amita&apos;s Bio</Link>
                 </Button>
               </div>
             </motion.div>
@@ -417,7 +417,7 @@ export default function Home() {
               </div>
               <Button asChild variant="ghost" className="btn-green">
                 <Link href="/about" className="inline-flex items-center">
-                  Dr. Amita's Bio <ArrowRight className="ml-2 h-4 w-4" />
+                  Dr. Amita&apos;s Bio <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>

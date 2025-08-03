@@ -28,7 +28,7 @@ export default async function Blog() {
       getAllCategories()
     ]);
 
-    // Filter out categories that don't have valid slugs
+    // Filter out categories that don&apos;t have valid slugs
     const validCategories = categories.filter(
       (category: { slug?: { current?: string } }) => category?.slug && category.slug.current
     );
@@ -52,7 +52,7 @@ export default async function Blog() {
                     Health & Wellness Blog
                   </h1>
                   <p className="text-lg text-text-brown/70">
-                    Latest insights on women's health, pregnancy, and wellness
+                    Latest insights on women&apos;s health, pregnancy, and wellness
                   </p>
                 </div>
 

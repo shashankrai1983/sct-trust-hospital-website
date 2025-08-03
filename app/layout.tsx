@@ -2,10 +2,11 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Lato } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-import Navbar from '@/components/layout/navbar';
-import Footer from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 import { GridPattern } from '@/components/ui/grid-pattern';
+import { Providers } from './providers';
+import { ConditionalNavbar } from '@/components/layout/conditional-navbar';
+import { ConditionalFooter } from '@/components/layout/conditional-footer';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -40,23 +41,23 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="https://i.ibb.co/Xk4ZJ7K1/doctor-image.jpg" />
       </head>
-      <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <div className="relative overflow-hidden min-h-screen">
-            <div className="relative">
+      <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream antialiased`}>
+        <Providers>
+          <ThemeProvider attribute="class" defaultTheme="light">
+            <div className="relative overflow-hidden min-h-screen">
               <GridPattern 
                 width={50} 
                 height={50}
                 strokeDasharray="1 1"
-                className="text-primary-green/5 dark:text-primary-green/10"
+                className="fixed inset-0 text-primary-green/5 dark:text-primary-green/10 pointer-events-none"
               />
-              <Navbar />
+              <ConditionalNavbar />
               <main className="relative">{children}</main>
+              <ConditionalFooter />
+              <Toaster />
             </div>
-            <Footer />
-            <Toaster />
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

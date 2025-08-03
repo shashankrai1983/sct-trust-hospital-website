@@ -39,11 +39,11 @@ export default function FixedHighRiskPregnancy() {
   const faqs = [
     {
       question: "What exactly is a high-risk pregnancy?",
-      answer: "A high-risk pregnancy is one where the mother or baby has an increased chance of health problems during pregnancy, labor, or delivery. The term 'high-risk' doesn't mean something will definitely go wrong, but rather indicates that closer monitoring and specialized care are needed."
+      answer: "A high-risk pregnancy is one where the mother or baby has an increased chance of health problems during pregnancy, labor, or delivery. The term &apos;high-risk&apos; doesn&apos;t mean something will definitely go wrong, but rather indicates that closer monitoring and specialized care are needed."
     },
     {
       question: "Does having a high-risk pregnancy mean my baby will have problems?",
-      answer: "No, being classified as high-risk doesn't mean your baby will definitely have problems. Many women with high-risk pregnancies deliver healthy babies with proper care and monitoring."
+      answer: "No, being classified as high-risk doesn&apos;t mean your baby will definitely have problems. Many women with high-risk pregnancies deliver healthy babies with proper care and monitoring."
     },
     {
       question: "How often will I need to visit the doctor?",
@@ -121,7 +121,7 @@ export default function FixedHighRiskPregnancy() {
               Understanding High-Risk Pregnancy
             </h2>
             <p className="text-lg text-text-brown/80 leading-relaxed">
-              Pregnancies can range from straightforward and low-risk, requiring routine antenatal care, to high-risk, which necessitates more intensive monitoring and care. The term "high-risk" is used to indicate that the pregnancy needs extra attention to ensure the health and safety of both mother and baby, not to alarm the parents.
+              Pregnancies can range from straightforward and low-risk, requiring routine antenatal care, to high-risk, which necessitates more intensive monitoring and care. The term &quot;high-risk&quot; is used to indicate that the pregnancy needs extra attention to ensure the health and safety of both mother and baby, not to alarm the parents.
             </p>
           </div>
         </div>
@@ -278,7 +278,7 @@ export default function FixedHighRiskPregnancy() {
             </h2>
             
             <p className="text-lg text-text-brown/80 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Don't wait to get the specialized care you and your baby deserve. Schedule your consultation with Dr. Amita Shukla today and take the first step towards a healthy pregnancy journey.
+              Don&apos;t wait to get the specialized care you and your baby deserve. Schedule your consultation with Dr. Amita Shukla today and take the first step towards a healthy pregnancy journey.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-8">

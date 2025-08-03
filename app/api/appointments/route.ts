@@ -28,13 +28,13 @@ const appointmentSchema = z.object({
   }),
 });
 
-// Function to verify reCAPTCHA token
-async function verifyRecaptcha(token: string): Promise<boolean> {
+// Function to verify reCAPTCHA V3 token
+async function verifyRecaptcha(token: string, expectedAction: string = 'appointment_booking'): Promise<{ success: boolean; score?: number; action?: string }> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   
   if (!secretKey) {
     console.error('RECAPTCHA_SECRET_KEY is not configured');
-    return false;
+    return { success: false };
   }
 
   try {
@@ -47,10 +47,27 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
     });
 
     const data = await response.json();
-    return data.success === true;
+    
+    // For reCAPTCHA V3, check success, score, and action
+    if (data.success && data.score !== undefined) {
+      // V3 score threshold - typically 0.5 is good, but you can adjust
+      const scoreThreshold = 0.5;
+      const isScoreValid = data.score >= scoreThreshold;
+      const isActionValid = data.action === expectedAction;
+      
+      console.log(`reCAPTCHA V3 verification: score=${data.score}, action=${data.action}, expected=${expectedAction}`);
+      
+      return {
+        success: isScoreValid && isActionValid,
+        score: data.score,
+        action: data.action
+      };
+    }
+    
+    return { success: false };
   } catch (error) {
     console.error('Error verifying reCAPTCHA:', error);
-    return false;
+    return { success: false };
   }
 }
 
@@ -62,13 +79,17 @@ export async function POST(request: NextRequest) {
     // Validate the data using Zod schema
     const validatedData = appointmentSchema.parse(body);
     
-    // Verify reCAPTCHA token
-    const isValidCaptcha = await verifyRecaptcha(validatedData.captchaToken);
+    // Verify reCAPTCHA V3 token
+    const captchaResult = await verifyRecaptcha(validatedData.captchaToken);
     
-    if (!isValidCaptcha) {
+    if (!captchaResult.success) {
+      const errorMessage = captchaResult.score !== undefined 
+        ? `reCAPTCHA verification failed. Score: ${captchaResult.score}. Please try again.`
+        : 'Invalid CAPTCHA verification. Please try again.';
+      
       return NextResponse.json({
         success: false,
-        message: 'Invalid CAPTCHA verification. Please try again.',
+        message: errorMessage,
       }, { status: 400 });
     }
     

@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle2, CalendarIcon } from 'lucide-react';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -59,7 +58,6 @@ const AppointmentForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -74,31 +72,61 @@ const AppointmentForm = () => {
     },
   });
 
-  const onCaptchaChange = (token: string | null) => {
-    setCaptchaToken(token);
-    if (token) {
-      form.setValue('captchaToken', token);
-      form.clearErrors('captchaToken');
-    }
+  // Load reCAPTCHA V3 script
+  React.useEffect(() => {
+    const loadRecaptcha = () => {
+      if (typeof window !== 'undefined' && !window.grecaptcha) {
+        const script = document.createElement('script');
+        script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`;
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    };
+    loadRecaptcha();
+  }, []);
+
+  const executeRecaptcha = async (): Promise<string | null> => {
+    return new Promise((resolve) => {
+      if (typeof window !== 'undefined' && window.grecaptcha) {
+        window.grecaptcha.ready(() => {
+          window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, { action: 'appointment_booking' })
+            .then((token: string) => {
+              resolve(token);
+            })
+            .catch(() => {
+              resolve(null);
+            });
+        });
+      } else {
+        resolve(null);
+      }
+    });
   };
 
   const onSubmit = async (data: FormValues) => {
-    if (!captchaToken) {
+    setIsSubmitting(true);
+    
+    // Execute reCAPTCHA V3
+    const recaptchaToken = await executeRecaptcha();
+    
+    if (!recaptchaToken) {
       form.setError('captchaToken', {
         type: 'manual',
-        message: 'Please complete the CAPTCHA verification.',
+        message: 'reCAPTCHA verification failed. Please try again.',
       });
+      setIsSubmitting(false);
       return;
     }
-
-    setIsSubmitting(true);
+    
+    setCaptchaToken(recaptchaToken);
     
     try {
       // Prepare the data for API submission
       const appointmentData = {
         ...data,
         date: format(data.date, 'yyyy-MM-dd'), // Convert date to string format
-        captchaToken: captchaToken,
+        captchaToken: recaptchaToken,
       };
 
       // Make API call to submit appointment
@@ -130,7 +158,6 @@ const AppointmentForm = () => {
         form.reset();
         setIsSuccess(false);
         setCaptchaToken(null);
-        recaptchaRef.current?.reset();
       }, 3000);
 
     } catch (error) {
@@ -324,7 +351,7 @@ const AppointmentForm = () => {
           )}
         />
         
-        {/* CAPTCHA */}
+        {/* reCAPTCHA V3 - Invisible, runs automatically */}
         <div className="space-y-2">
           <FormField
             control={form.control}
@@ -332,13 +359,8 @@ const AppointmentForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <div className="flex justify-center">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                      onChange={onCaptchaChange}
-                      theme="light"
-                    />
+                  <div className="text-center text-sm text-muted-foreground">
+                    <p>This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" className="underline" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" className="underline" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>
                   </div>
                 </FormControl>
                 <FormMessage className="text-center" />

@@ -1,7 +1,8 @@
-# Updated for reCAPTCHA environment variable deployment
+# Updated for reCAPTCHA environment variable deployment - force new build
 [build]
   command = "npm install --legacy-peer-deps && NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS='--openssl-legacy-provider --max-old-space-size=4096' npm run build"
-  publish = ".next"
+  # Let the Next.js plugin manage the publish directory to avoid 404s on app/ routes
+  # publish = ".next"
 
 [build.environment]
   NODE_VERSION = "18.19.0"
@@ -14,6 +15,12 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Global rewrite to hand off routing to Next.js (prevents 404s for app/ routes like /dashboard)
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/next"
+  status = 200
 
 # Handle client-side routing
 

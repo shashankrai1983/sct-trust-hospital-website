@@ -36,46 +36,44 @@ export const CAPTCHA_MOCK_RESPONSES = {
 } as const;
 
 /**
- * Setup CAPTCHA mocking for tests
- * This intercepts Google's reCAPTCHA API calls and returns mock responses
+ * Setup CAPTCHA V3 mocking for tests
+ * This intercepts Google's reCAPTCHA V3 API calls and returns mock responses
  */
 export async function setupCaptchaMocking(page: Page, config: CaptchaTestConfig = defaultCaptchaConfig) {
-  // Mock the reCAPTCHA script loading
+  // Mock the reCAPTCHA V3 script loading
   await page.route('https://www.google.com/recaptcha/api.js*', async (route) => {
     const mockScript = `
       window.grecaptcha = {
         ready: function(callback) { 
           setTimeout(callback, 100); 
         },
-        render: function(container, options) {
-          const element = document.querySelector(container) || document.getElementById(container);
-          if (element) {
-            element.innerHTML = '<div data-testid="mock-recaptcha" style="width:304px;height:78px;border:1px solid #ccc;background:#f9f9f9;display:flex;align-items:center;justify-content:center;">Mock reCAPTCHA</div>';
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.setAttribute('data-testid', 'captcha-checkbox');
-            checkbox.style.margin = '10px';
-            checkbox.onchange = function() {
-              if (this.checked && options.callback) {
-                const mockToken = '${config.mockResponse === 'success' ? CAPTCHA_MOCK_RESPONSES.SUCCESS : ''}';
-                setTimeout(() => options.callback(mockToken), 500);
-              }
-            };
-            element.querySelector('[data-testid="mock-recaptcha"]').appendChild(checkbox);
-          }
-          return 'mock-widget-id';
-        },
-        reset: function(widgetId) {
-          const checkbox = document.querySelector('[data-testid="captcha-checkbox"]');
-          if (checkbox) {
-            checkbox.checked = false;
-          }
-        },
-        getResponse: function(widgetId) {
-          const checkbox = document.querySelector('[data-testid="captcha-checkbox"]');
-          return checkbox && checkbox.checked ? '${CAPTCHA_MOCK_RESPONSES.SUCCESS}' : '';
+        execute: function(siteKey, options) {
+          return new Promise((resolve) => {
+            // Simulate reCAPTCHA V3 execution
+            setTimeout(() => {
+              const mockToken = '${config.mockResponse === 'success' ? CAPTCHA_MOCK_RESPONSES.SUCCESS : ''}';
+              resolve(mockToken);
+              
+              // Add visual indicator for testing
+              const indicator = document.createElement('div');
+              indicator.setAttribute('data-testid', 'recaptcha-v3-indicator');
+              indicator.textContent = 'reCAPTCHA V3 executed (action: ' + (options?.action || 'default') + ')';
+              indicator.style.cssText = 'position:fixed;top:10px;right:10px;background:#4CAF50;color:white;padding:8px;border-radius:4px;z-index:9999;font-size:12px;';
+              document.body.appendChild(indicator);
+              
+              // Remove indicator after 2 seconds
+              setTimeout(() => {
+                if (indicator.parentNode) {
+                  indicator.parentNode.removeChild(indicator);
+                }
+              }, 2000);
+            }, 300);
+          });
         }
       };
+      
+      // Mock the script loaded state
+      window.recaptchaV3Loaded = true;
     `;
     
     await route.fulfill({
@@ -143,75 +141,65 @@ export async function setupCaptchaMocking(page: Page, config: CaptchaTestConfig 
 }
 
 /**
- * Wait for CAPTCHA to be loaded and ready
+ * Wait for reCAPTCHA V3 to be loaded and ready
  */
 export async function waitForCaptchaReady(page: Page, timeout: number = 10000) {
   await page.waitForFunction(
-    () => window.grecaptcha && window.grecaptcha.ready,
+    () => window.grecaptcha && window.grecaptcha.ready && window.grecaptcha.execute,
     { timeout }
   );
   
-  // Wait for the CAPTCHA element to be visible
-  await page.waitForSelector('[data-testid="mock-recaptcha"], .g-recaptcha', { 
-    timeout,
-    state: 'visible' 
-  });
+  // Wait for the script to be fully loaded
+  await page.waitForFunction(
+    () => window.recaptchaV3Loaded === true,
+    { timeout }
+  );
 }
 
 /**
- * Complete CAPTCHA challenge (for mocked tests)
+ * Complete reCAPTCHA V3 challenge (automatic execution simulation)
  */
 export async function completeCaptcha(page: Page, success: boolean = true) {
-  // For mocked CAPTCHA, click the checkbox
-  const mockCheckbox = page.locator('[data-testid="captcha-checkbox"]');
-  
-  if (await mockCheckbox.isVisible()) {
-    if (success) {
-      await mockCheckbox.check();
-      // Wait for the token to be set
-      await page.waitForTimeout(600);
-    }
-    return;
-  }
-
-  // For real CAPTCHA (if testing in real mode), we can't complete it automatically
-  // This would require manual intervention or special test keys from Google
+  // reCAPTCHA V3 is invisible and executes automatically on form submission
+  // We just need to wait for the execution indicator to appear
   if (success) {
-    console.warn('Real CAPTCHA detected - cannot complete automatically in tests');
+    // Check if the reCAPTCHA V3 indicator appears (means execution was triggered)
+    await page.waitForSelector('[data-testid="recaptcha-v3-indicator"]', { 
+      timeout: 5000,
+      state: 'visible' 
+    });
+    
+    // Wait for the indicator to disappear (execution complete)
+    await page.waitForSelector('[data-testid="recaptcha-v3-indicator"]', { 
+      timeout: 3000,
+      state: 'hidden' 
+    });
   }
 }
 
 /**
- * Reset CAPTCHA state
+ * Reset reCAPTCHA V3 state (not applicable for V3, but kept for compatibility)
  */
 export async function resetCaptcha(page: Page) {
-  const mockCheckbox = page.locator('[data-testid="captcha-checkbox"]');
-  
-  if (await mockCheckbox.isVisible()) {
-    await mockCheckbox.uncheck();
-    return;
-  }
-
-  // For real CAPTCHA, call the reset function
-  await page.evaluate(() => {
-    if (window.grecaptcha && window.grecaptcha.reset) {
-      window.grecaptcha.reset();
-    }
-  });
+  // reCAPTCHA V3 doesn't have a reset state like V2
+  // Each execution generates a new token automatically
+  console.log('reCAPTCHA V3 reset - tokens are automatically regenerated on each execution');
 }
 
 /**
- * Verify CAPTCHA visual elements are present
+ * Verify reCAPTCHA V3 elements are present (privacy policy text)
  */
 export async function verifyCaptchaDisplay(page: Page) {
-  // Check if CAPTCHA container is visible
-  const captchaContainer = page.locator('[data-testid="mock-recaptcha"], .g-recaptcha');
-  await expect(captchaContainer).toBeVisible();
-
-  // Check CAPTCHA dimensions (should be standard Google reCAPTCHA size)
-  const boundingBox = await captchaContainer.boundingBox();
-  expect(boundingBox?.width).toBeGreaterThan(300);
-  expect(boundingBox?.height).toBeGreaterThan(70);
+  // Check if reCAPTCHA V3 privacy policy text is visible
+  const privacyText = page.locator('text=This site is protected by reCAPTCHA');
+  await expect(privacyText).toBeVisible();
+  
+  // Check for Google Privacy Policy and Terms links
+  const privacyLink = page.locator('a[href="https://policies.google.com/privacy"]');
+  const termsLink = page.locator('a[href="https://policies.google.com/terms"]');
+  
+  await expect(privacyLink).toBeVisible();
+  await expect(termsLink).toBeVisible();
 }
 
 /**
@@ -274,7 +262,7 @@ export async function measureCaptchaLoadTime(page: Page): Promise<number> {
 }
 
 /**
- * Validate form submission with CAPTCHA
+ * Validate form submission with reCAPTCHA V3
  */
 export async function submitFormWithCaptcha(
   page: Page, 
@@ -310,13 +298,13 @@ export async function submitFormWithCaptcha(
     await page.fill('textarea[name="message"]', formData.message);
   }
   
-  // Complete CAPTCHA if requested
+  // Submit form (reCAPTCHA V3 executes automatically on submission)
+  await page.click('button[type="submit"]');
+  
+  // Wait for reCAPTCHA V3 execution if successful completion is expected
   if (completeCaptchaFirst) {
     await completeCaptcha(page, true);
   }
-  
-  // Submit form
-  await page.click('button[type="submit"]');
 }
 
 /**
@@ -337,19 +325,13 @@ export async function setupTestEnvironment(page: Page, testConfig?: Partial<Capt
   return config;
 }
 
-// Type declarations for global grecaptcha object
+// Type declarations for global grecaptcha V3 object
 declare global {
   interface Window {
     grecaptcha: {
       ready: (callback: () => void) => void;
-      render: (container: string | Element, options: {
-        sitekey: string;
-        callback?: (token: string) => void;
-        'expired-callback'?: () => void;
-        'error-callback'?: () => void;
-      }) => string;
-      reset: (widgetId?: string) => void;
-      getResponse: (widgetId?: string) => string;
+      execute: (siteKey: string, options: { action: string }) => Promise<string>;
     };
+    recaptchaV3Loaded?: boolean;
   }
 }

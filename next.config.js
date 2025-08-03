@@ -34,7 +34,20 @@ const nextConfig = {
     ],
   },
   // Enhanced webpack configuration for Netlify deployment
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    // Only apply polyfills for client-side builds
+    if (!isServer) {
+      // Add Node.js polyfills for browser environment
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        buffer: require.resolve('buffer'),
+        process: require.resolve('process/browser'),
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
     // Disable cache for cleaner builds
     config.cache = false;
     

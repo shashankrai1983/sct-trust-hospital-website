@@ -16,8 +16,9 @@ const navLinks = [
     icon: FileText,
     submenu: [
       { title: 'High Risk Pregnancy', href: '/services/high-risk-pregnancy' },
-      { title: 'Infertility Treatment', href: '/services/infertility' },
-      { title: 'PCOS/PCOD Treatment', href: '/services/pcos-pcod' },
+      { title: 'Pregnancy Complications', href: '/services/pregnancy-complications' },
+      { title: 'Infertility Treatment', href: '/services/infertility-treatment' },
+      { title: 'PCOS/PCOD Treatment', href: '/services/pcos-pcod-treatment' },
       { title: 'Laparoscopy', href: '/services/laparoscopy' },
       { title: 'Antenatal Care', href: '/services/antenatal-care' },
       { title: 'Well Women Health', href: '/services/well-women-health' },

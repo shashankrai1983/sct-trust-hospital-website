@@ -1,0 +1,94 @@
+# Page snapshot
+
+```yaml
+- main:
+  - img
+  - heading "Admin Dashboard" [level=2]
+  - paragraph: SCT Trust Hospital - Internal Access Only
+  - text: Invalid email or password Email address
+  - textbox "Email address": admin@scttrusthospital.com
+  - text: Password
+  - textbox "Password": admin123
+  - button
+  - button "Sign in"
+  - button "Check Auth Endpoints"
+  - paragraph: This is a secure admin area. Only authorized personnel should access this system.
+- contentinfo:
+  - img
+  - heading "Dr. Amita Shukla" [level=3]
+  - paragraph: Gynecologist with 10+ years of experience specializing in High-Risk Pregnancy, Infertility, PCOS/PCOD, Laparoscopy, and Hysteroscopy.
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - heading "Our Services" [level=3]
+  - list:
+    - listitem:
+      - link "High Risk Pregnancy":
+        - /url: /services/high-risk-pregnancy
+    - listitem:
+      - link "Infertility Treatment":
+        - /url: /services/infertility
+    - listitem:
+      - link "PCOS/PCOD Treatment":
+        - /url: /services/pcos-pcod
+    - listitem:
+      - link "Advanced Laparoscopy":
+        - /url: /services/laparoscopy
+    - listitem:
+      - link "Antenatal Care":
+        - /url: /services/antenatal-care
+    - listitem:
+      - link "Well Women Health":
+        - /url: /services/well-women-health
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "About Dr. Amita":
+        - /url: /about
+    - listitem:
+      - link "Health Blog":
+        - /url: /blog
+    - listitem:
+      - link "Book Appointment":
+        - /url: /contact
+    - listitem:
+      - link "FAQs":
+        - /url: /faq
+    - listitem:
+      - link "Privacy Policy":
+        - /url: /privacy-policy
+    - listitem:
+      - link "Terms & Conditions":
+        - /url: /terms
+  - heading "Contact Us" [level=3]
+  - list:
+    - listitem:
+      - img
+      - text: SCT Trust Hospital, A-1/7, Sector-H, Aliganj, Lucknow - 226024
+    - listitem:
+      - img
+      - link "+91 8303222222":
+        - /url: tel:+918303222222
+    - listitem:
+      - img
+      - link "amitaobg@gmail.com":
+        - /url: mailto:amitaobg@gmail.com
+    - listitem:
+      - img
+      - paragraph: Open 24 Hours with emergency and NICU facility
+  - heading "Find Us" [level=3]
+  - iframe
+  - paragraph: © 2025 Dr. Amita Shukla. All rights reserved.
+- region "Notifications (F8)":
+  - list
+- alert
+```

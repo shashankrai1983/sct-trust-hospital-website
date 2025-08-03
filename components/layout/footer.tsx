@@ -42,12 +42,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/services/infertility" className="hover:text-primary-green transition-colors">
+                <Link href="/services/pregnancy-complications" className="hover:text-primary-green transition-colors">
+                  Pregnancy Complications
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/infertility-treatment" className="hover:text-primary-green transition-colors">
                   Infertility Treatment
                 </Link>
               </li>
               <li>
-                <Link href="/services/pcos-pcod" className="hover:text-primary-green transition-colors">
+                <Link href="/services/pcos-pcod-treatment" className="hover:text-primary-green transition-colors">
                   PCOS/PCOD Treatment
                 </Link>
               </li>

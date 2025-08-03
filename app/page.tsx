@@ -52,17 +52,24 @@ export default function Home() {
       imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png'
     },
     { 
+      title: 'Pregnancy Complications', 
+      description: '24/7 emergency care for pregnancy complications with immediate intervention capabilities.', 
+      icon: <Heart className="h-10 w-10 text-secondary-brown" />,
+      href: '/services/pregnancy-complications',
+      imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png'
+    },
+    { 
       title: 'Infertility Treatment', 
       description: 'Comprehensive evaluation and treatment options for couples struggling with fertility issues.', 
       icon: <Heart className="h-10 w-10 text-secondary-brown" />,
-      href: '/services/infertility',
+      href: '/services/infertility-treatment',
       imageUrl: 'https://i.ibb.co/zT9kR7kq/Infertility-Care.png'
     },
     { 
       title: 'PCOS/PCOD Treatment', 
       description: 'Effective management of polycystic ovary syndrome with personalized treatment plans.', 
       icon: <Activity className="h-10 w-10 text-secondary-brown" />,
-      href: '/services/pcos-pcod',
+      href: '/services/pcos-pcod-treatment',
       imageUrl: 'https://i.ibb.co/LXHkZKWc/PCOS-PCOD-care.png'
     },
     { 

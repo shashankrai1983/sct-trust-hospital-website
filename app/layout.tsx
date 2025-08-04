@@ -39,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link rel="icon" href="https://i.ibb.co/Xk4ZJ7K1/doctor-image.jpg" />
       </head>
       <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream antialiased`}>

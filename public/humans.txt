@@ -1,0 +1,21 @@
+/* TEAM */
+Website Developer: Claude Code (Anthropic)
+Development Location: AI-Assisted Development
+Contact: support@anthropic.com
+
+Medical Expert: Dr. Amita Shukla
+Title: MS (OBS & GYNAE), Gold Medalist MBBS
+Hospital: SCT Trust Hospital
+Location: Lucknow, Uttar Pradesh, India
+Contact: amitaobg@gmail.com
+
+/* THANKS */
+Built with Next.js, TypeScript, Tailwind CSS
+Hosted on Netlify
+Medical content reviewed for accuracy and compliance
+
+/* SITE */
+Last update: 2025/01/01
+Language: English / Hindi
+Doctype: HTML5
+IDE: Visual Studio Code, Claude Code

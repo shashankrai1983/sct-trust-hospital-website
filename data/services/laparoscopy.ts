@@ -48,7 +48,7 @@ export const laparoscopyData: ServicePageData = {
   },
 
   overview: {
-    introduction: "Laparoscopic surgery, also known as minimally invasive surgery, uses small incisions and specialized instruments to perform complex gynecological procedures. Dr. Amita Shukla specializes in advanced laparoscopic techniques that offer significant advantages over traditional open surgery, including reduced pain, faster recovery, minimal scarring, and lower risk of complications.",
+    introduction: "Laparoscopic surgery, also known as minimally invasive surgery, uses small incisions and specialized instruments to perform complex gynecological procedures. Dr. Amita Shukla specializes in advanced laparoscopic techniques for conditions like endometriosis, ovarian cysts related to <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS/PCOD</a>, and fertility-enhancing procedures for women undergoing <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>infertility treatment</a>. These minimally invasive approaches offer significant advantages over traditional surgery.",
     keyPoints: [
       "Minimally invasive approach with 3-4 small incisions instead of large surgical cuts",
       "High-definition camera systems for precise visualization during surgery",
@@ -641,7 +641,28 @@ export const laparoscopyData: ServicePageData = {
     structuredData: {
       "@type": "MedicalProcedure",
       "name": "Advanced Laparoscopic Surgery",
-      "description": "Minimally invasive laparoscopic surgery for gynecological conditions including ovarian cysts, endometriosis, fibroids, and diagnostic procedures."
+      "description": "Minimally invasive laparoscopic surgery for gynecological conditions including ovarian cysts, endometriosis, fibroids, and diagnostic procedures.",
+      "procedureType": "Minimally Invasive Surgery",
+      "bodyLocation": "Abdomen, Pelvis, Reproductive organs",
+      "preparation": "Pre-operative evaluation, fasting, medical clearance",
+      "followup": "Post-operative monitoring, follow-up visits at 1 week and 4-6 weeks",
+      "duration": "PT30M/PT180M",
+      "benefits": [
+        "Minimal scarring with small keyhole incisions",
+        "Faster recovery compared to open surgery",
+        "Reduced post-operative pain and complications",
+        "Shorter hospital stay and earlier return to activities"
+      ],
+      "riskFactor": [
+        "Previous abdominal surgery",
+        "Severe obesity",
+        "Certain medical conditions"
+      ],
+      "medicalCode": {
+        "@type": "MedicalCode",
+        "code": "58570-58579",
+        "codingSystem": "CPT"
+      }
     }
   },
 

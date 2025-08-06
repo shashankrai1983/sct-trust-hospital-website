@@ -641,7 +641,29 @@ export const antenatalCareData: ServicePageData = {
     structuredData: {
       "@type": "MedicalProcedure",
       "name": "Comprehensive Antenatal Care",
-      "description": "Complete pregnancy care including regular monitoring, screening tests, health education, and personalized guidance throughout pregnancy for optimal maternal and fetal outcomes."
+      "description": "Complete pregnancy care including regular monitoring, screening tests, health education, and personalized guidance throughout pregnancy for optimal maternal and fetal outcomes.",
+      "procedureType": "Prenatal Care and Monitoring",
+      "bodyLocation": "Uterus, Reproductive system",
+      "preparation": "Pregnancy confirmation, medical history review, initial blood tests",
+      "followup": "Regular visits increasing from monthly to weekly, postpartum care for 6 weeks",
+      "duration": "PT40W",
+      "benefits": [
+        "Early detection of pregnancy complications",
+        "Optimal maternal and fetal health monitoring",
+        "Comprehensive health education for informed decisions",
+        "Better preparation for labor and delivery"
+      ],
+      "indication": [
+        "Confirmed pregnancy",
+        "Routine pregnancy monitoring",
+        "High-risk pregnancy management",
+        "Preconception counseling"
+      ],
+      "medicalCode": {
+        "@type": "MedicalCode",
+        "code": "Z34.9",
+        "codingSystem": "ICD-10"
+      }
     }
   },
 

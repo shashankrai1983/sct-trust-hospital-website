@@ -640,7 +640,28 @@ export const pregnancyComplicationsData: ServicePageData = {
     structuredData: {
       "@type": "MedicalProcedure",
       "name": "Pregnancy Complications Management",
-      "description": "Emergency and comprehensive management of pregnancy complications including pre-eclampsia, gestational diabetes, placental disorders, and critical obstetric conditions."
+      "description": "Emergency and comprehensive management of pregnancy complications including pre-eclampsia, gestational diabetes, placental disorders, and critical obstetric conditions.",
+      "procedureType": "Emergency and Specialized Pregnancy Care",
+      "bodyLocation": "Uterus, Placenta, Maternal-fetal system",
+      "preparation": "Emergency assessment, maternal-fetal monitoring, laboratory tests",
+      "followup": "Intensive monitoring, specialized care, delivery planning as needed",
+      "benefits": [
+        "Life-saving emergency care",
+        "Specialized management of complex conditions",
+        "Optimal maternal and fetal outcomes",
+        "Coordinated multidisciplinary care"
+      ],
+      "indication": [
+        "Pre-eclampsia or eclampsia",
+        "Gestational diabetes complications",
+        "Placental abruption or previa",
+        "Other critical pregnancy emergencies"
+      ],
+      "medicalCode": {
+        "@type": "MedicalCode",
+        "code": "O99.9",
+        "codingSystem": "ICD-10"
+      }
     }
   },
 

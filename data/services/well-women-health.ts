@@ -48,14 +48,14 @@ export const wellWomenHealthData: ServicePageData = {
   },
 
   overview: {
-    introduction: "Well women health focuses on preventive care and health maintenance for women throughout their lives. Dr. Amita Shukla provides comprehensive well women services in Lucknow, emphasizing early detection of health issues, health promotion, and disease prevention through regular screenings, health education, and personalized wellness planning.",
+    introduction: "Well women health focuses on preventive care and health maintenance for women throughout their lives. Dr. Amita Shukla provides comprehensive well women services in Lucknow, emphasizing early detection of conditions like <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS/PCOD</a>, health promotion through <a href='/services/antenatal-care' class='text-primary-green hover:text-primary-green/80 underline'>preconception counseling</a>, and disease prevention through regular screenings and personalized wellness planning.",
     keyPoints: [
-      "Regular health screenings and preventive examinations for early detection",
-      "Age-appropriate health maintenance and wellness counseling",
-      "Reproductive health planning and contraceptive counseling",
-      "Menopause management and hormone health optimization",
-      "Health education about nutrition, exercise, and lifestyle modifications",
-      "Coordination of care with other specialists for comprehensive health management"
+      "Regular health screenings and preventive examinations for early detection of reproductive health issues",
+      "Age-appropriate health maintenance and wellness counseling tailored to life stage needs",
+      "Reproductive health planning and <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility counseling</a> for family planning",
+      "Menopause management and hormone health optimization with personalized treatment approaches",
+      "Health education about nutrition, exercise, and lifestyle modifications for optimal wellness",
+      "Seamless coordination with <a href='/about' class='text-primary-green hover:text-primary-green/80 underline'>Dr. Amita's specialized services</a> for comprehensive women's healthcare"
     ],
     statistics: [
       {
@@ -641,7 +641,28 @@ export const wellWomenHealthData: ServicePageData = {
     structuredData: {
       "@type": "MedicalProcedure",
       "name": "Well Women Health Care",
-      "description": "Comprehensive preventive healthcare services for women including regular check-ups, screening tests, health education, and wellness programs for optimal health throughout all life stages."
+      "description": "Comprehensive preventive healthcare services for women including regular check-ups, screening tests, health education, and wellness programs for optimal health throughout all life stages.",
+      "procedureType": "Preventive Healthcare and Wellness",
+      "bodyLocation": "Reproductive system, General health assessment",
+      "preparation": "Medical history review, current medications list, previous health records",
+      "followup": "Annual wellness visits, preventive screening as recommended",
+      "benefits": [
+        "Early detection of health issues",
+        "Preventive care for better health outcomes",
+        "Personalized wellness planning",
+        "Health education and lifestyle guidance"
+      ],
+      "indication": [
+        "Annual wellness examination",
+        "Preventive health screening",
+        "Health maintenance and education",
+        "Women's health concerns"
+      ],
+      "medicalCode": {
+        "@type": "MedicalCode",
+        "code": "Z00.00",
+        "codingSystem": "ICD-10"
+      }
     }
   },
 

@@ -47,14 +47,14 @@ export const pcosPcodTreatmentData: ServicePageData = {
   },
 
   overview: {
-    introduction: "PCOS (Polycystic Ovary Syndrome) affects 1 in 10 women of reproductive age in India. This complex hormonal disorder can impact menstrual cycles, fertility, metabolism, and overall health. Dr. Amita Shukla provides comprehensive PCOS/PCOD management in Lucknow, combining medical treatment with lifestyle modifications to help women achieve hormonal balance and improve quality of life.",
+    introduction: "PCOS (Polycystic Ovary Syndrome) affects 1 in 10 women of reproductive age in India. This complex hormonal disorder can impact menstrual cycles, fertility, metabolism, and overall health. Dr. Amita Shukla provides comprehensive PCOS/PCOD management in Lucknow, combining medical treatment with lifestyle modifications. For women planning families, we seamlessly integrate <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility treatments</a> and may recommend <a href='/services/laparoscopy' class='text-primary-green hover:text-primary-green/80 underline'>minimally invasive surgery</a> when needed for optimal reproductive outcomes.",
     keyPoints: [
       "Comprehensive hormonal evaluation and diagnosis using advanced testing methods",
       "Personalized treatment plans addressing individual symptoms and health goals", 
-      "Evidence-based medical management with lifestyle modification guidance",
-      "Fertility-focused treatment for women planning pregnancy",
-      "Long-term metabolic health monitoring and diabetes prevention strategies",
-      "Regular follow-up care with treatment plan adjustments based on response"
+      "Evidence-based medical management integrated with <a href='/services/well-women-health' class='text-primary-green hover:text-primary-green/80 underline'>preventive health screening</a>",
+      "Specialized <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility-focused treatment</a> for women planning pregnancy",
+      "Surgical intervention through <a href='/services/laparoscopy' class='text-primary-green hover:text-primary-green/80 underline'>advanced laparoscopy</a> when medication alone is insufficient",
+      "Long-term metabolic health monitoring and diabetes prevention strategies with regular follow-up care"
     ],
     statistics: [
       {
@@ -563,7 +563,28 @@ export const pcosPcodTreatmentData: ServicePageData = {
     structuredData: {
       "@type": "MedicalProcedure",
       "name": "PCOS/PCOD Treatment",
-      "description": "Comprehensive management of Polycystic Ovary Syndrome and Polycystic Ovary Disorder with personalized treatment approaches addressing hormonal imbalances and reproductive health."
+      "description": "Comprehensive management of Polycystic Ovary Syndrome and Polycystic Ovary Disorder with personalized treatment approaches addressing hormonal imbalances and reproductive health.",
+      "procedureType": "Medical Treatment and Management",
+      "bodyLocation": "Ovaries, Reproductive system, Endocrine system",
+      "preparation": "Medical history review, hormonal tests, ultrasound evaluation",
+      "followup": "Regular monitoring every 3-6 months, lifestyle counseling, medication adjustments",
+      "benefits": [
+        "Improved menstrual regularity",
+        "Enhanced fertility potential",
+        "Better metabolic health",
+        "Reduced long-term health risks"
+      ],
+      "indication": [
+        "Irregular menstrual cycles",
+        "Infertility related to PCOS",
+        "Metabolic dysfunction",
+        "Cosmetic concerns (hirsutism, acne)"
+      ],
+      "medicalCode": {
+        "@type": "MedicalCode",
+        "code": "E28.2",
+        "codingSystem": "ICD-10"
+      }
     }
   },
 

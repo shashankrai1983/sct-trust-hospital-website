@@ -59,7 +59,7 @@ export default function CTASection({ data, service }: CTASectionProps) {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <div className="mb-12 space-y-8">
             <motion.div 

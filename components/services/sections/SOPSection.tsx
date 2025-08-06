@@ -38,7 +38,7 @@ export default function SOPSection({ data, service }: SOPSectionProps) {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
             className="inline-flex items-center gap-3 px-6 py-3 bg-primary-green/10 backdrop-blur-md border border-primary-green/20 rounded-full mb-8 shadow-warm"
@@ -71,7 +71,7 @@ export default function SOPSection({ data, service }: SOPSectionProps) {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {data.categories.map((category, index) => {
             const IconComponent = category.icon;
@@ -151,7 +151,7 @@ export default function SOPSection({ data, service }: SOPSectionProps) {
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <div className="p-8 bg-amber-50 border border-amber-200 rounded-2xl">
               <div className="flex items-start gap-4">

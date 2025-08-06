@@ -47,7 +47,7 @@ export default function DifferentiatorsSection({ data, service }: Differentiator
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
             className="inline-flex items-center gap-3 px-6 py-3 bg-white/90 backdrop-blur-md border border-primary-green/20 rounded-full mb-8 shadow-warm"
@@ -80,7 +80,7 @@ export default function DifferentiatorsSection({ data, service }: Differentiator
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {data.items.map((item, index) => {
             const IconComponent = getIcon(item.icon);
@@ -136,7 +136,7 @@ export default function DifferentiatorsSection({ data, service }: Differentiator
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <div className="p-8 bg-gradient-to-r from-white/80 to-accent-cream/50 rounded-3xl border border-primary-green/10 shadow-warm backdrop-blur-sm">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">

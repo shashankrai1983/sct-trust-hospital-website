@@ -75,7 +75,7 @@ export default function FAQSection({ data, service }: FAQSectionProps) {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {/* Section Header */}
           <div className="text-center mb-20">

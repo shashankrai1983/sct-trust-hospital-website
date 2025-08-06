@@ -46,7 +46,7 @@ export default function RiskFactorsSection({ data, service }: RiskFactorsSection
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           <motion.div 
             className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-xl border border-primary-green/15 rounded-full mb-6 shadow-warm"
@@ -79,7 +79,7 @@ export default function RiskFactorsSection({ data, service }: RiskFactorsSection
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1 }}
         >
           {data.factors.map((factor, index) => {
             // Determine colors based on risk level
@@ -201,7 +201,7 @@ export default function RiskFactorsSection({ data, service }: RiskFactorsSection
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }}
           >
             <div className="p-6 bg-white/60 backdrop-blur-md rounded-2xl border border-white/50 shadow-warm">
               <div className="flex items-center justify-center gap-3 mb-3">

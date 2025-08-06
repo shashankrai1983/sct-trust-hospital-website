@@ -303,3 +303,37 @@
 .animate-ripple-delay-3 {
   animation: circle-ripple-delay 3s ease-out 1.5s infinite;
 }
+
+/* Fallback for content visibility if JavaScript/Framer Motion fails */
+@media (prefers-reduced-motion: reduce) {
+  /* Ensure all content is immediately visible when motion is reduced */
+  [style*="opacity: 0"], 
+  .motion-div[style*="opacity: 0"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Ensure critical content is visible even if animations fail */
+.no-js .motion-div,
+noscript + .motion-div {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Mobile-first progressive enhancement */
+@media (max-width: 768px) {
+  /* Ensure service section content is always visible on mobile */
+  section[class*="py-24"] [data-hydrated="false"],
+  section[class*="py-20"] [data-hydrated="false"],
+  section[class*="py-16"] [data-hydrated="false"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  
+  /* Faster mobile animations */
+  [data-hydrated="true"] * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}

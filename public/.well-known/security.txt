@@ -1,0 +1,13 @@
+Contact: mailto:amitaobg@gmail.com
+Contact: tel:+91-8303222222
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://www.dramitashukla.com/pgp-key.txt
+Acknowledgments: https://www.dramitashukla.com/security-acknowledgments
+Preferred-Languages: en, hi
+Canonical: https://www.dramitashukla.com/.well-known/security.txt
+
+# Medical Content Security Policy
+# This website contains medical information for educational purposes only.
+# Always consult with qualified healthcare professionals for medical advice.
+# Patient privacy and HIPAA compliance are paramount.
+# Report any security vulnerabilities responsibly.

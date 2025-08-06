@@ -78,10 +78,77 @@
 @layer components {
   .hero-gradient-text {
     @apply bg-gradient-to-r from-secondary-brown to-primary-beige bg-clip-text text-transparent;
+    /* Improve Safari/iOS rendering for clipped gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   .green-title-text {
     @apply bg-gradient-to-r from-primary-green to-text-brown bg-clip-text text-transparent;
+    /* Improve Safari/iOS rendering for clipped gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Optional fallback for mobile Safari where gradient text can disappear on light/yellow backgrounds.
+     Add 'gradient-text-fallback' alongside gradient classes to force solid text color on mobile. */
+  @supports (-webkit-touch-callout: none) {
+    .gradient-text-fallback {
+      -webkit-text-fill-color: currentColor;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      background: none !important;
+    }
+  }
+
+  /* Conservative fallback on very small screens (can be removed if not desired).
+     Ensures readability over pale/yellow backgrounds by using solid text color when needed. */
+  @media (max-width: 640px) {
+    .gradient-text-fallback {
+      -webkit-text-fill-color: currentColor;
+    }
+  }
+
+  /* Mobile Safari backdrop-blur compatibility fixes */
+  @supports not (backdrop-filter: blur(10px)) {
+    /* Fallback for browsers that don't support backdrop-filter */
+    .backdrop-blur-sm,
+    .backdrop-blur-md,
+    .backdrop-blur-lg,
+    .backdrop-blur-xl {
+      backdrop-filter: none;
+      background-color: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    /* Ensure content remains visible with solid backgrounds */
+    .bg-white\/60 { background-color: rgba(255, 255, 255, 0.95) !important; }
+    .bg-white\/70 { background-color: rgba(255, 255, 255, 0.95) !important; }
+    .bg-white\/80 { background-color: rgba(255, 255, 255, 0.95) !important; }
+    .bg-white\/90 { background-color: rgba(255, 255, 255, 0.98) !important; }
+  }
+
+  /* Mobile-specific backdrop-blur fixes for iOS Safari */
+  @media (max-width: 768px) {
+    /* Reduce backdrop-blur intensity on mobile for better compatibility */
+    .backdrop-blur-xl {
+      backdrop-filter: blur(8px);
+    }
+    .backdrop-blur-lg {
+      backdrop-filter: blur(6px);
+    }
+    .backdrop-blur-md {
+      backdrop-filter: blur(4px);
+    }
+    .backdrop-blur-sm {
+      backdrop-filter: blur(2px);
+    }
+    
+    /* Ensure text remains visible on mobile with stronger backgrounds */
+    .bg-white\/10 { background-color: rgba(255, 255, 255, 0.8) !important; }
+    .bg-white\/15 { background-color: rgba(255, 255, 255, 0.85) !important; }
+    .bg-white\/20 { background-color: rgba(255, 255, 255, 0.9) !important; }
   }
   
   .glass-card {
@@ -303,7 +370,6 @@
 .animate-ripple-delay-3 {
   animation: circle-ripple-delay 3s ease-out 1.5s infinite;
 }
-
 /* Fallback for content visibility if JavaScript/Framer Motion fails */
 @media (prefers-reduced-motion: reduce) {
   /* Ensure all content is immediately visible when motion is reduced */

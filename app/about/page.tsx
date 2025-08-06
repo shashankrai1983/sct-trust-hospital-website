@@ -14,6 +14,8 @@ import {
   Stethoscope 
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { PersonProfileSchema } from '@/components/seo/rich-snippets/person-profile-schema';
+import { BreadcrumbSchema, generateAboutBreadcrumb } from '@/components/seo/rich-snippets/breadcrumb-schema';
 
 export default function About() {
   const certificationRef = useRef<HTMLDivElement>(null);
@@ -58,8 +60,81 @@ export default function About() {
     }
   ];
 
+  const aboutUrl = 'https://dramitashukla.com/about';
+  const breadcrumbItems = generateAboutBreadcrumb();
+
   return (
-    <div className="pt-24 pb-16">
+    <>
+      <PersonProfileSchema
+        name="Dr. Amita Shukla"
+        jobTitle="Gynecologist & Obstetrician"
+        description="Dr. Amita Shukla is a distinguished gynecologist and obstetrician with 10+ years of experience providing exceptional care to women across all age groups. Gold Medalist in MBBS with specialized training in gynecological surgeries."
+        image="https://i.ibb.co/wNcyfqGS/Amita-Shukla-website-image.png"
+        url={aboutUrl}
+        telephone="+91-8303222222"
+        email="amitaobg@gmail.com"
+        yearsOfExperience={10}
+        awards={[
+          "Gold Medalist - MBBS",
+          "Best Gynecologist Award 2023",
+          "Excellence in Patient Care Award"
+        ]}
+        education={[
+          {
+            degree: "MBBS (Gold Medalist)",
+            institution: "King George's Medical University",
+            year: "2004-2009",
+            location: "Lucknow, Uttar Pradesh",
+            honors: "Gold Medalist"
+          },
+          {
+            degree: "MS (OBS & GYNAE)",
+            institution: "Medical Sciences University",
+            year: "2009-2012",
+            location: "Lucknow, Uttar Pradesh"
+          },
+          {
+            degree: "Diploma in Aesthetic Gynecology",
+            institution: "International Academy of Aesthetic Medicine",
+            year: "2015",
+            location: "International"
+          }
+        ]}
+        specialties={[
+          "High-Risk Pregnancy Management",
+          "Infertility Evaluation and Treatment",
+          "PCOS/PCOD Treatment",
+          "Laparoscopic Surgery",
+          "Hysteroscopy",
+          "Antenatal Care",
+          "Menstrual Disorders",
+          "Aesthetic Gynecology"
+        ]}
+        languages={["English", "Hindi"]}
+        memberOf={[
+          {
+            name: "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+            url: "https://www.fogsi.org/"
+          },
+          {
+            name: "Indian Medical Association (IMA)",
+            url: "https://www.ima-india.org/"
+          }
+        ]}
+        sameAs={[
+          "https://www.practo.com/lucknow/doctor/dr-amita-shukla-gynecologist",
+          "https://www.justdial.com/lucknow/dr-amita-shukla-gynecologist",
+          "https://www.linkedin.com/in/dramitashukla"
+        ]}
+      />
+      
+      <BreadcrumbSchema
+        items={breadcrumbItems}
+        currentPageName="About Dr. Amita Shukla"
+        currentPageUrl={aboutUrl}
+      />
+      
+      <div className="pt-24 pb-16">
       {/* Hero Section */}
       <section className="py-16 bg-accent-cream/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -339,6 +414,7 @@ export default function About() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

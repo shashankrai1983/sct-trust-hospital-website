@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  productionBrowserSourceMaps: false,
+
   // Production-ready configuration - no error suppression
   eslint: {
     // Remove ignoreDuringBuilds: true to catch linting errors
@@ -12,12 +17,20 @@ const nextConfig = {
   },
   experimental: {
     instrumentationHook: false,
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
   // Netlify deployment configuration (keep server-side features)
   // Disable trailing slash for development and NextAuth compatibility
   trailingSlash: false,
+  
+  // Image optimization for SEO
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: false, // Enable optimization for better SEO
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: 'https',
@@ -32,6 +45,68 @@ const nextConfig = {
         hostname: 'i.ibb.co',
       },
     ],
+  },
+
+  // SEO Headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          }
+        ],
+      },
+      {
+        source: '/sitemap.xml',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/xml'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400, stale-while-revalidate'
+          }
+        ],
+      }
+    ]
+  },
+
+  // SEO Redirects
+  async redirects() {
+    return [
+      {
+        source: '/doctor',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/gynecologist',
+        destination: '/',
+        permanent: true,
+      }
+    ]
+  },
+
+  // SEO Rewrites
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/api/sitemap',
+      },
+      {
+        source: '/robots.txt',
+        destination: '/api/robots',
+      }
+    ]
   },
   // Enhanced webpack configuration for Netlify deployment
   webpack: (config, { isServer }) => {

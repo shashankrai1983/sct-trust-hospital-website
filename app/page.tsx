@@ -46,52 +46,59 @@ export default function Home() {
   const services = [
     { 
       title: 'High Risk Pregnancy', 
-      description: 'Specialized care for mothers with complex or high-risk pregnancies, ensuring the best outcomes.', 
+      description: 'Specialized care for mothers with complex pregnancies, including advanced monitoring for conditions like diabetes and preeclampsia. Our comprehensive approach ensures the best outcomes for both mother and baby.', 
       icon: <Baby className="h-10 w-10 text-secondary-brown" />,
       href: '/services/high-risk-pregnancy',
-      imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png'
+      imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png',
+      relatedServices: ['/services/pregnancy-complications', '/services/antenatal-care']
     },
     { 
       title: 'Pregnancy Complications', 
-      description: '24/7 emergency care for pregnancy complications with immediate intervention capabilities.', 
+      description: '24/7 emergency care for unexpected pregnancy challenges with immediate intervention capabilities. From gestational diabetes to placental issues, our expert team provides swift, effective treatment.', 
       icon: <Heart className="h-10 w-10 text-secondary-brown" />,
       href: '/services/pregnancy-complications',
-      imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png'
+      imageUrl: 'https://i.ibb.co/ycn9SnhQ/High-Risk-Pregnancy-Care.png',
+      relatedServices: ['/services/high-risk-pregnancy', '/services/antenatal-care']
     },
     { 
       title: 'Infertility Treatment', 
-      description: 'Comprehensive evaluation and treatment options for couples struggling with fertility issues.', 
+      description: 'Comprehensive fertility evaluation and advanced reproductive treatments for couples facing conception challenges. Our personalized approach addresses both male and female factors for optimal success rates.', 
       icon: <Heart className="h-10 w-10 text-secondary-brown" />,
       href: '/services/infertility-treatment',
-      imageUrl: 'https://i.ibb.co/zT9kR7kq/Infertility-Care.png'
+      imageUrl: 'https://i.ibb.co/zT9kR7kq/Infertility-Care.png',
+      relatedServices: ['/services/pcos-pcod-treatment', '/services/laparoscopy']
     },
     { 
       title: 'PCOS/PCOD Treatment', 
-      description: 'Effective management of polycystic ovary syndrome with personalized treatment plans.', 
+      description: 'Expert management of polycystic ovary syndrome with personalized treatment plans addressing hormonal imbalances, irregular periods, and fertility concerns through medical and lifestyle interventions.', 
       icon: <Activity className="h-10 w-10 text-secondary-brown" />,
       href: '/services/pcos-pcod-treatment',
-      imageUrl: 'https://i.ibb.co/LXHkZKWc/PCOS-PCOD-care.png'
+      imageUrl: 'https://i.ibb.co/LXHkZKWc/PCOS-PCOD-care.png',
+      relatedServices: ['/services/infertility-treatment', '/services/well-women-health']
     },
     { 
       title: 'Advanced Laparoscopy', 
-      description: 'Minimally invasive surgical procedures with quicker recovery and less discomfort.', 
+      description: 'State-of-the-art minimally invasive surgical procedures for gynecological conditions including endometriosis, fibroids, and ovarian cysts. Experience faster recovery with precision techniques.', 
       icon: <Microscope className="h-10 w-10 text-secondary-brown" />,
       href: '/services/laparoscopy',
-      imageUrl: 'https://i.ibb.co/pvsbFHZk/Advance-Laproscopy.png'
+      imageUrl: 'https://i.ibb.co/pvsbFHZk/Advance-Laproscopy.png',
+      relatedServices: ['/services/pcos-pcod-treatment', '/services/infertility-treatment']
     },
     { 
       title: 'Antenatal Care', 
-      description: 'Comprehensive pregnancy care including regular check-ups, screenings, and education.', 
+      description: 'Complete pregnancy journey support from conception to delivery, including regular health monitoring, nutritional guidance, and preparation for safe delivery. Building confidence for expecting mothers.', 
       icon: <Stethoscope className="h-10 w-10 text-secondary-brown" />,
       href: '/services/antenatal-care',
-      imageUrl: 'https://i.ibb.co/b5DLnkFt/Antenatal.png'
+      imageUrl: 'https://i.ibb.co/b5DLnkFt/Antenatal.png',
+      relatedServices: ['/services/high-risk-pregnancy', '/services/pregnancy-complications']
     },
     { 
       title: 'Well Women Health', 
-      description: 'Preventive healthcare services focused on maintaining and improving women\'s health.', 
+      description: 'Comprehensive preventive healthcare services for women at every life stage, from adolescence to menopause. Regular screenings, health education, and early intervention for optimal wellness.', 
       icon: <UserRound className="h-10 w-10 text-secondary-brown" />,
       href: '/services/well-women-health',
-      imageUrl: 'https://i.ibb.co/Q3HthvMW/women-health.png'
+      imageUrl: 'https://i.ibb.co/Q3HthvMW/women-health.png',
+      relatedServices: ['/services/pcos-pcod-treatment', '/about']
     }
   ];
 
@@ -294,6 +301,11 @@ export default function Home() {
         className="py-16 bg-white relative"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <p className="text-lg text-text-brown/80">
+              Our proven track record in <Link href="/services/high-risk-pregnancy" className="text-primary-green hover:text-primary-green/80 underline">high-risk pregnancies</Link>, <Link href="/services/infertility-treatment" className="text-primary-green hover:text-primary-green/80 underline">fertility treatments</Link>, and <Link href="/services/well-women-health" className="text-primary-green hover:text-primary-green/80 underline">women's health</Link>:
+            </p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {stats.map((stat, i) => (
               <motion.div 
@@ -402,24 +414,24 @@ export default function Home() {
                 About Dr. Amita Shukla
               </h2>
               <p className="text-lg text-text-brown/80 mb-6">
-                Dr. Amita Shukla is a highly qualified and experienced Gynecologist and Obstetrician practicing at SCT Trust Hospital in Lucknow. With 10+ years of experience, she has helped thousands of women with various gynecological issues and has successfully delivered over 4,000 babies.
+                Dr. Amita Shukla is a highly qualified and experienced Gynecologist and Obstetrician practicing at SCT Trust Hospital in Lucknow. With 10+ years of experience, she specializes in <Link href="/services/high-risk-pregnancy" className="text-primary-green hover:text-primary-green/80 underline">high-risk pregnancy management</Link>, <Link href="/services/infertility-treatment" className="text-primary-green hover:text-primary-green/80 underline">advanced fertility treatments</Link>, and <Link href="/services/laparoscopy" className="text-primary-green hover:text-primary-green/80 underline">minimally invasive surgeries</Link>, helping thousands of women achieve their health and family goals.
               </p>
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary-green"></div>
-                  <p className="text-text-brown">MBBS (Gold Medalist)</p>
+                  <p className="text-text-brown">MBBS (Gold Medalist) - Foundation in comprehensive women's healthcare</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary-green"></div>
-                  <p className="text-text-brown">MS (OBS & GYNAE)</p>
+                  <p className="text-text-brown">MS (OBS & GYNAE) - Advanced expertise in <Link href="/services/pregnancy-complications" className="text-primary-green hover:text-primary-green/80 underline text-sm">complex pregnancies</Link></p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary-green"></div>
-                  <p className="text-text-brown">Diploma in Aesthetic Gynecology</p>
+                  <p className="text-text-brown">Diploma in Aesthetic Gynecology - Specialized <Link href="/services/well-women-health" className="text-primary-green hover:text-primary-green/80 underline text-sm">women's wellness care</Link></p>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-primary-green"></div>
-                  <p className="text-text-brown">10+ Years of Experience</p>
+                  <p className="text-text-brown">10+ Years treating <Link href="/services/pcos-pcod-treatment" className="text-primary-green hover:text-primary-green/80 underline text-sm">PCOS</Link>, fertility issues, and pregnancy care</p>
                 </div>
               </div>
               <Button asChild variant="ghost" className="btn-green">
@@ -470,8 +482,11 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4 green-title-text">
               Patient Testimonials
             </h2>
-            <p className="text-lg text-text-brown/80">
+            <p className="text-lg text-text-brown/80 mb-4">
               Hear what our patients have to say about their experience with Dr. Amita Shukla
+            </p>
+            <p className="text-base text-text-brown/60">
+              With 10,000+ successful deliveries and 15,000+ happy patients, our <Link href="/about" className="text-primary-green hover:text-primary-green/80 underline">expert care</Link> speaks through every testimonial. Each story reflects our commitment to specialized services like <Link href="/services/high-risk-pregnancy" className="text-primary-green hover:text-primary-green/80 underline">high-risk pregnancy management</Link> and <Link href="/services/infertility-treatment" className="text-primary-green hover:text-primary-green/80 underline">fertility treatments</Link>.
             </p>
           </div>
 
@@ -489,7 +504,7 @@ export default function Home() {
               Schedule Your Appointment Today
             </h2>
             <p className="text-lg text-text-brown/80 mb-8 max-w-2xl mx-auto">
-              Take the first step towards better health. Schedule a consultation with Dr. Amita Shukla and receive personalized care tailored to your needs.
+              Take the first step towards better health. Whether you need <Link href="/services/antenatal-care" className="text-primary-green hover:text-primary-green/80 underline">pregnancy care</Link>, <Link href="/services/infertility-treatment" className="text-primary-green hover:text-primary-green/80 underline">fertility consultation</Link>, or <Link href="/services/well-women-health" className="text-primary-green hover:text-primary-green/80 underline">preventive health screening</Link>, schedule a consultation with Dr. Amita Shukla for personalized expert care.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button asChild variant="ghost" className="btn-green">

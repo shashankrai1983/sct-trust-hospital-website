@@ -29,14 +29,14 @@ export default function About() {
   const isTeamInView = useInView(teamRef, { once: true });
 
   const specializations = [
-    "High-Risk Pregnancy Management",
-    "Infertility Evaluation and Treatment",
-    "PCOS/PCOD Treatment",
-    "Laparoscopic Surgery",
-    "Hysteroscopy",
-    "Antenatal Care",
-    "Menstrual Disorders",
-    "Aesthetic Gynecology"
+    { name: "High-Risk Pregnancy Management", href: "/services/high-risk-pregnancy" },
+    { name: "Infertility Evaluation and Treatment", href: "/services/infertility-treatment" },
+    { name: "PCOS/PCOD Treatment", href: "/services/pcos-pcod-treatment" },
+    { name: "Advanced Laparoscopic Surgery", href: "/services/laparoscopy" },
+    { name: "Comprehensive Antenatal Care", href: "/services/antenatal-care" },
+    { name: "Pregnancy Complications Management", href: "/services/pregnancy-complications" },
+    { name: "Well Women Health Screening", href: "/services/well-women-health" },
+    { name: "Aesthetic Gynecology", href: "/services/well-women-health" }
   ];
 
   const timeline = [
@@ -181,7 +181,7 @@ export default function About() {
                 Dr. Amita Shukla is a distinguished gynecologist and obstetrician with 10+ years of experience in providing exceptional care to women across all age groups. As a Gold Medalist in MBBS and with specialized training in gynecological surgeries, Dr. Amita combines clinical excellence with a compassionate approach.
               </p>
               <p className="text-lg text-text-brown/80 mb-6">
-                Her practice at SCT Trust Hospital in Aliganj, Lucknow, focuses on providing personalized care for high-risk pregnancies, infertility issues, PCOS/PCOD management, and advanced laparoscopic procedures. Dr. Amita is known for her patient-centered approach, taking time to understand each patient&apos;s unique needs and concerns.
+                Her practice at SCT Trust Hospital in Aliganj, Lucknow, focuses on providing personalized care for <Link href="/services/high-risk-pregnancy" className="text-primary-green hover:text-primary-green/80 underline">high-risk pregnancies</Link>, <Link href="/services/infertility-treatment" className="text-primary-green hover:text-primary-green/80 underline">fertility challenges</Link>, <Link href="/services/pcos-pcod-treatment" className="text-primary-green hover:text-primary-green/80 underline">PCOS/PCOD management</Link>, and <Link href="/services/laparoscopy" className="text-primary-green hover:text-primary-green/80 underline">advanced laparoscopic procedures</Link>. Dr. Amita is known for her patient-centered approach, taking time to understand each patient's unique needs and concerns.
               </p>
               <p className="text-lg text-text-brown/80 mb-8">
                 With over 4,000 successful deliveries and 60,000+ consultations, Dr. Amita has established herself as a trusted healthcare provider in Lucknow. She remains committed to continuing education and implementing the latest advancements in gynecological care.
@@ -214,8 +214,8 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specializations.map((spec, i) => (
               <motion.div
-                key={spec}
-                className="bg-white p-6 rounded-xl shadow-warm text-center"
+                key={spec.name}
+                className="bg-white p-6 rounded-xl shadow-warm text-center hover:shadow-warm-lg transition-shadow"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isCertificationInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
@@ -225,7 +225,9 @@ export default function About() {
                     <CheckCheck className="h-6 w-6 text-text-brown" />
                   </div>
                 </div>
-                <h3 className="font-bold text-text-brown">{spec}</h3>
+                <Link href={spec.href} className="block">
+                  <h3 className="font-bold text-text-brown hover:text-primary-green transition-colors cursor-pointer">{spec.name}</h3>
+                </Link>
               </motion.div>
             ))}
           </div>

@@ -91,17 +91,21 @@ export const metadata: Metadata = {
     },
   },
 
-  // Icons (local files)
+  // Icons (local files) - Enhanced for better Google detection
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' }
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
     ],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
     ],
     other: [
-      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#22c55e' }
+      { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#22c55e' },
+      { rel: 'shortcut icon', url: '/favicon.ico' }
     ]
   },
 
@@ -118,9 +122,12 @@ export default function RootLayout({
     <html lang="en-IN" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <SchemaMarkup />
         <GoogleAnalytics />
-        <link rel="icon" href="https://i.ibb.co/Xk4ZJ7K1/doctor-image.jpg" />
       </head>
       <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream antialiased`}>
         <Providers>

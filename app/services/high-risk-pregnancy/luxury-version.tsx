@@ -87,7 +87,7 @@ export default function LuxuryHighRiskPregnancy() {
     },
     {
       question: "How often will I need to visit the doctor during a high-risk pregnancy?",
-      answer: "High-risk pregnancies typically require more frequent antenatal visits for closer monitoring. The exact frequency depends on your specific risk factors and how your pregnancy progresses. Your doctor will create a personalized schedule that may include additional tests, ultrasounds, and specialist consultations."
+      answer: "High-risk pregnancies typically require more frequent <Link href='/services/antenatal-care' className='text-primary-green hover:text-primary-green/80 underline'>antenatal visits</Link> for closer monitoring. The exact frequency depends on your specific risk factors and how your pregnancy progresses. Your doctor will create a personalized schedule that may include additional tests, ultrasounds, and specialist consultations."
     },
     {
       question: "What specialists might I need to see during my high-risk pregnancy?",
@@ -95,7 +95,7 @@ export default function LuxuryHighRiskPregnancy() {
     },
     {
       question: "Can I do anything to reduce my pregnancy risks?",
-      answer: "Yes, there are several steps you can take: attend all prenatal appointments, maintain a healthy diet, manage weight gain according to medical advice, avoid alcohol, smoking, and drugs, prevent infections, take prescribed medications, and follow your doctor's recommendations closely."
+      answer: "Yes, there are several steps you can take: attend all prenatal appointments, maintain a healthy diet, manage weight gain according to medical advice, avoid alcohol, smoking, and drugs, prevent infections, take prescribed medications, and follow your doctor's recommendations closely. If you experience any <Link href='/services/pregnancy-complications' className='text-primary-green hover:text-primary-green/80 underline'>pregnancy complications</Link>, our 24/7 emergency care team is ready to provide immediate intervention."
     },
     {
       question: "Where will I deliver my baby?",

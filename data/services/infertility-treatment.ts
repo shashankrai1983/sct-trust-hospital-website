@@ -49,14 +49,14 @@ export const infertilityTreatmentData: ServicePageData = {
   },
 
   overview: {
-    introduction: "Infertility affects approximately 1 in 6 couples worldwide. At our fertility center in Lucknow, we understand the emotional and physical challenges of infertility. Dr. Amita Shukla combines advanced reproductive technologies with personalized care to provide comprehensive fertility treatments. Many fertility challenges stem from conditions like <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS/PCOD</a>, which we also specialize in treating, ensuring a holistic approach to reproductive health.",
+    introduction: "Infertility affects approximately 1 in 6 couples worldwide. At our fertility center in Lucknow, we understand the emotional and physical challenges of infertility. Dr. Amita Shukla combines advanced reproductive technologies with personalized care to provide comprehensive fertility treatments. Many fertility challenges stem from conditions like PCOS/PCOD, which we also specialize in treating, ensuring a holistic approach to reproductive health.",
     keyPoints: [
       "Comprehensive fertility evaluation for both partners using state-of-the-art diagnostic technologies",
       "Advanced reproductive treatments including IVF, IUI, ICSI, and fertility preservation techniques",
-      "Specialized treatment for <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS-related fertility issues</a> and other hormonal disorders",
-      "Minimally invasive surgical options through <a href='/services/laparoscopy' class='text-primary-green hover:text-primary-green/80 underline'>advanced laparoscopy</a> when required",
+      "Specialized treatment for PCOS-related fertility issues and other hormonal disorders",
+      "Minimally invasive surgical options through advanced laparoscopy when required",
       "Emotional support and counseling throughout the fertility journey with dedicated patient care coordinators",
-      "Seamless transition to <a href='/services/high-risk-pregnancy' class='text-primary-green hover:text-primary-green/80 underline'>high-risk pregnancy care</a> for successful IVF pregnancies"
+      "Seamless transition to high-risk pregnancy care for successful IVF pregnancies"
     ],
     statistics: [
       {

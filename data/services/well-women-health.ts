@@ -48,14 +48,14 @@ export const wellWomenHealthData: ServicePageData = {
   },
 
   overview: {
-    introduction: "Well women health focuses on preventive care and health maintenance for women throughout their lives. Dr. Amita Shukla provides comprehensive well women services in Lucknow, emphasizing early detection of conditions like <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS/PCOD</a>, health promotion through <a href='/services/antenatal-care' class='text-primary-green hover:text-primary-green/80 underline'>preconception counseling</a>, and disease prevention through regular screenings and personalized wellness planning.",
+    introduction: "Well women health focuses on preventive care and health maintenance for women throughout their lives. Dr. Amita Shukla provides comprehensive well women services in Lucknow, emphasizing early detection of conditions like PCOS/PCOD, health promotion through preconception counseling, and disease prevention through regular screenings and personalized wellness planning.",
     keyPoints: [
       "Regular health screenings and preventive examinations for early detection of reproductive health issues",
       "Age-appropriate health maintenance and wellness counseling tailored to life stage needs",
-      "Reproductive health planning and <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility counseling</a> for family planning",
+      "Reproductive health planning and fertility counseling for family planning",
       "Menopause management and hormone health optimization with personalized treatment approaches",
       "Health education about nutrition, exercise, and lifestyle modifications for optimal wellness",
-      "Seamless coordination with <a href='/about' class='text-primary-green hover:text-primary-green/80 underline'>Dr. Amita's specialized services</a> for comprehensive women's healthcare"
+      "Seamless coordination with Dr. Amita's specialized services for comprehensive women's healthcare"
     ],
     statistics: [
       {

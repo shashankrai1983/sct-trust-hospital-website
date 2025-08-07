@@ -48,7 +48,7 @@ export const laparoscopyData: ServicePageData = {
   },
 
   overview: {
-    introduction: "Laparoscopic surgery, also known as minimally invasive surgery, uses small incisions and specialized instruments to perform complex gynecological procedures. Dr. Amita Shukla specializes in advanced laparoscopic techniques for conditions like endometriosis, ovarian cysts related to <a href='/services/pcos-pcod-treatment' class='text-primary-green hover:text-primary-green/80 underline'>PCOS/PCOD</a>, and fertility-enhancing procedures for women undergoing <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>infertility treatment</a>. These minimally invasive approaches offer significant advantages over traditional surgery.",
+    introduction: "Laparoscopic surgery, also known as minimally invasive surgery, uses small incisions and specialized instruments to perform complex gynecological procedures. Dr. Amita Shukla specializes in advanced laparoscopic techniques for conditions like endometriosis, ovarian cysts related to PCOS/PCOD, and fertility-enhancing procedures for women undergoing infertility treatment. These minimally invasive approaches offer significant advantages over traditional surgery.",
     keyPoints: [
       "Minimally invasive approach with 3-4 small incisions instead of large surgical cuts",
       "High-definition camera systems for precise visualization during surgery",

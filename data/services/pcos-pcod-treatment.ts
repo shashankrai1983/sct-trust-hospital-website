@@ -47,13 +47,13 @@ export const pcosPcodTreatmentData: ServicePageData = {
   },
 
   overview: {
-    introduction: "PCOS (Polycystic Ovary Syndrome) affects 1 in 10 women of reproductive age in India. This complex hormonal disorder can impact menstrual cycles, fertility, metabolism, and overall health. Dr. Amita Shukla provides comprehensive PCOS/PCOD management in Lucknow, combining medical treatment with lifestyle modifications. For women planning families, we seamlessly integrate <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility treatments</a> and may recommend <a href='/services/laparoscopy' class='text-primary-green hover:text-primary-green/80 underline'>minimally invasive surgery</a> when needed for optimal reproductive outcomes.",
+    introduction: "PCOS (Polycystic Ovary Syndrome) affects 1 in 10 women of reproductive age in India. This complex hormonal disorder can impact menstrual cycles, fertility, metabolism, and overall health. Dr. Amita Shukla provides comprehensive PCOS/PCOD management in Lucknow, combining medical treatment with lifestyle modifications. For women planning families, we seamlessly integrate fertility treatments and may recommend minimally invasive surgery when needed for optimal reproductive outcomes.",
     keyPoints: [
       "Comprehensive hormonal evaluation and diagnosis using advanced testing methods",
       "Personalized treatment plans addressing individual symptoms and health goals", 
-      "Evidence-based medical management integrated with <a href='/services/well-women-health' class='text-primary-green hover:text-primary-green/80 underline'>preventive health screening</a>",
-      "Specialized <a href='/services/infertility-treatment' class='text-primary-green hover:text-primary-green/80 underline'>fertility-focused treatment</a> for women planning pregnancy",
-      "Surgical intervention through <a href='/services/laparoscopy' class='text-primary-green hover:text-primary-green/80 underline'>advanced laparoscopy</a> when medication alone is insufficient",
+      "Evidence-based medical management integrated with preventive health screening",
+      "Specialized fertility-focused treatment for women planning pregnancy",
+      "Surgical intervention through advanced laparoscopy when medication alone is insufficient",
       "Long-term metabolic health monitoring and diabetes prevention strategies with regular follow-up care"
     ],
     statistics: [

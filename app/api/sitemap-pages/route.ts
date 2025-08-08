@@ -7,65 +7,10 @@ export async function GET() {
   // Main pages
   const pages = [
     {
-      url: '',
-      lastmod: currentDate,
-      changefreq: 'weekly',
-      priority: '1.0'
-    },
-    {
-      url: '/about',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.9'
-    },
-    {
       url: '/contact',
       lastmod: currentDate,
       changefreq: 'monthly',
       priority: '0.8'
-    },
-    {
-      url: '/gallery',
-      lastmod: currentDate,
-      changefreq: 'weekly',
-      priority: '0.7'
-    },
-    {
-      url: '/blog',
-      lastmod: currentDate,
-      changefreq: 'daily',
-      priority: '0.8'
-    },
-    // SEO-focused landing pages
-    {
-      url: '/best-gynaecologist-lucknow',
-      lastmod: currentDate,
-      changefreq: 'weekly',
-      priority: '1.0'
-    },
-    {
-      url: '/gynecologist-fees-consultation-cost',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.8'
-    },
-    {
-      url: '/patient-reviews-testimonials',
-      lastmod: currentDate,
-      changefreq: 'weekly',
-      priority: '0.8'
-    },
-    {
-      url: '/emergency-gynecology-care-lucknow',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.9'
-    },
-    {
-      url: '/appointment-booking-online',
-      lastmod: currentDate,
-      changefreq: 'daily',
-      priority: '0.9'
     }
   ];
 

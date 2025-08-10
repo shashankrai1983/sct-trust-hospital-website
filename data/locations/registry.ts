@@ -62,6 +62,16 @@ export const LOCATION_REGISTRY: LocationRegistryEntry[] = [
     competitionLevel: 'low',
     createdAt: '2025-08-10',
     lastUpdated: '2025-08-10'
+  },
+  {
+    slug: 'indira-nagar',
+    displayName: 'Indira Nagar',
+    status: 'active',
+    priority: 'high',
+    searchVolume: 'high',
+    competitionLevel: 'high',
+    createdAt: '2025-08-10',
+    lastUpdated: '2025-08-10'
   }
 ];
 

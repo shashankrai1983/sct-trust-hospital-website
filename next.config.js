@@ -92,6 +92,22 @@ const nextConfig = {
         destination: '/api/sitemap',
       },
       {
+        source: '/sitemap-pages.xml',
+        destination: '/api/sitemap-pages',
+      },
+      {
+        source: '/sitemap-services.xml',
+        destination: '/api/sitemap-services',
+      },
+      {
+        source: '/sitemap-locations.xml',
+        destination: '/api/sitemap-locations',
+      },
+      {
+        source: '/sitemap-blog.xml',
+        destination: '/api/sitemap-blog',
+      },
+      {
         source: '/robots.txt',
         destination: '/api/robots',
       }

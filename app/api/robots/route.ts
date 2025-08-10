@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = 'https://www.dramitashukla.com';
+  const baseUrl = 'https://dramitashukla.com';
 
   const robots = `User-agent: *
 Allow: /

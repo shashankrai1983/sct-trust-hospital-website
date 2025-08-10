@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = 'https://www.dramitashukla.com';
+  const baseUrl = 'https://dramitashukla.com';
   const currentDate = new Date().toISOString();
 
   const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
@@ -12,6 +12,10 @@ export async function GET() {
   </sitemap>
   <sitemap>
     <loc>${baseUrl}/sitemap-services.xml</loc>
+    <lastmod>${currentDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${baseUrl}/sitemap-locations.xml</loc>
     <lastmod>${currentDate}</lastmod>
   </sitemap>
   <sitemap>

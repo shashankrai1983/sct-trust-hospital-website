@@ -1,11 +1,23 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = 'https://www.dramitashukla.com';
+  const baseUrl = 'https://dramitashukla.com';
   const currentDate = new Date().toISOString();
 
   // Main pages
   const pages = [
+    {
+      url: '/',
+      lastmod: currentDate,
+      changefreq: 'weekly',
+      priority: '1.0'
+    },
+    {
+      url: '/about',
+      lastmod: currentDate,
+      changefreq: 'monthly',
+      priority: '0.9'
+    },
     {
       url: '/contact',
       lastmod: currentDate,

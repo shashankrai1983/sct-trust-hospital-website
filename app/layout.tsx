@@ -24,6 +24,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://www.dramitashukla.com' : 'http://localhost:3000'),
   title: 'Best Gynaecologist in Lucknow - Dr. Amita Shukla | SCT Trust Hospital',
   description: 'Dr. Amita Shukla is the best gynaecologist in Lucknow with 10+ years experience. Expert in high-risk pregnancy, PCOS treatment, infertility care at SCT Trust Hospital. Book appointment.',
   

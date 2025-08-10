@@ -666,7 +666,7 @@ export const pregnancyComplicationsData: ServicePageData = {
   },
 
   config: {
-    theme: "primary",
+    theme: "forest",
     showEmergencyBanner: true,
     customSections: ["process", "treatments", "riskFactors", "differentiators"]
   }

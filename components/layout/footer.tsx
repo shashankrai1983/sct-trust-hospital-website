@@ -1,11 +1,15 @@
 import Link from 'next/link';
 import { Heart, Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import { getActiveLocations } from '@/data/locations/registry';
 
 const Footer = () => {
+  // Get all active locations for footer links
+  const allLocations = getActiveLocations();
+
   return (
     <footer className="bg-text-brown text-white pt-16 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Practice Info */}
           <div>
             <div className="flex items-center mb-4">
@@ -72,6 +76,25 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
+          </div>
+
+          {/* Service Areas */}
+          <div>
+            <h3 className="text-lg font-bold mb-4 text-white">Service Areas</h3>
+            <div className={`${allLocations.length > 5 ? 'max-h-48 overflow-y-auto pr-2' : ''}`}>
+              <ul className="space-y-2">
+                {allLocations.map((location) => (
+                  <li key={location.slug}>
+                    <Link 
+                      href={`/gynecologist-in/${location.slug}`} 
+                      className="hover:text-primary-green transition-colors"
+                    >
+                      Gynecologist in {location.displayName}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Quick Links */}

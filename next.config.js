@@ -81,18 +81,7 @@ const nextConfig = {
 
   // SEO Redirects
   async redirects() {
-    return [
-      {
-        source: '/doctor',
-        destination: '/about',
-        permanent: true,
-      },
-      {
-        source: '/gynecologist',
-        destination: '/',
-        permanent: true,
-      }
-    ]
+    return []
   },
 
   // SEO Rewrites

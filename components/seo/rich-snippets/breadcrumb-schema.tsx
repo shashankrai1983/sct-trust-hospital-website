@@ -173,3 +173,11 @@ export const generateServiceBreadcrumb = (serviceName: string, serviceSlug: stri
 export const generateAboutBreadcrumb = () => [];
 
 export const generateContactBreadcrumb = () => [];
+
+export const generateLocationBreadcrumb = (locationName: string, locationSlug: string) => [
+  {
+    name: "Areas Served",
+    url: "https://dramitashukla.com/#areas",
+    position: 2
+  }
+];

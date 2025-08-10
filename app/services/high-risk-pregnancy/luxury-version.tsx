@@ -99,7 +99,7 @@ export default function LuxuryHighRiskPregnancy() {
     },
     {
       question: "Where will I deliver my baby?",
-      answer: "High-risk pregnancies typically require delivery at hospitals with advanced facilities like Level 3 NICU and specialized surgical capabilities. We work with SCT Trust Hospital and other tertiary care centers in Lucknow that are equipped to handle complex deliveries and provide immediate specialized care if needed."
+      answer: "High-risk pregnancies typically require delivery at hospitals with advanced facilities like Level 3 NICU and specialized surgical capabilities. We work with SCT Trust Hospital and other tertiary care centers in Lucknow that are equipped to handle complex deliveries and provide immediate specialized care if needed. Our services are easily accessible for residents from <Link href='/gynecologist-in/gomti-nagar' className='text-primary-green hover:text-primary-green/80 underline'>Gomti Nagar</Link>, <Link href='/gynecologist-in/aliganj' className='text-primary-green hover:text-primary-green/80 underline'>Aliganj</Link>, <Link href='/gynecologist-in/hazratganj' className='text-primary-green hover:text-primary-green/80 underline'>Hazratganj</Link>, and <Link href='/gynecologist-in/jankipuram-extension' className='text-primary-green hover:text-primary-green/80 underline'>Jankipuram Extension</Link>."
     },
     {
       question: "Can my partner be involved in my appointments and care?",
@@ -182,7 +182,7 @@ export default function LuxuryHighRiskPregnancy() {
               <div className="text-center lg:text-left space-y-2">
                 <h3 className="text-xl font-semibold text-secondary-brown">Dr. Amita Shukla</h3>
                 <p className="text-text-brown/70">
-                  Gynecologist Obstetrician & Laparoscopic Surgeon | Lucknow, UP
+                  Gynecologist Obstetrician & <Link href="/services/laparoscopy" className="text-primary-green hover:text-primary-green/80 underline">Laparoscopic Surgeon</Link> | Serving <Link href="/gynecologist-in/gomti-nagar" className="text-primary-green hover:text-primary-green/80 underline">Gomti Nagar</Link>, <Link href="/gynecologist-in/aliganj" className="text-primary-green hover:text-primary-green/80 underline">Aliganj</Link> & surrounding areas in Lucknow
                 </p>
               </div>
               

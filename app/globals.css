@@ -92,6 +92,116 @@
     background-clip: text;
   }
 
+  /* Forest Theme Styles */
+  .theme-forest {
+    --theme-primary: #606c38;
+    --theme-primary-light: rgba(96, 108, 56, 0.1);
+    --theme-primary-medium: rgba(96, 108, 56, 0.2);
+    --theme-secondary: #228B22;
+    --theme-secondary-light: rgba(34, 139, 34, 0.1);
+    --theme-secondary-medium: rgba(34, 139, 34, 0.2);
+    --theme-accent: rgba(96, 108, 56, 0.05);
+  }
+
+  .theme-forest .hero-gradient-text {
+    @apply bg-gradient-to-r from-primary-green to-forest-green bg-clip-text text-transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .theme-forest .btn-primary {
+    @apply bg-primary-green text-white hover:bg-forest-green;
+  }
+
+  .theme-forest .btn-secondary {
+    @apply bg-forest-green text-white hover:bg-primary-green;
+  }
+
+  .theme-forest .service-card {
+    @apply bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-l-4 border-primary-green/30;
+  }
+
+  .theme-forest .glass-card {
+    @apply bg-white bg-opacity-80 backdrop-blur-sm shadow-lg rounded-xl border border-primary-green/20;
+  }
+
+  /* Theme-specific section backgrounds */
+  .theme-forest .section-bg-primary {
+    background: linear-gradient(135deg, var(--theme-primary-light), var(--theme-accent));
+  }
+
+  .theme-forest .section-bg-secondary {
+    background: linear-gradient(135deg, var(--theme-secondary-light), var(--theme-primary-light));
+  }
+
+  /* Theme-specific accent colors for statistics and highlights */
+  .theme-forest .stat-card {
+    @apply bg-gradient-to-br from-primary-green/10 to-forest-green/5 border border-primary-green/20;
+  }
+
+  .theme-forest .stat-icon {
+    @apply text-primary-green;
+  }
+
+  .theme-forest .highlight-box {
+    @apply bg-gradient-to-r from-primary-green/10 to-forest-green/10 border-l-4 border-primary-green;
+  }
+
+  /* Theme-specific text colors */
+  .theme-forest .text-theme-primary {
+    color: var(--theme-primary);
+  }
+
+  .theme-forest .text-theme-secondary {
+    color: var(--theme-secondary);
+  }
+
+  /* Theme-specific badge styles */
+  .theme-forest .badge-primary {
+    @apply bg-primary-green text-white;
+  }
+
+  .theme-forest .badge-secondary {
+    @apply bg-forest-green text-white;
+  }
+
+  /* Theme-specific button gradients */
+  .theme-forest .btn-gradient {
+    @apply bg-gradient-to-r from-primary-green to-forest-green hover:from-forest-green hover:to-primary-green text-white;
+  }
+
+  /* Override any remaining secondary-brown text with forest theme colors */
+  .theme-forest .text-secondary-brown {
+    @apply text-forest-green;
+  }
+
+  /* Override primary-beige colors with green equivalents in forest theme */
+  .theme-forest .text-primary-beige {
+    @apply text-primary-green;
+  }
+
+  .theme-forest .bg-primary-beige {
+    @apply bg-primary-green;
+  }
+
+  .theme-forest .bg-secondary-brown {
+    @apply bg-forest-green;
+  }
+
+  /* Make sure headings use the forest theme colors */
+  .theme-forest h1,
+  .theme-forest h2, 
+  .theme-forest h3 {
+    color: var(--theme-primary);
+  }
+
+  .theme-forest h1 span:last-child,
+  .theme-forest h2 span:last-child,
+  .theme-forest h3 span:last-child {
+    color: var(--theme-secondary);
+  }
+
   /* Optional fallback for mobile Safari where gradient text can disappear on light/yellow backgrounds.
      Add 'gradient-text-fallback' alongside gradient classes to force solid text color on mobile. */
   @supports (-webkit-touch-callout: none) {

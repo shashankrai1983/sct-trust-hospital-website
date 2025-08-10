@@ -60,7 +60,7 @@ export function SitelinksSchema({
     "publisher": {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      "name": "SCT Trust Hospital",
+      "name": "Dr. Amita Shukla - SCT Trust Hospital",
       "url": siteUrl
     },
     "potentialAction": {

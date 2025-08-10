@@ -24,7 +24,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://www.dramitashukla.com' : 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://dramitashukla.com' : 'http://localhost:3000'),
   title: 'Best Gynaecologist in Lucknow - Dr. Amita Shukla | SCT Trust Hospital',
   description: 'Dr. Amita Shukla is the best gynaecologist in Lucknow with 10+ years experience. Expert in high-risk pregnancy, PCOS treatment, infertility care at SCT Trust Hospital. Book appointment.',
   
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Best Gynaecologist in Lucknow - Dr. Amita Shukla',
     description: 'Leading gynecologist in Lucknow specializing in women\'s health, pregnancy care, and fertility treatments.',
-    url: 'https://www.dramitashukla.com',
+    url: 'https://dramitashukla.com',
     siteName: 'Dr. Amita Shukla - SCT Trust Hospital',
     images: [{
       url: '/images/dr-amita-shukla-og.jpg',
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
   },
 
   // Medical and local SEO
-  authors: [{ name: 'Dr. Amita Shukla', url: 'https://www.dramitashukla.com/about' }],
+  authors: [{ name: 'Dr. Amita Shukla', url: 'https://dramitashukla.com/about' }],
   creator: 'Dr. Amita Shukla',
   publisher: 'SCT Trust Hospital',
   category: 'Healthcare',
@@ -92,21 +92,21 @@ export const metadata: Metadata = {
     },
   },
 
-  // Icons (local files) - Enhanced for better Google detection
+  // Icons - Using Supabase hosted favicon for consistent display
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: 'https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }
+      { url: 'https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico', sizes: '180x180', type: 'image/png' }
     ],
     other: [
       { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: '#22c55e' },
-      { rel: 'shortcut icon', url: '/favicon.ico' }
+      { rel: 'shortcut icon', url: 'https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico' }
     ]
   },
 
@@ -123,10 +123,6 @@ export default function RootLayout({
     <html lang="en-IN" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <link rel="icon" type="image/x-icon" href="https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico" />
-        <link rel="icon" type="image/x-icon" sizes="16x16" href="https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico" />
-        <link rel="icon" type="image/x-icon" sizes="32x32" href="https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="https://pbkxpylwatscfjzbmwur.supabase.co/storage/v1/object/public/amitashukla/upscaled_dr_amita_shukla.ico" />
         <SchemaMarkup />
         <GoogleAnalytics />
       </head>

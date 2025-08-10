@@ -3,20 +3,20 @@ export function SchemaMarkup() {
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": ["MedicalOrganization", "LocalBusiness"],
-    "@id": "https://www.dramitashukla.com/#organization",
+    "@id": "https://dramitashukla.com/#organization",
     "name": "SCT Trust Hospital - Dr. Amita Shukla",
     "alternateName": "Dr. Amita Shukla Gynecologist",
     "description": "Best gynaecologist in Lucknow specializing in women's health, high-risk pregnancy, PCOS treatment, and fertility care",
-    "url": "https://www.dramitashukla.com",
+    "url": "https://dramitashukla.com",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://www.dramitashukla.com/logo.png",
+      "url": "https://dramitashukla.com/logo.png",
       "width": 400,
       "height": 400
     },
     "image": {
       "@type": "ImageObject", 
-      "url": "https://www.dramitashukla.com/images/sct-trust-hospital.jpg",
+      "url": "https://dramitashukla.com/images/sct-trust-hospital.jpg",
       "width": 1200,
       "height": 800
     },
@@ -112,6 +112,7 @@ export function SchemaMarkup() {
     "review": [
       {
         "@type": "Review",
+        "@id": "https://dramitashukla.com/#review1",
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": 5,
@@ -121,11 +122,17 @@ export function SchemaMarkup() {
           "@type": "Person",
           "name": "Priya Sharma"
         },
-        "reviewBody": "Dr. Amita Shukla provided excellent care during my high-risk pregnancy. Her expertise and compassionate approach made all the difference.",
-        "datePublished": "2024-01-15"
+        "reviewBody": "Dr. Amita Shukla at SCT Trust Hospital provided excellent care during my high-risk pregnancy. Her expertise and compassionate approach made all the difference.",
+        "datePublished": "2024-01-15",
+        "itemReviewed": {
+          "@type": "MedicalOrganization",
+          "@id": "https://dramitashukla.com/#organization",
+          "name": "Dr. Amita Shukla - SCT Trust Hospital"
+        }
       },
       {
         "@type": "Review",
+        "@id": "https://dramitashukla.com/#review2",
         "reviewRating": {
           "@type": "Rating", 
           "ratingValue": 5,
@@ -135,11 +142,17 @@ export function SchemaMarkup() {
           "@type": "Person",
           "name": "Anjali Gupta"
         },
-        "reviewBody": "Best gynecologist in Lucknow. Dr. Amita helped me with my PCOS treatment and I feel much better now.",
-        "datePublished": "2024-02-10"
+        "reviewBody": "Best gynecologist in Lucknow. Dr. Amita at SCT Trust Hospital helped me with my PCOS treatment and I feel much better now.",
+        "datePublished": "2024-02-10",
+        "itemReviewed": {
+          "@type": "MedicalOrganization",
+          "@id": "https://dramitashukla.com/#organization",
+          "name": "Dr. Amita Shukla - SCT Trust Hospital"
+        }
       },
       {
         "@type": "Review",
+        "@id": "https://dramitashukla.com/#review3",
         "reviewRating": {
           "@type": "Rating",
           "ratingValue": 5,
@@ -149,8 +162,13 @@ export function SchemaMarkup() {
           "@type": "Person",
           "name": "Sunita Singh"
         },
-        "reviewBody": "Excellent infertility treatment. Dr. Amita's personalized care helped us conceive after years of trying.",
-        "datePublished": "2024-03-05"
+        "reviewBody": "Excellent infertility treatment at SCT Trust Hospital. Dr. Amita's personalized care helped us conceive after years of trying.",
+        "datePublished": "2024-03-05",
+        "itemReviewed": {
+          "@type": "MedicalOrganization",
+          "@id": "https://dramitashukla.com/#organization",
+          "name": "Dr. Amita Shukla - SCT Trust Hospital"
+        }
       }
     ],
     
@@ -209,21 +227,21 @@ export function SchemaMarkup() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": "https://www.dramitashukla.com/#person",
+    "@id": "https://dramitashukla.com/#person",
     "name": "Dr. Amita Shukla",
     "alternateName": "Amita Shukla",
     "description": "Best gynaecologist in Lucknow with 10+ years experience specializing in high-risk pregnancy and women's health",
     "image": {
       "@type": "ImageObject",
-      "url": "https://www.dramitashukla.com/images/dr-amita-shukla.jpg",
+      "url": "https://dramitashukla.com/images/dr-amita-shukla.jpg",
       "width": 400,
       "height": 400
     },
     "jobTitle": "Gynecologist & Obstetrician",
     "worksFor": {
-      "@id": "https://www.dramitashukla.com/#organization"
+      "@id": "https://dramitashukla.com/#organization"
     },
-    "url": "https://www.dramitashukla.com/about",
+    "url": "https://dramitashukla.com/about",
     "sameAs": [
       "https://www.practo.com/dr-amita-shukla",
       "https://www.justdial.com/dr-amita-shukla"
@@ -260,18 +278,18 @@ export function SchemaMarkup() {
   const webSiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://www.dramitashukla.com/#website",
-    "url": "https://www.dramitashukla.com",
+    "@id": "https://dramitashukla.com/#website",
+    "url": "https://dramitashukla.com",
     "name": "Dr. Amita Shukla - Best Gynaecologist in Lucknow",
     "description": "Leading gynecologist in Lucknow providing comprehensive women's healthcare services",
     "publisher": {
-      "@id": "https://www.dramitashukla.com/#organization"
+      "@id": "https://dramitashukla.com/#organization"
     },
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://www.dramitashukla.com/search?q={search_term_string}"
+        "urlTemplate": "https://dramitashukla.com/search?q={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     },

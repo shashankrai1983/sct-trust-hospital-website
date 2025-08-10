@@ -10,6 +10,7 @@ import hazratganjData from './hazratganj';
 import jankipuramExtensionData from './jankipuram-extension';
 import aliganjData from './aliganj';
 import mahanagarData from './mahanagar';
+import indiraNagarData from './indira-nagar';
 
 // Location data mapping for easy access
 export const LOCATION_DATA: Record<string, LocationSEOData> = {
@@ -18,6 +19,7 @@ export const LOCATION_DATA: Record<string, LocationSEOData> = {
   'jankipuram-extension': jankipuramExtensionData,
   'aliganj': aliganjData,
   'mahanagar': mahanagarData,
+  'indira-nagar': indiraNagarData,
 };
 
 // Validation check for all location data
@@ -68,7 +70,7 @@ export const getLocationNames = (): Array<{slug: string; name: string}> => {
 };
 
 // Export individual location data for direct imports
-export { gomtiNagarData, hazratganjData, jankipuramExtensionData, aliganjData, mahanagarData };
+export { gomtiNagarData, hazratganjData, jankipuramExtensionData, aliganjData, mahanagarData, indiraNagarData };
 
 // Export schemas and templates
 export { locationSchemaTemplate, validateLocationData } from './location-schema';

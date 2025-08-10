@@ -42,10 +42,12 @@ export function generateDirectionsURL(locationData: LocationSEOData): string {
  * @returns Google Maps embed URL for iframe
  */
 export function generateEmbedDirectionsURL(locationData: LocationSEOData): string {
-  // Simple embed format that works in iframes
-  const query = encodeURIComponent(`Directions from ${locationData.displayName} to Dr. Amita Shukla SCT Trust Hospital Lucknow`);
+  // Use the coordinates-based approach for more reliable embedding
+  const hospitalLat = SCT_TRUST_HOSPITAL.coordinates.latitude;
+  const hospitalLng = SCT_TRUST_HOSPITAL.coordinates.longitude;
   
-  return `https://maps.google.com/maps?width=100%&height=400&hl=en&q=${query}&t=&z=13&ie=UTF8&iwloc=B&output=embed`;
+  // Simple coordinate-based embed that should work reliably
+  return `https://www.google.com/maps?q=${hospitalLat},${hospitalLng}&output=embed&z=15`;
 }
 
 /**

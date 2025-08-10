@@ -52,6 +52,16 @@ export const LOCATION_REGISTRY: LocationRegistryEntry[] = [
     competitionLevel: 'medium',
     createdAt: '2025-08-10',
     lastUpdated: '2025-08-10'
+  },
+  {
+    slug: 'mahanagar',
+    displayName: 'Mahanagar',
+    status: 'active',
+    priority: 'medium',
+    searchVolume: 'medium',
+    competitionLevel: 'low',
+    createdAt: '2025-08-10',
+    lastUpdated: '2025-08-10'
   }
 ];
 

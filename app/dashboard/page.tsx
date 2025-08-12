@@ -219,6 +219,9 @@ export default function DashboardPage() {
     // Initial data fetch - using the simpler fetchDashboardData
     fetchDashboardData()
 
+    // Start polling for real-time updates
+    startPolling()
+
     return () => {
       if (pollingInterval.current) {
         clearInterval(pollingInterval.current)
@@ -235,7 +238,7 @@ export default function DashboardPage() {
   const updateAppointmentStatus = async (appointmentId: string, newStatus: 'pending' | 'visited') => {
     setUpdatingStatus(appointmentId)
     try {
-      const response = await fetch(`/api/appointments/${appointmentId}`, {
+      const response = await fetch(`/api/dashboard/appointments/${appointmentId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { 
   CalendarIcon, 
   UsersIcon, 
@@ -9,7 +9,8 @@ import {
   ViewColumnsIcon,
   CalendarDaysIcon,
   MagnifyingGlassIcon,
-  FunnelIcon
+  FunnelIcon,
+  BellIcon
 } from '@heroicons/react/24/outline'
 import CalendarView from './components/calendar-view'
 
@@ -47,12 +48,119 @@ export default function DashboardPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [dateFilter, setDateFilter] = useState('')
   const [serviceFilter, setServiceFilter] = useState('')
-
+  const [updatingStatus, setUpdatingStatus] = useState<string | null>(null)
+  
+  // Notification and auto-refresh state
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>('default')
+  const [lastChecked, setLastChecked] = useState<Date>(new Date())
+  const [hasNewLeads, setHasNewLeads] = useState(false)
+  const pollingInterval = useRef<NodeJS.Timeout | null>(null)
+  const appointmentsRef = useRef<RecentAppointment[]>([])
+  
+  // Update ref when appointments change
   useEffect(() => {
-    fetchDashboardData()
+    appointmentsRef.current = appointments
+  }, [appointments])
+
+  // Notification functions
+  const requestNotificationPermission = useCallback(async () => {
+    if ("Notification" in window) {
+      const permission = await Notification.requestPermission()
+      setNotificationPermission(permission)
+      return permission === "granted"
+    }
+    return false
   }, [])
 
-  const fetchDashboardData = async () => {
+  const showNewLeadNotification = useCallback((appointment: RecentAppointment) => {
+    if (notificationPermission === "granted") {
+      try {
+        // Play notification sound
+        const playNotificationSound = () => {
+          try {
+            // Create audio element with notification sound
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvGEUCjyE0OvZgCkDAx4Gk9Tnv1kEEX+84OaLKgwPbKvz655IBhJam9vx0mclBgx4xfXGDjsdBCCR1vPUdScDJXTE8NKGOAQS');
+            audio.volume = 0.5;
+            audio.play().catch(() => {
+              // Fallback: use system default notification sound
+              console.log('Playing fallback notification sound');
+            });
+          } catch (error) {
+            console.warn('Audio notification failed:', error);
+          }
+        };
+
+        playNotificationSound();
+
+        const notification = new Notification("🏥 New Patient Lead!", {
+          body: `${appointment.name} - ${appointment.service}\nDate: ${appointment.date} at ${appointment.time}\nPhone: ${appointment.phone}`,
+          icon: "/favicon.ico",
+          badge: "/favicon.ico",
+          tag: `lead-${appointment._id}`,
+          requireInteraction: true,
+          silent: false
+        })
+
+        // Auto-close after 10 seconds
+        setTimeout(() => notification.close(), 10000)
+
+        // Handle click - bring dashboard to front
+        notification.onclick = () => {
+          window.focus()
+          // Try to scroll to the new appointment
+          setTimeout(() => {
+            const element = document.querySelector(`[data-testid="appointment-${appointment._id}"]`)
+            element?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 100)
+          notification.close()
+        }
+
+        // Update tab title to show new lead indicator
+        document.title = "🔴 New Lead - SCT Hospital Dashboard"
+        setTimeout(() => {
+          document.title = "SCT Hospital Dashboard"
+        }, 10000)
+
+      } catch (error) {
+        console.warn('Failed to show notification:', error)
+      }
+    }
+  }, [notificationPermission])
+
+  const getPollingInterval = useCallback(() => {
+    const hour = new Date().getHours()
+    const isBusinessHours = hour >= 8 && hour <= 18
+    return isBusinessHours ? 30000 : 60000 // 30s during business hours, 60s otherwise
+  }, [])
+
+  const checkForNewLeads = useCallback((appointments: RecentAppointment[]) => {
+    const newLeads = appointments.filter(apt => 
+      new Date(apt.createdAt) > lastChecked
+    )
+    
+    if (newLeads.length > 0) {
+      // Update last checked time
+      const now = new Date()
+      setLastChecked(now)
+      localStorage.setItem('dashboardLastChecked', now.toISOString())
+      
+      // Show notification for the most recent lead
+      const mostRecent = newLeads.sort((a, b) => 
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      )[0]
+      
+      showNewLeadNotification(mostRecent)
+      setHasNewLeads(true)
+      
+      // Clear new leads indicator after 5 seconds
+      setTimeout(() => setHasNewLeads(false), 5000)
+      
+      return true
+    }
+    return false
+  }, [lastChecked, showNewLeadNotification])
+
+  const fetchDashboardDataWithNotification = useCallback(async (isPolling = false) => {
     try {
       const [statsResponse, appointmentsResponse] = await Promise.all([
         fetch('/api/dashboard/stats'),
@@ -72,23 +180,96 @@ export default function DashboardPage() {
       
       if (appointmentsResponse.ok) {
         const appointmentsData = await appointmentsResponse.json()
-        setAppointments(appointmentsData.appointments || [])
+        const newAppointments = appointmentsData.appointments || []
+        
+        // Check for new leads only if this is a polling request and we have existing data
+        if (isPolling && appointmentsRef.current.length > 0) {
+          checkForNewLeads(newAppointments)
+        }
+        
+        setAppointments(newAppointments)
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
+    }
+  }, [checkForNewLeads]) // Remove appointments.length dependency
+
+  const startPolling = useCallback(() => {
+    if (pollingInterval.current) {
+      clearInterval(pollingInterval.current)
+    }
+    
+    pollingInterval.current = setInterval(() => {
+      fetchDashboardDataWithNotification(true)
+    }, getPollingInterval())
+  }, []) // Remove dependencies that cause re-creation
+
+  useEffect(() => {
+    // Initialize notification permission
+    if ("Notification" in window) {
+      setNotificationPermission(Notification.permission)
+    }
+
+    // Load last checked time from localStorage
+    const savedLastChecked = localStorage.getItem('dashboardLastChecked')
+    if (savedLastChecked) {
+      setLastChecked(new Date(savedLastChecked))
+    }
+
+    // Initial data fetch - using the simpler fetchDashboardData
+    fetchDashboardData()
+
+    return () => {
+      if (pollingInterval.current) {
+        clearInterval(pollingInterval.current)
+      }
+    }
+  }, []) // Remove all dependencies to run only once
+
+  const fetchDashboardData = async () => {
+    setLoading(true)
+    await fetchDashboardDataWithNotification(false)
+    setLoading(false)
+  }
+
+  const updateAppointmentStatus = async (appointmentId: string, newStatus: 'pending' | 'visited') => {
+    setUpdatingStatus(appointmentId)
+    try {
+      const response = await fetch(`/api/appointments/${appointmentId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ status: newStatus })
+      })
+
+      if (response.ok) {
+        // Update the local state immediately
+        setAppointments(prevAppointments => 
+          prevAppointments.map(apt => 
+            apt._id === appointmentId 
+              ? { ...apt, status: newStatus }
+              : apt
+          )
+        )
+      } else {
+        console.error('Failed to update appointment status')
+        // TODO: Add proper error notification
+      }
+    } catch (error) {
+      console.error('Error updating appointment status:', error)
+      // TODO: Add proper error notification
     } finally {
-      setLoading(false)
+      setUpdatingStatus(null)
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
-      case 'confirmed':
+      case 'visited':
         return 'bg-green-100 text-green-800'
       case 'pending':
         return 'bg-yellow-100 text-yellow-800'
-      case 'cancelled':
-        return 'bg-red-100 text-red-800'
       default:
         return 'bg-gray-100 text-gray-800'
     }
@@ -167,9 +348,67 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard Overview</h1>
-          <p className="text-sm sm:text-base text-gray-600">Welcome to SCT Trust Hospital Admin Dashboard</p>
+        <div className="flex-1">
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Dashboard Overview</h1>
+            {hasNewLeads && (
+              <div className="flex items-center gap-2 px-3 py-1 bg-red-50 border border-red-200 rounded-full">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-medium text-red-700">New Lead!</span>
+              </div>
+            )}
+          </div>
+          <div className="flex items-center gap-4 mt-1">
+            <p className="text-sm sm:text-base text-gray-600">Welcome to SCT Trust Hospital Admin Dashboard</p>
+            
+            {/* Notification Permission Status */}
+            {notificationPermission === 'default' && (
+              <button
+                onClick={requestNotificationPermission}
+                className="flex items-center gap-2 px-3 py-1 text-xs bg-blue-50 text-blue-700 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
+              >
+                <BellIcon className="w-4 h-4" />
+                Enable Notifications
+              </button>
+            )}
+            
+            {notificationPermission === 'granted' && (
+              <div className="flex items-center gap-2 px-3 py-1 text-xs bg-green-50 text-green-700 border border-green-200 rounded-md">
+                <BellIcon className="w-4 h-4" />
+                Notifications Active
+              </div>
+            )}
+            
+            {notificationPermission === 'denied' && (
+              <div className="flex items-center gap-2 px-3 py-1 text-xs bg-orange-50 text-orange-700 border border-orange-200 rounded-md">
+                <BellIcon className="w-4 h-4" />
+                Notifications Disabled
+              </div>
+            )}
+
+            {/* Test Notification Button (Development Only) */}
+            {process.env.NODE_ENV === 'development' && notificationPermission === 'granted' && (
+              <button
+                onClick={() => {
+                  showNewLeadNotification({
+                    _id: 'test-id',
+                    name: 'Test Patient',
+                    service: 'Antenatal Care',
+                    date: '2025-01-15',
+                    time: '10:30 AM',
+                    phone: '+91 9876543210',
+                    email: 'test@example.com',
+                    status: 'pending',
+                    createdAt: new Date().toISOString(),
+                    message: 'Test appointment'
+                  })
+                }}
+                className="flex items-center gap-2 px-3 py-1 text-xs bg-purple-50 text-purple-700 border border-purple-200 rounded-md hover:bg-purple-100 transition-colors"
+              >
+                🧪 Test Notification
+              </button>
+            )}
+          </div>
         </div>
         
         {/* View Toggle */}
@@ -315,14 +554,14 @@ export default function DashboardPage() {
                   Pending ({appointments.filter(a => a.status.toLowerCase() === 'pending').length})
                 </button>
                 <button
-                  onClick={() => setFilter('confirmed')}
+                  onClick={() => setFilter('visited')}
                   className={`px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    filter === 'confirmed'
+                    filter === 'visited'
                       ? 'bg-blue-100 text-blue-700 border border-blue-200'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  Confirmed ({appointments.filter(a => a.status.toLowerCase() === 'confirmed').length})
+                  Visited ({appointments.filter(a => a.status.toLowerCase() === 'visited').length})
                 </button>
               </div>
               
@@ -377,8 +616,16 @@ export default function DashboardPage() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {filteredAppointments.map((appointment) => (
-                      <tr key={appointment._id} className="hover:bg-gray-50 appointment-item" data-testid={`appointment-${appointment._id}`}>
+                    {filteredAppointments.map((appointment) => {
+                      const isNewAppointment = new Date(appointment.createdAt) > new Date(Date.now() - 5 * 60 * 1000) // Last 5 minutes
+                      return (
+                      <tr 
+                        key={appointment._id} 
+                        className={`hover:bg-gray-50 appointment-item ${
+                          isNewAppointment ? 'bg-blue-50 border-l-4 border-l-blue-500' : ''
+                        }`} 
+                        data-testid={`appointment-${appointment._id}`}
+                      >
                         <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10">
@@ -389,8 +636,15 @@ export default function DashboardPage() {
                               </div>
                             </div>
                             <div className="ml-3 sm:ml-4 min-w-0">
-                              <div className="text-sm font-medium text-gray-900 truncate" data-testid={`appointment-name`}>
-                                {appointment.name}
+                              <div className="flex items-center gap-2">
+                                <div className="text-sm font-medium text-gray-900 truncate" data-testid={`appointment-name`}>
+                                  {appointment.name}
+                                </div>
+                                {isNewAppointment && (
+                                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    New
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -409,9 +663,22 @@ export default function DashboardPage() {
                           </span>
                         </td>
                         <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(appointment.status)}`}>
-                            {appointment.status}
-                          </span>
+                          <select
+                            value={appointment.status}
+                            onChange={(e) => updateAppointmentStatus(appointment._id, e.target.value as 'pending' | 'visited')}
+                            disabled={updatingStatus === appointment._id}
+                            className={`px-2 py-1 text-xs font-semibold rounded-full border-0 cursor-pointer focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                              getStatusColor(appointment.status)
+                            } ${updatingStatus === appointment._id ? 'opacity-50 cursor-not-allowed' : ''}`}
+                          >
+                            <option value="pending">Pending</option>
+                            <option value="visited">Visited</option>
+                          </select>
+                          {updatingStatus === appointment._id && (
+                            <div className="inline-flex ml-2">
+                              <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600"></div>
+                            </div>
+                          )}
                         </td>
                         <td className="px-4 sm:px-6 py-4 hidden sm:table-cell">
                           <div className="text-sm text-gray-900 max-w-xs truncate" title={appointment.message || 'No message'}>
@@ -422,7 +689,8 @@ export default function DashboardPage() {
                           {new Date(appointment.createdAt).toLocaleDateString()}
                         </td>
                       </tr>
-                    ))}
+                      )
+                    })}
                   </tbody>
                 </table>
               </div>

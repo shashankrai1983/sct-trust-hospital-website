@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PostPreview from '@/components/blog/post-preview';
@@ -13,6 +14,66 @@ interface PageProps {
 
 // Enable ISR for category pages
 export const revalidate = 1800; // Revalidate every 30 minutes
+
+// Generate metadata for blog category pages
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const categoryTitle = params.slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+
+  const categoryDescriptions: { [key: string]: string } = {
+    'pregnancy-care': 'Expert pregnancy care advice and tips from Dr. Amita Shukla. Learn about prenatal care, high-risk pregnancy management, and safe delivery practices.',
+    'pcos-treatment': 'Comprehensive PCOS/PCOD treatment guides by Dr. Amita Shukla. Understand symptoms, treatment options, and lifestyle management for hormonal balance.',
+    'fertility-care': 'Fertility care and infertility treatment insights from leading gynecologist Dr. Amita Shukla. Expert guidance on conception and reproductive health.',
+    'womens-health': 'Women\'s health articles covering gynecological issues, wellness tips, and preventive care by Dr. Amita Shukla, Lucknow\'s trusted gynecologist.'
+  };
+
+  const title = `${categoryTitle} Articles | Dr. Amita Shukla Blog`;
+  const description = categoryDescriptions[params.slug] || `Read expert articles about ${categoryTitle.toLowerCase()} from Dr. Amita Shukla, leading gynecologist in Lucknow. Professional medical insights and advice.`;
+  const url = `https://dramitashukla.com/blog/category/${params.slug}`;
+
+  return {
+    title,
+    description,
+    keywords: [
+      categoryTitle,
+      'Dr. Amita Shukla',
+      'gynecologist blog',
+      'medical articles',
+      'women health',
+      'Lucknow',
+      'SCT Trust Hospital'
+    ],
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'Dr. Amita Shukla - SCT Trust Hospital',
+      images: [{
+        url: 'https://i.ibb.co/wNcyfqGS/Amita-Shukla-website-image.png',
+        width: 1200,
+        height: 630,
+        alt: `${categoryTitle} Articles by Dr. Amita Shukla`,
+      }],
+      locale: 'en_IN',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['https://i.ibb.co/wNcyfqGS/Amita-Shukla-website-image.png'],
+    },
+    alternates: {
+      canonical: url,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 export default async function CategoryPage({ params }: PageProps) {
   try {

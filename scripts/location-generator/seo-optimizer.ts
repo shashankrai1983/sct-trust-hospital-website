@@ -409,11 +409,11 @@ export class SchemaValidator {
     return {
       "@context": "https://schema.org",
       "@type": ["MedicalOrganization", "LocalBusiness"],
-      "@id": `https://www.dramitashukla.com/gynecologist-in-${locationData.slug}#organization`,
+      "@id": `https://dramitashukla.com/gynecologist-in-${locationData.slug}#organization`,
       "name": `Dr. Amita Shukla - Best Gynaecologist in ${locationData.displayName}`,
       "alternateName": `Dr. Amita Shukla ${locationData.displayName}`,
       "description": locationData.seoData.description,
-      "url": `https://www.dramitashukla.com/gynecologist-in-${locationData.slug}`,
+      "url": `https://dramitashukla.com/gynecologist-in-${locationData.slug}`,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "SCT Trust Hospital, Sector-2, Viraj Khand",

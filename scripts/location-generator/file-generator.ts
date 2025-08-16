@@ -386,7 +386,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: ${this.toCamelCase(location)}Data.seoData.title,
     description: ${this.toCamelCase(location)}Data.seoData.description,
-    url: \`https://www.dramitashukla.com/gynecologist-in-${locationSlug}\`,
+    url: \`https://dramitashukla.com/gynecologist-in-${locationSlug}\`,
     siteName: 'Dr. Amita Shukla - SCT Trust Hospital',
     images: [{
       url: '/images/dr-amita-shukla-og.jpg',
@@ -433,12 +433,12 @@ export const metadata: Metadata = {
 
   // Canonical URL
   alternates: {
-    canonical: \`https://www.dramitashukla.com/gynecologist-in-${locationSlug}\`,
+    canonical: \`https://dramitashukla.com/gynecologist-in-${locationSlug}\`,
   },
 };
 
 export default function ${this.toPascalCase(location)}GynecologistPage() {
-  const pageUrl = \`https://www.dramitashukla.com/gynecologist-in-${locationSlug}\`;
+  const pageUrl = \`https://dramitashukla.com/gynecologist-in-${locationSlug}\`;
   const breadcrumbItems = generateLocationBreadcrumb('${location}', '${locationSlug}');
 
   // Generate structured data for the page
@@ -453,7 +453,7 @@ export default function ${this.toPascalCase(location)}GynecologistPage() {
       "url": pageUrl,
       "image": {
         "@type": "ImageObject",
-        "url": "https://www.dramitashukla.com/images/dr-amita-shukla.jpg",
+        "url": "https://dramitashukla.com/images/dr-amita-shukla.jpg",
         "width": 400,
         "height": 400
       },
@@ -593,7 +593,7 @@ export class SitemapGenerator {
     const currentDate = new Date().toISOString().split('T')[0];
     
     return `  <url>
-    <loc>https://www.dramitashukla.com/gynecologist-in-${locationSlug}</loc>
+    <loc>https://dramitashukla.com/gynecologist-in-${locationSlug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -621,19 +621,19 @@ ${entries.join('\n')}
     const mainSitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc>https://www.dramitashukla.com/sitemap-pages.xml</loc>
+    <loc>https://dramitashukla.com/sitemap-pages.xml</loc>
     <lastmod>${currentDate}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.dramitashukla.com/sitemap-services.xml</loc>
+    <loc>https://dramitashukla.com/sitemap-services.xml</loc>
     <lastmod>${currentDate}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.dramitashukla.com/sitemap-blog.xml</loc>
+    <loc>https://dramitashukla.com/sitemap-blog.xml</loc>
     <lastmod>${currentDate}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>https://www.dramitashukla.com/sitemap-locations.xml</loc>
+    <loc>https://dramitashukla.com/sitemap-locations.xml</loc>
     <lastmod>${currentDate}</lastmod>
   </sitemap>
 </sitemapindex>`;

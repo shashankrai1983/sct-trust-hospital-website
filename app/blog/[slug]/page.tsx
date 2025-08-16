@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import { getPostBySlug, getAllPostSlugs } from '@/lib/api';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
@@ -86,6 +87,76 @@ export async function generateStaticParams() {
 
 // Enable ISR with revalidation
 export const revalidate = 3600; // Revalidate every hour
+
+// Generate metadata for blog posts
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  try {
+    const post = await getPostBySlug(params.slug);
+    
+    if (!post) {
+      return {
+        title: 'Post Not Found | Dr. Amita Shukla Blog',
+        description: 'The requested blog post could not be found.',
+      };
+    }
+
+    const title = `${post.title} | Dr. Amita Shukla Blog`;
+    const description = post.excerpt || `Read about ${post.title} - expert insights from Dr. Amita Shukla, leading gynecologist in Lucknow. Women's health, pregnancy care, and medical advice.`;
+    const url = `https://dramitashukla.com/blog/${params.slug}`;
+    const imageUrl = post.mainImage || 'https://i.ibb.co/wNcyfqGS/Amita-Shukla-website-image.png';
+
+    return {
+      title,
+      description,
+      keywords: [
+        post.title,
+        'Dr. Amita Shukla',
+        'gynecologist blog',
+        'women health',
+        'pregnancy care',
+        'medical advice',
+        'Lucknow',
+        ...(post.categories?.map((cat: any) => cat.title) || [])
+      ],
+      openGraph: {
+        title,
+        description,
+        url,
+        siteName: 'Dr. Amita Shukla - SCT Trust Hospital',
+        images: [{
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }],
+        locale: 'en_IN',
+        type: 'article',
+        publishedTime: post.publishedAt,
+        authors: [post.author?.name || 'Dr. Amita Shukla'],
+        tags: post.categories?.map((cat: any) => cat.title) || [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: [imageUrl],
+      },
+      alternates: {
+        canonical: url,
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: 'Blog Post | Dr. Amita Shukla',
+      description: 'Read expert insights from Dr. Amita Shukla on women\'s health and gynecology.',
+    };
+  }
+}
 
 export default async function BlogPost({ params }: PageProps) {
   try {

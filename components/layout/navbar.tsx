@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Heart, ChevronDown, Home, User, FileText, Phone } from 'lucide-react';
+import { Menu, X, Heart, ChevronDown, Home, User, FileText, Phone, Calculator } from 'lucide-react';
 
 const navLinks = [
   { title: 'Home', href: '/', icon: Home },
@@ -22,6 +22,22 @@ const navLinks = [
       { title: 'Laparoscopy', href: '/services/laparoscopy' },
       { title: 'Antenatal Care', href: '/services/antenatal-care' },
       { title: 'Well Women Health', href: '/services/well-women-health' },
+    ]
+  },
+  { 
+    title: 'Women\'s Health Calculator', 
+    href: '/calculators',
+    icon: Calculator,
+    submenu: [
+      { title: 'Due Date Calculator', href: '/calculators/due-date-calculator' },
+      { title: 'Pregnancy Week Calculator', href: '/calculators/pregnancy-week-calculator' },
+      { title: 'Conception Date Calculator', href: '/calculators/conception-date-calculator' },
+      { title: 'High-Risk Pregnancy Assessment', href: '/calculators/high-risk-pregnancy-assessment' },
+      { title: 'Ovulation Calculator', href: '/calculators/ovulation-calculator' },
+      { title: 'Fertile Window Calculator', href: '/calculators/fertile-window-calculator' },
+      { title: 'BMI Calculator', href: '/calculators/bmi-calculator' },
+      { title: 'Weight Gain Calculator', href: '/calculators/weight-gain-calculator' },
+      { title: 'Prenatal Vitamin Calculator', href: '/calculators/prenatal-vitamin-calculator' },
     ]
   },
   { title: 'Blog', href: '/blog', icon: FileText },

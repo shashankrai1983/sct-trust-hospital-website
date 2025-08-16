@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { HomeIcon, PhoneIcon, CalendarIcon, ArrowLeftIcon } from '@heroicons/react/24/outline'
-import anime from 'animejs/lib/anime.es.js'
+import { animate as anime, svg, utils } from 'animejs'
 
 export default function NotFound() {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -27,53 +27,58 @@ export default function NotFound() {
 
       try {
         // Heartbeat pulse animation
+        const heartbeatPath = svg.createMotionPath('#heartbeat-path')
         anime({
           targets: '.heartbeat-dot',
-          translateX: anime.path('#heartbeat-path')('x'),
-          translateY: anime.path('#heartbeat-path')('y'),
+          translateX: heartbeatPath.translateX,
+          translateY: heartbeatPath.translateY,
           duration: 3000,
           loop: true,
           easing: 'linear'
         })
 
         // Doctor walking animation
+        const doctorPath = svg.createMotionPath('#doctor-walk-path')
         anime({
           targets: '.doctor-character',
-          translateX: anime.path('#doctor-walk-path')('x'),
-          translateY: anime.path('#doctor-walk-path')('y'),
+          translateX: doctorPath.translateX,
+          translateY: doctorPath.translateY,
           duration: 8000,
           loop: true,
           easing: 'easeInOutSine'
         })
 
         // Stethoscope following path (mobile-optimized)
+        const stethoscopePath = svg.createMotionPath('#stethoscope-path')
         anime({
           targets: '.stethoscope',
-          translateX: anime.path('#stethoscope-path')('x'),
-          translateY: anime.path('#stethoscope-path')('y'),
-          rotate: anime.path('#stethoscope-path')('angle'),
+          translateX: stethoscopePath.translateX,
+          translateY: stethoscopePath.translateY,
+          rotate: stethoscopePath.rotate,
           duration: window.innerWidth < 768 ? 6000 : 4000, // Slower on mobile
           loop: true,
           easing: 'easeInOutQuad'
         })
 
         // Medical charts floating
+        const chartPath = svg.createMotionPath('#chart-path')
         anime({
           targets: '.medical-chart',
-          translateX: anime.path('#chart-path')('x'),
-          translateY: anime.path('#chart-path')('y'),
+          translateX: chartPath.translateX,
+          translateY: chartPath.translateY,
           duration: 6000,
           loop: true,
-          delay: anime.stagger(1000),
+          delay: (target, index) => index * 1000,
           easing: 'easeInOutSine'
         })
 
         // Prescription pen writing
+        const signaturePath = svg.createMotionPath('#signature-path')
         anime({
           targets: '.prescription-pen',
-          translateX: anime.path('#signature-path')('x'),
-          translateY: anime.path('#signature-path')('y'),
-          rotate: anime.path('#signature-path')('angle'),
+          translateX: signaturePath.translateX,
+          translateY: signaturePath.translateY,
+          rotate: signaturePath.rotate,
           duration: 5000,
           delay: 2000,
           loop: true,
@@ -83,13 +88,13 @@ export default function NotFound() {
         // Pills floating animation (reduced on mobile)
         anime({
           targets: '.floating-pill',
-          translateY: () => anime.random(-20, 20),
-          translateX: () => anime.random(-10, 10),
-          rotateZ: () => anime.random(-180, 180),
-          duration: () => anime.random(3000, 5000),
+          translateY: () => utils.random(-20, 20),
+          translateX: () => utils.random(-10, 10),
+          rotateZ: () => utils.random(-180, 180),
+          duration: () => utils.random(3000, 5000),
           loop: window.innerWidth >= 768, // Only loop on desktop
           direction: 'alternate',
-          delay: anime.stagger(500),
+          delay: (target, index) => index * 500,
           easing: 'easeInOutSine'
         })
 
@@ -100,7 +105,7 @@ export default function NotFound() {
           opacity: [0, 1],
           scale: [0.5, 1],
           duration: 1000,
-          delay: anime.stagger(300),
+          delay: (target, index) => index * 300,
           easing: 'easeOutElastic(1, .6)'
         })
 
@@ -115,7 +120,7 @@ export default function NotFound() {
 
         // Auto-pause animations after 30 seconds to save battery
         setTimeout(() => {
-          anime.remove('.heartbeat-dot, .doctor-character, .stethoscope, .floating-pill')
+          utils.remove('.heartbeat-dot, .doctor-character, .stethoscope, .floating-pill')
         }, 30000)
 
       } catch (error) {

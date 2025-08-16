@@ -64,7 +64,7 @@ export default function PrivacyPolicyPage() {
               <br />
               Phone: +91-8303222222
               <br />
-              Address: SCT Trust Hospital, Sector-2, Viraj Khand, Gomti Nagar, Lucknow
+              Address: SCT Trust Hospital, A1/7, Purania Rd, Sector H, Sector-A, Aliganj, Lucknow, Uttar Pradesh 226024
             </p>
 
             <p className="text-sm text-gray-600 mt-8">

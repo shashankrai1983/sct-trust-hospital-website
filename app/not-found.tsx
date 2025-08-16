@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { HomeIcon, PhoneIcon, CalendarIcon, ArrowLeftIcon } from '@heroicons/react/24/outline'
-import { animate as anime, svg, utils } from 'animejs'
+import { animate, svg, utils } from 'animejs'
 
 export default function NotFound() {
   const svgRef = useRef<SVGSVGElement>(null)
@@ -27,71 +27,67 @@ export default function NotFound() {
 
       try {
         // Heartbeat pulse animation
-        const heartbeatPath = svg.createMotionPath('#heartbeat-path')
-        anime({
+        animate({
           targets: '.heartbeat-dot',
-          translateX: heartbeatPath.translateX,
-          translateY: heartbeatPath.translateY,
+          translateX: [0, 1200],
+          translateY: [0, 0],
           duration: 3000,
           loop: true,
           easing: 'linear'
         })
 
         // Doctor walking animation
-        const doctorPath = svg.createMotionPath('#doctor-walk-path')
-        anime({
+        animate({
           targets: '.doctor-character',
-          translateX: doctorPath.translateX,
-          translateY: doctorPath.translateY,
+          translateX: [-100, 1300],
+          translateY: [0, 0],
           duration: 8000,
           loop: true,
           easing: 'easeInOutSine'
         })
 
         // Stethoscope following path (mobile-optimized)
-        const stethoscopePath = svg.createMotionPath('#stethoscope-path')
-        anime({
+        animate({
           targets: '.stethoscope',
-          translateX: stethoscopePath.translateX,
-          translateY: stethoscopePath.translateY,
-          rotate: stethoscopePath.rotate,
+          translateX: [200, 800],
+          translateY: [200, 200],
+          rotate: [0, 360],
           duration: window.innerWidth < 768 ? 6000 : 4000, // Slower on mobile
           loop: true,
           easing: 'easeInOutQuad'
         })
 
         // Medical charts floating
-        const chartPath = svg.createMotionPath('#chart-path')
-        anime({
+        animate({
           targets: '.medical-chart',
-          translateX: chartPath.translateX,
-          translateY: chartPath.translateY,
+          translateY: [-20, 20],
           duration: 6000,
           loop: true,
           delay: (target, index) => index * 1000,
+          direction: 'alternate',
           easing: 'easeInOutSine'
         })
 
         // Prescription pen writing
-        const signaturePath = svg.createMotionPath('#signature-path')
-        anime({
+        animate({
           targets: '.prescription-pen',
-          translateX: signaturePath.translateX,
-          translateY: signaturePath.translateY,
-          rotate: signaturePath.rotate,
+          translateX: [0, 50],
+          translateY: [0, -10],
+          rotate: [0, 15],
           duration: 5000,
           delay: 2000,
           loop: true,
+          direction: 'alternate',
           easing: 'easeInOutSine'
         })
 
         // Pills floating animation (reduced on mobile)
-        anime({
+        animate({
           targets: '.floating-pill',
-          translateY: () => utils.random(-20, 20),
-          translateX: () => utils.random(-10, 10),
-          rotateZ: () => utils.random(-180, 180),
-          duration: () => utils.random(3000, 5000),
+          translateY: () => Math.random() * 40 - 20,
+          translateX: () => Math.random() * 20 - 10,
+          rotateZ: () => Math.random() * 360 - 180,
+          duration: () => Math.random() * 2000 + 3000,
           loop: window.innerWidth >= 768, // Only loop on desktop
           direction: 'alternate',
           delay: (target, index) => index * 500,
@@ -99,7 +95,7 @@ export default function NotFound() {
         })
 
         // 404 numbers entrance animation
-        anime({
+        animate({
           targets: '.error-number',
           translateY: [-50, 0],
           opacity: [0, 1],
@@ -110,7 +106,7 @@ export default function NotFound() {
         })
 
         // Medical bag opening animation
-        anime({
+        animate({
           targets: '.medical-bag',
           scaleY: [0, 1],
           duration: 1500,

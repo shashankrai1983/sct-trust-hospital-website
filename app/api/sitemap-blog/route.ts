@@ -4,7 +4,7 @@ export async function GET() {
   const baseUrl = 'https://dramitashukla.com';
   const currentDate = new Date().toISOString();
 
-  // Blog categories and sample posts
+  // Blog categories only (removed non-existent blog posts)
   const blogPages = [
     // Category pages
     {
@@ -30,38 +30,13 @@ export async function GET() {
       lastmod: currentDate,
       changefreq: 'weekly',
       priority: '0.7'
-    },
-    // Educational blog posts
-    {
-      url: '/blog/signs-symptoms-pcos-when-to-see-gynecologist',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.6'
-    },
-    {
-      url: '/blog/high-risk-pregnancy-complete-guide-lucknow',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.6'
-    },
-    {
-      url: '/blog/fertility-treatment-options-success-rates',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.6'
-    },
-    {
-      url: '/blog/laparoscopy-surgery-benefits-recovery-time',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.6'
-    },
-    {
-      url: '/blog/choosing-best-gynecologist-lucknow-checklist',
-      lastmod: currentDate,
-      changefreq: 'monthly',
-      priority: '0.7'
     }
+    // Note: Removed 5 blog post URLs that return 404:
+    // - /blog/signs-symptoms-pcos-when-to-see-gynecologist
+    // - /blog/high-risk-pregnancy-complete-guide-lucknow
+    // - /blog/fertility-treatment-options-success-rates
+    // - /blog/laparoscopy-surgery-benefits-recovery-time
+    // - /blog/choosing-best-gynecologist-lucknow-checklist
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

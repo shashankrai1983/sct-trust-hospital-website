@@ -13,6 +13,7 @@ import {
   BellIcon
 } from '@heroicons/react/24/outline'
 import CalendarView from './components/calendar-view'
+import IndexNowPanel from '@/components/dashboard/indexnow-panel'
 
 interface DashboardStats {
   totalAppointments: number
@@ -43,7 +44,7 @@ export default function DashboardPage() {
   })
   const [appointments, setAppointments] = useState<RecentAppointment[]>([])
   const [loading, setLoading] = useState(true)
-  const [viewMode, setViewMode] = useState<'dashboard' | 'calendar'>('dashboard')
+  const [viewMode, setViewMode] = useState<'dashboard' | 'calendar' | 'indexnow'>('dashboard')
   const [filter, setFilter] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
   const [dateFilter, setDateFilter] = useState('')
@@ -418,7 +419,7 @@ export default function DashboardPage() {
         <div className="flex bg-gray-100 rounded-lg p-1 w-full sm:w-auto">
           <button
             onClick={() => setViewMode('dashboard')}
-            className={`flex items-center justify-center px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
+            className={`flex items-center justify-center px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
               viewMode === 'dashboard'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
@@ -429,7 +430,7 @@ export default function DashboardPage() {
           </button>
           <button
             onClick={() => setViewMode('calendar')}
-            className={`flex items-center justify-center px-3 sm:px-4 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
+            className={`flex items-center justify-center px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
               viewMode === 'calendar'
                 ? 'bg-white text-gray-900 shadow-sm'
                 : 'text-gray-500 hover:text-gray-700'
@@ -437,6 +438,17 @@ export default function DashboardPage() {
           >
             <CalendarDaysIcon className="w-4 h-4 mr-1 sm:mr-2" />
             <span className="hidden xs:inline">Calendar</span>
+          </button>
+          <button
+            onClick={() => setViewMode('indexnow')}
+            className={`flex items-center justify-center px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors flex-1 sm:flex-none ${
+              viewMode === 'indexnow'
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-500 hover:text-gray-700'
+            }`}
+          >
+            <MagnifyingGlassIcon className="w-4 h-4 mr-1 sm:mr-2" />
+            <span className="hidden xs:inline">SEO</span>
           </button>
         </div>
       </div>
@@ -700,8 +712,10 @@ export default function DashboardPage() {
             )}
           </div>
         </>
-      ) : (
+      ) : viewMode === 'calendar' ? (
         <CalendarView appointments={appointments} />
+      ) : (
+        <IndexNowPanel />
       )}
     </div>
   )

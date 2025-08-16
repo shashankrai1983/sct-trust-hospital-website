@@ -1,0 +1,273 @@
+# Page snapshot
+
+```yaml
+- banner:
+  - link "Dr. Amita Shukla Gynecologist & Obstetrician":
+    - /url: /
+    - img
+    - heading "Dr. Amita Shukla" [level=1]
+    - paragraph: Gynecologist & Obstetrician
+  - link "Home":
+    - /url: /
+  - link "About":
+    - /url: /about
+  - button "Services":
+    - text: Services
+    - img
+  - link "Blog":
+    - /url: /blog
+  - link "Contact":
+    - /url: /contact
+  - link "Book Appointment":
+    - /url: /contact
+- main:
+  - heading "Contact & Appointments" [level=1]
+  - paragraph: Reach out to us or book an appointment with Dr. Amita Shukla for personalized care
+  - img
+  - heading "Address" [level=3]
+  - paragraph: SCT Trust Hospital, A-1/7, Sector-H, Aliganj, Lucknow - 226024
+  - img
+  - heading "Phone" [level=3]
+  - paragraph: +91 8303222222
+  - img
+  - heading "Email" [level=3]
+  - paragraph: amitaobg@gmail.com
+  - img
+  - heading "Hours" [level=3]
+  - paragraph: Open 24 Hours with emergency and NICU facility
+  - iframe
+  - heading "Book Your Appointment" [level=2]
+  - paragraph: Fill out the form below to schedule a consultation with Dr. Amita Shukla
+  - text: Full Name
+  - textbox "Full Name": Reset Test
+  - text: Email
+  - textbox "Email": reset@example.com
+  - text: Phone Number
+  - textbox "Phone Number": "9876543210"
+  - text: Service Needed
+  - combobox "Service Needed":
+    - option "Select a service"
+    - option "High Risk Pregnancy"
+    - option "Infertility Treatment"
+    - option "PCOS/PCOD Treatment"
+    - option "Laparoscopy"
+    - option "Antenatal Care"
+    - option "Well Women Health"
+    - option "General Consultation" [selected]
+    - option "Other"
+  - text: Appointment Date
+  - button "Appointment Date" [expanded]:
+    - text: August 13th, 2025
+    - img
+  - text: Preferred Time
+  - combobox "Preferred Time":
+    - option "Select a time slot" [selected]
+    - option "10:30 AM"
+    - option "11:00 AM"
+    - option "11:30 AM"
+    - option "12:00 PM"
+    - option "12:30 PM"
+    - option "01:00 PM"
+    - option "01:30 PM"
+    - option "02:00 PM"
+    - option "06:00 PM"
+    - option "06:30 PM"
+    - option "07:00 PM"
+    - option "07:30 PM"
+    - option "08:00 PM"
+    - option "08:30 PM"
+    - option "09:00 PM"
+    - option "-- Break Time 2:00 PM - 6:00 PM --" [disabled]
+  - text: Additional Information (Optional)
+  - textbox "Additional Information (Optional)"
+  - paragraph:
+    - text: This site is protected by reCAPTCHA and the Google
+    - link "Privacy Policy":
+      - /url: https://policies.google.com/privacy
+    - text: and
+    - link "Terms of Service":
+      - /url: https://policies.google.com/terms
+    - text: apply.
+  - button "Book Appointment"
+  - heading "Our Consultation Process" [level=2]
+  - paragraph: What to expect when you visit Dr. Amita Shukla
+  - img
+  - heading "1. Booking" [level=3]
+  - paragraph: Schedule your appointment online or by phone. Choose a date and time that works for you.
+  - img
+  - heading "2. Consultation" [level=3]
+  - paragraph: Meet with Dr. Amita for a thorough evaluation. Discuss your concerns and medical history.
+  - img
+  - heading "3. Treatment" [level=3]
+  - paragraph: Receive a personalized treatment plan tailored to your specific needs and concerns.
+  - heading "Insurance & Payment" [level=2]
+  - paragraph: We accept all major insurance plans and offer flexible payment options to ensure access to quality healthcare.
+  - paragraph: For questions about insurance coverage or payment options, please contact our office directly.
+- contentinfo:
+  - img
+  - heading "Dr. Amita Shukla" [level=3]
+  - paragraph: Gynecologist with 10+ years of experience specializing in High-Risk Pregnancy, Infertility, PCOS/PCOD, Laparoscopy, and Hysteroscopy.
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - heading "Our Services" [level=3]
+  - list:
+    - listitem:
+      - link "High Risk Pregnancy":
+        - /url: /services/high-risk-pregnancy
+    - listitem:
+      - link "Pregnancy Complications":
+        - /url: /services/pregnancy-complications
+    - listitem:
+      - link "Infertility Treatment":
+        - /url: /services/infertility-treatment
+    - listitem:
+      - link "PCOS/PCOD Treatment":
+        - /url: /services/pcos-pcod-treatment
+    - listitem:
+      - link "Advanced Laparoscopy":
+        - /url: /services/laparoscopy
+    - listitem:
+      - link "Antenatal Care":
+        - /url: /services/antenatal-care
+    - listitem:
+      - link "Well Women Health":
+        - /url: /services/well-women-health
+  - heading "Service Areas" [level=3]
+  - list:
+    - listitem:
+      - link "Gynecologist in Gomti Nagar":
+        - /url: /gynecologist-in/gomti-nagar
+    - listitem:
+      - link "Gynecologist in Hazratganj":
+        - /url: /gynecologist-in/hazratganj
+    - listitem:
+      - link "Gynecologist in Jankipuram Extension":
+        - /url: /gynecologist-in/jankipuram-extension
+    - listitem:
+      - link "Gynecologist in Aliganj":
+        - /url: /gynecologist-in/aliganj
+    - listitem:
+      - link "Gynecologist in Mahanagar":
+        - /url: /gynecologist-in/mahanagar
+    - listitem:
+      - link "Gynecologist in Indira Nagar":
+        - /url: /gynecologist-in/indira-nagar
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "About Dr. Amita":
+        - /url: /about
+    - listitem:
+      - link "Health Blog":
+        - /url: /blog
+    - listitem:
+      - link "Book Appointment":
+        - /url: /contact
+    - listitem:
+      - link "FAQs":
+        - /url: /faq
+    - listitem:
+      - link "Privacy Policy":
+        - /url: /privacy-policy
+    - listitem:
+      - link "Terms & Conditions":
+        - /url: /terms
+  - heading "Contact Us" [level=3]
+  - list:
+    - listitem:
+      - img
+      - text: SCT Trust Hospital, A-1/7, Sector-H, Aliganj, Lucknow - 226024
+    - listitem:
+      - img
+      - link "+91 8303222222":
+        - /url: tel:+918303222222
+    - listitem:
+      - img
+      - link "amitaobg@gmail.com":
+        - /url: mailto:amitaobg@gmail.com
+    - listitem:
+      - img
+      - paragraph: Open 24 Hours with emergency and NICU facility
+  - heading "Find Us" [level=3]
+  - iframe
+  - paragraph: © 2025 Dr. Amita Shukla. All rights reserved.
+- region "Notifications (F8)":
+  - list
+- alert
+- iframe
+- dialog:
+  - text: August 2025
+  - button "Go to previous month":
+    - img
+  - button "Go to next month":
+    - img
+  - grid "August 2025":
+    - rowgroup:
+      - row "Sunday Monday Tuesday Wednesday Thursday Friday Saturday":
+        - columnheader "Sunday": Su
+        - columnheader "Monday": Mo
+        - columnheader "Tuesday": Tu
+        - columnheader "Wednesday": We
+        - columnheader "Thursday": Th
+        - columnheader "Friday": Fr
+        - columnheader "Saturday": Sa
+    - rowgroup:
+      - row "27 28 29 30 31 1 2":
+        - gridcell "27" [disabled]
+        - gridcell "28" [disabled]
+        - gridcell "29" [disabled]
+        - gridcell "30" [disabled]
+        - gridcell "31" [disabled]
+        - gridcell "1" [disabled]
+        - gridcell "2" [disabled]
+      - row "3 4 5 6 7 8 9":
+        - gridcell "3" [disabled]
+        - gridcell "4" [disabled]
+        - gridcell "5" [disabled]
+        - gridcell "6" [disabled]
+        - gridcell "7" [disabled]
+        - gridcell "8" [disabled]
+        - gridcell "9" [disabled]
+      - row "10 11 12 13 14 15 16":
+        - gridcell "10" [disabled]
+        - gridcell "11" [disabled]
+        - gridcell "12"
+        - gridcell "13" [selected]
+        - gridcell "14"
+        - gridcell "15"
+        - gridcell "16"
+      - row "17 18 19 20 21 22 23":
+        - gridcell "17" [disabled]
+        - gridcell "18"
+        - gridcell "19"
+        - gridcell "20"
+        - gridcell "21"
+        - gridcell "22"
+        - gridcell "23"
+      - row "24 25 26 27 28 29 30":
+        - gridcell "24" [disabled]
+        - gridcell "25"
+        - gridcell "26"
+        - gridcell "27"
+        - gridcell "28"
+        - gridcell "29"
+        - gridcell "30"
+      - row "31 1 2 3 4 5 6":
+        - gridcell "31" [disabled]
+        - gridcell "1"
+        - gridcell "2"
+        - gridcell "3"
+        - gridcell "4"
+        - gridcell "5"
+        - gridcell "6"
+```

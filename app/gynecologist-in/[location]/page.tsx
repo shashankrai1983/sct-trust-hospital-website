@@ -85,7 +85,7 @@ export async function generateMetadata({
     };
   }
 
-  const pageUrl = `https://www.dramitashukla.com/gynecologist-in/${params.location}`;
+  const pageUrl = `https://dramitashukla.com/gynecologist-in/${params.location}`;
 
   return {
     title: locationData.seoData.title,
@@ -162,7 +162,7 @@ export default async function LocationPage({
     notFound();
   }
 
-  const pageUrl = `https://www.dramitashukla.com/gynecologist-in/${params.location}`;
+  const pageUrl = `https://dramitashukla.com/gynecologist-in/${params.location}`;
   const breadcrumbItems = generateLocationBreadcrumb(locationData.displayName, params.location);
 
   // Generate structured data for the page
@@ -177,7 +177,7 @@ export default async function LocationPage({
       "url": pageUrl,
       "image": {
         "@type": "ImageObject",
-        "url": "https://www.dramitashukla.com/images/dr-amita-shukla.jpg",
+        "url": "https://dramitashukla.com/images/dr-amita-shukla.jpg",
         "width": 400,
         "height": 400
       },

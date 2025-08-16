@@ -26,6 +26,7 @@ import {
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import { IndexNowService } from '@/lib/indexnow';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -150,6 +151,19 @@ const AppointmentForm = () => {
         title: "Appointment Booked Successfully!",
         description: `Your appointment has been scheduled for ${format(data.date, 'PPP')} at ${data.time}. We'll contact you soon to confirm.`,
       });
+
+      // Submit to IndexNow for instant indexing of updated contact page
+      try {
+        if (result.appointmentId) {
+          await IndexNowService.submitAppointmentConfirmation(result.appointmentId);
+        } else {
+          // Fallback: submit contact page
+          await IndexNowService.submitUrl('https://dramitashukla.com/contact');
+        }
+      } catch (indexError) {
+        // IndexNow failure shouldn't affect user experience
+        console.log('IndexNow submission failed:', indexError);
+      }
       
       // Reset form after showing success for a moment
       setTimeout(() => {

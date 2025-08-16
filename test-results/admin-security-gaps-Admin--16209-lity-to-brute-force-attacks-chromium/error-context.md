@@ -1,0 +1,155 @@
+# Page snapshot
+
+```yaml
+- main:
+  - heading "SCT Admin" [level=1]
+  - navigation:
+    - link "Appointments Dashboard":
+      - /url: /dashboard
+  - text: SCT Trust Hospital Admin Dashboard
+  - main:
+    - heading "Dashboard Overview" [level=1]
+    - paragraph: Welcome to SCT Trust Hospital Admin Dashboard
+    - button
+    - button
+    - term: Total Appointments
+    - definition: "1"
+    - term: Today's Appointments
+    - definition: "0"
+    - term: This Week
+    - definition: "0"
+    - term: This Month
+    - definition: "1"
+    - textbox "Search by name, email, phone, or service..."
+    - button "Clear All"
+    - text: "Filters:"
+    - combobox:
+      - option "All Dates" [selected]
+      - option "2025-08-16"
+    - combobox:
+      - option "All Services" [selected]
+      - option "Other"
+    - button "All (1)"
+    - button "Pending (1)"
+    - button "Confirmed (0)"
+    - table:
+      - rowgroup:
+        - row "Patient Details Contact Appointment Service Status Message Booked On":
+          - cell "Patient Details"
+          - cell "Contact"
+          - cell "Appointment"
+          - cell "Service"
+          - cell "Status"
+          - cell "Message"
+          - cell "Booked On"
+      - rowgroup:
+        - row "S stagingformcaptachv3fixed workwithsr@gmail.com 08750065555 2025-08-16 12:30 PM Other pending tet 8/3/2025":
+          - cell "S stagingformcaptachv3fixed"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-16 12:30 PM"
+          - cell "Other"
+          - cell "pending"
+          - cell "tet"
+          - cell "8/3/2025"
+- contentinfo:
+  - img
+  - heading "Dr. Amita Shukla" [level=3]
+  - paragraph: Gynecologist with 10+ years of experience specializing in High-Risk Pregnancy, Infertility, PCOS/PCOD, Laparoscopy, and Hysteroscopy.
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - heading "Our Services" [level=3]
+  - list:
+    - listitem:
+      - link "High Risk Pregnancy":
+        - /url: /services/high-risk-pregnancy
+    - listitem:
+      - link "Pregnancy Complications":
+        - /url: /services/pregnancy-complications
+    - listitem:
+      - link "Infertility Treatment":
+        - /url: /services/infertility-treatment
+    - listitem:
+      - link "PCOS/PCOD Treatment":
+        - /url: /services/pcos-pcod-treatment
+    - listitem:
+      - link "Advanced Laparoscopy":
+        - /url: /services/laparoscopy
+    - listitem:
+      - link "Antenatal Care":
+        - /url: /services/antenatal-care
+    - listitem:
+      - link "Well Women Health":
+        - /url: /services/well-women-health
+  - heading "Service Areas" [level=3]
+  - list:
+    - listitem:
+      - link "Gynecologist in Gomti Nagar":
+        - /url: /gynecologist-in/gomti-nagar
+    - listitem:
+      - link "Gynecologist in Hazratganj":
+        - /url: /gynecologist-in/hazratganj
+    - listitem:
+      - link "Gynecologist in Jankipuram Extension":
+        - /url: /gynecologist-in/jankipuram-extension
+    - listitem:
+      - link "Gynecologist in Aliganj":
+        - /url: /gynecologist-in/aliganj
+    - listitem:
+      - link "Gynecologist in Mahanagar":
+        - /url: /gynecologist-in/mahanagar
+    - listitem:
+      - link "Gynecologist in Indira Nagar":
+        - /url: /gynecologist-in/indira-nagar
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "About Dr. Amita":
+        - /url: /about
+    - listitem:
+      - link "Health Blog":
+        - /url: /blog
+    - listitem:
+      - link "Book Appointment":
+        - /url: /contact
+    - listitem:
+      - link "FAQs":
+        - /url: /faq
+    - listitem:
+      - link "Privacy Policy":
+        - /url: /privacy-policy
+    - listitem:
+      - link "Terms & Conditions":
+        - /url: /terms
+  - heading "Contact Us" [level=3]
+  - list:
+    - listitem:
+      - img
+      - text: SCT Trust Hospital, A-1/7, Sector-H, Aliganj, Lucknow - 226024
+    - listitem:
+      - img
+      - link "+91 8303222222":
+        - /url: tel:+918303222222
+    - listitem:
+      - img
+      - link "amitaobg@gmail.com":
+        - /url: mailto:amitaobg@gmail.com
+    - listitem:
+      - img
+      - paragraph: Open 24 Hours with emergency and NICU facility
+  - heading "Find Us" [level=3]
+  - iframe
+  - paragraph: © 2025 Dr. Amita Shukla. All rights reserved.
+- region "Notifications (F8)":
+  - list
+- alert
+```

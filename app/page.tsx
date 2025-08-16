@@ -200,15 +200,15 @@ export default function Home() {
                 <Building2 className="h-5 w-5 mr-2" /> SCT Trust Hospital, Lucknow
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 green-title-text">
-                Dr. Amita Shukla
+                Best Gynaecologist in Lucknow
               </h1>
               <div className="typewriter overflow-hidden whitespace-nowrap mb-8 text-xl md:text-2xl text-text-brown font-light">
-                Gynecologist & Obstetrician
+                Dr. Amita Shukla - Women's Health Specialist
               </div>
               <p className="text-lg text-text-brown/80 mb-8 max-w-xl">
-                With 10+ years of experience, Dr. Amita provides compassionate and comprehensive 
-                care for women at every stage of life, specializing in high-risk pregnancies, 
-                infertility, and minimally invasive surgeries.
+                With 10+ years of experience, Dr. Amita Shukla is a leading gynecologist doctor in Lucknow providing 
+                compassionate and comprehensive women's healthcare. Expert in high-risk pregnancies, 
+                PCOS treatment, infertility care, and advanced laparoscopic surgeries.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild variant="ghost" className="btn-green">

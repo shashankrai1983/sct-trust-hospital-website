@@ -9,6 +9,7 @@ import { ConditionalNavbar } from '@/components/layout/conditional-navbar';
 import { ConditionalFooter } from '@/components/layout/conditional-footer';
 import { SchemaMarkup } from '@/components/seo/schema-markup';
 import { GoogleAnalytics } from '@/components/seo/google-analytics';
+import { MicrosoftClarity } from '@/components/seo/microsoft-clarity';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -27,6 +28,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://dramitashukla.com' : 'http://localhost:3000'),
   title: 'Best Gynaecologist in Lucknow - Dr. Amita Shukla | SCT Trust Hospital',
   description: 'Dr. Amita Shukla is the best gynaecologist in Lucknow with 10+ years experience. Expert in high-risk pregnancy, PCOS treatment, infertility care at SCT Trust Hospital. Book appointment.',
+  
+  // Canonical URL for SEO
+  alternates: {
+    canonical: 'https://dramitashukla.com',
+  },
   
   // Open Graph for social sharing
   openGraph: {
@@ -123,8 +129,21 @@ export default function RootLayout({
     <html lang="en-IN" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        
+        {/* Preload critical resources for Core Web Vitals */}
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" as="style" />
+        <link rel="preload" href="/images/dr-amita-shukla-hero.jpg" as="image" fetchpriority="high" />
+        
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//www.clarity.ms" />
+        
         <SchemaMarkup />
         <GoogleAnalytics />
+        <MicrosoftClarity />
       </head>
       <body className={`${inter.variable} ${lato.variable} font-sans bg-accent-cream antialiased`}>
         <Providers>

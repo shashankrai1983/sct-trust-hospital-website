@@ -141,6 +141,16 @@ const nextConfig = {
         fs: false,
         net: false,
         tls: false,
+        // Exclude MongoDB and related packages from client bundle
+        mongodb: false,
+        'mongodb-client-encryption': false,
+        '@mongodb-js/zstd': false,
+        '@aws-sdk/credential-providers': false,
+        'gcp-metadata': false,
+        'snappy': false,
+        'socks': false,
+        'kerberos': false,
+        'child_process': false,
       };
     }
     

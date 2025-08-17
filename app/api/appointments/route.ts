@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { getAppointmentsCollection } from '@/lib/mongodb';
+import { getAppointmentsCollection, getBookedSlotsCollection, getBlockedDatesCollection } from '@/lib/mongodb';
+import { checkDateAvailability } from '@/lib/availability';
 
 // Zod schema for appointment validation
 const appointmentSchema = z.object({
@@ -23,9 +24,7 @@ const appointmentSchema = z.object({
     message: "Please select a time slot.",
   }),
   message: z.string().optional(),
-  captchaToken: z.string().min(1, {
-    message: 'Please complete the CAPTCHA verification.',
-  }),
+  captchaToken: z.string().optional(), // Optional for localhost development
 });
 
 // Function to verify reCAPTCHA V3 token
@@ -79,25 +78,84 @@ export async function POST(request: NextRequest) {
     // Validate the data using Zod schema
     const validatedData = appointmentSchema.parse(body);
     
-    // Verify reCAPTCHA V3 token
-    const captchaResult = await verifyRecaptcha(validatedData.captchaToken);
+    // Skip reCAPTCHA verification in localhost development
+    const isLocalhost = process.env.NODE_ENV === 'development' || 
+                       request.headers.get('host')?.includes('localhost');
     
-    if (!captchaResult.success) {
-      const errorMessage = captchaResult.score !== undefined 
-        ? `reCAPTCHA verification failed. Score: ${captchaResult.score}. Please try again.`
-        : 'Invalid CAPTCHA verification. Please try again.';
+    if (!isLocalhost) {
+      // Verify reCAPTCHA V3 token for staging/production only
+      if (!validatedData.captchaToken) {
+        return NextResponse.json({
+          success: false,
+          message: 'CAPTCHA verification is required.',
+        }, { status: 400 });
+      }
       
-      return NextResponse.json({
-        success: false,
-        message: errorMessage,
-      }, { status: 400 });
+      const captchaResult = await verifyRecaptcha(validatedData.captchaToken);
+      
+      if (!captchaResult.success) {
+        const errorMessage = captchaResult.score !== undefined 
+          ? `reCAPTCHA verification failed. Score: ${captchaResult.score}. Please try again.`
+          : 'Invalid CAPTCHA verification. Please try again.';
+        
+        return NextResponse.json({
+          success: false,
+          message: errorMessage,
+        }, { status: 400 });
+      }
     }
     
     // Remove captchaToken from the data to be stored
     const { captchaToken, ...appointmentData } = validatedData;
     
-    // Get the appointments collection
-    const collection = await getAppointmentsCollection();
+    // Check slot availability before booking
+    const dateAvailable = checkDateAvailability(appointmentData.date);
+    if (!dateAvailable.available) {
+      return NextResponse.json({
+        success: false,
+        message: 'Selected date is not available for booking.',
+        reason: dateAvailable.reason,
+      }, { status: 409 });
+    }
+
+    // Check if specific time slot is available
+    const bookedSlotsCollection = await getBookedSlotsCollection();
+    const existingBooking = await bookedSlotsCollection.findOne({
+      date: appointmentData.date,
+      time: appointmentData.time,
+      status: 'active',
+    });
+
+    if (existingBooking) {
+      return NextResponse.json({
+        success: false,
+        message: 'Selected time slot is no longer available. Please choose another slot.',
+        reason: 'Slot already booked',
+      }, { status: 409 });
+    }
+
+    // Check if time slot is admin blocked
+    const blockedDatesCollection = await getBlockedDatesCollection();
+    const blockedSlot = await blockedDatesCollection.findOne({
+      date: appointmentData.date,
+      isActive: true,
+      $or: [
+        { timeSlots: { $exists: false } }, // Entire day blocked
+        { timeSlots: { $size: 0 } }, // Entire day blocked 
+        { timeSlots: appointmentData.time }, // Specific time blocked
+      ],
+    });
+
+    if (blockedSlot) {
+      return NextResponse.json({
+        success: false,
+        message: 'Selected time slot is blocked by administration.',
+        reason: blockedSlot.reason,
+      }, { status: 409 });
+    }
+    
+    // Get collections
+    const appointmentsCollection = await getAppointmentsCollection();
     
     // Prepare the appointment document
     const appointmentDoc = {
@@ -108,16 +166,38 @@ export async function POST(request: NextRequest) {
     };
     
     // Insert the appointment into MongoDB
-    const result = await collection.insertOne(appointmentDoc);
+    const appointmentResult = await appointmentsCollection.insertOne(appointmentDoc);
+    
+    // Create permanent slot booking
+    const slotBooking = {
+      date: appointmentData.date,
+      time: appointmentData.time,
+      appointmentId: appointmentResult.insertedId,
+      patientName: appointmentData.name,
+      patientEmail: appointmentData.email,
+      service: appointmentData.service,
+      status: 'active' as const,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    
+    await bookedSlotsCollection.insertOne(slotBooking);
+    
+    // Clean up any temporary bookings for this slot
+    await bookedSlotsCollection.deleteMany({
+      date: appointmentData.date,
+      time: appointmentData.time,
+      service: 'Temporary Hold',
+    });
     
     // Return success response
     return NextResponse.json({
       success: true,
       message: 'Appointment booked successfully',
-      appointmentId: result.insertedId,
+      appointmentId: appointmentResult.insertedId,
       appointment: {
         ...appointmentDoc,
-        _id: result.insertedId,
+        _id: appointmentResult.insertedId,
       },
     }, { status: 201 });
     

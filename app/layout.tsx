@@ -10,6 +10,7 @@ import { ConditionalFooter } from '@/components/layout/conditional-footer';
 import { SchemaMarkup } from '@/components/seo/schema-markup';
 import { GoogleAnalytics } from '@/components/seo/google-analytics';
 import { MicrosoftClarity } from '@/components/seo/microsoft-clarity';
+import { NotificationTicker } from '@/components/ui/notification-ticker';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -133,7 +134,7 @@ export default function RootLayout({
         {/* Preload critical resources for Core Web Vitals */}
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" as="style" />
-        <link rel="preload" href="/images/dr-amita-shukla-hero.jpg" as="image" fetchpriority="high" />
+        <link rel="preload" href="/images/dr-amita-shukla-hero.jpg" as="image" fetchPriority="high" />
         
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -158,6 +159,7 @@ export default function RootLayout({
               <ConditionalNavbar />
               <main className="relative">{children}</main>
               <ConditionalFooter />
+              <NotificationTicker />
               <Toaster />
             </div>
           </ThemeProvider>

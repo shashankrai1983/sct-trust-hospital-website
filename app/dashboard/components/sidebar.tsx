@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { CalendarIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { CalendarIcon, XMarkIcon, ClockIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
   { name: 'Appointments Dashboard', href: '/dashboard', icon: CalendarIcon },
+  { name: 'Block Dates', href: '/dashboard/blocked-dates', icon: ClockIcon },
 ]
 
 interface SidebarProps {

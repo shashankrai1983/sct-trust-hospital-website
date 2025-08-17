@@ -48,9 +48,21 @@ export async function getCollection(collectionName: string): Promise<Collection>
   return db.collection(collectionName);
 }
 
-// Appointment-specific collection helper
+// Collection helpers
 export async function getAppointmentsCollection() {
   return getCollection('appointments');
+}
+
+export async function getBookedSlotsCollection() {
+  return getCollection('bookedSlots');
+}
+
+export async function getBlockedDatesCollection() {
+  return getCollection('blockedDates');
+}
+
+export async function getTickerNotificationsCollection() {
+  return getCollection('tickerNotifications');
 }
 
 export default clientPromise;

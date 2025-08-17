@@ -46,9 +46,10 @@ export default function LoginPage() {
   }, [searchParams])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
     // Prevent submit if csrf not ready
     if (!csrfToken) {
-      e.preventDefault()
       setError('Initializing authentication. Please try again in a moment.')
       return
     }
@@ -61,16 +62,36 @@ export default function LoginPage() {
     const emailVal = (form.elements.namedItem('email') as HTMLInputElement)?.value || ''
     const passwordVal = (form.elements.namedItem('password') as HTMLInputElement)?.value || ''
     if (!emailVal) {
-      e.preventDefault()
       setIsLoading(false)
       setError('Please enter your email address')
       return
     }
     if (!passwordVal) {
-      e.preventDefault()
       setIsLoading(false)
       setError('Please enter your password')
       return
+    }
+
+    try {
+      // Use NextAuth signIn instead of native form submission
+      const result = await signIn('credentials', {
+        email: emailVal,
+        password: passwordVal,
+        redirect: false
+      })
+
+      if (result?.ok) {
+        // Successful authentication - redirect to callback URL
+        router.push(callbackUrl)
+      } else {
+        // Authentication failed
+        setError('Invalid email or password')
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.error('Authentication error:', error)
+      setError('Authentication failed. Please try again.')
+      setIsLoading(false)
     }
   }
 
@@ -104,15 +125,9 @@ export default function LoginPage() {
 
         <form
           className="mt-8 space-y-6"
-          method="post"
-          action="/api/auth/callback/credentials"
           onSubmit={handleSubmit}
           noValidate
         >
-          {/* Required for NextAuth credentials flow */}
-          <input type="hidden" name="csrfToken" value={csrfToken || ''} />
-          {/* Preserve callback URL after login */}
-          <input type="hidden" name="callbackUrl" value={callbackUrl} />
           {error && (
             <div className="rounded-md bg-red-50 p-4">
               <div className="text-sm text-red-700">{error}</div>

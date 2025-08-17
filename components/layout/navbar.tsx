@@ -38,6 +38,8 @@ const navLinks = [
       { title: 'BMI Calculator', href: '/calculators/bmi-calculator' },
       { title: 'Weight Gain Calculator', href: '/calculators/weight-gain-calculator' },
       { title: 'Prenatal Vitamin Calculator', href: '/calculators/prenatal-vitamin-calculator' },
+      { title: 'Calorie Needs Calculator', href: '/calculators/calorie-needs-calculator' },
+      { title: 'Water Intake Calculator', href: '/calculators/water-intake-calculator' },
     ]
   },
   { title: 'Blog', href: '/blog', icon: FileText },

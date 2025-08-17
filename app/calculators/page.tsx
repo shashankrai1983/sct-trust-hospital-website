@@ -17,7 +17,6 @@ interface CalculatorCard {
   icon: React.ComponentType<any>;
   category: string;
   popular?: boolean;
-  comingSoon?: boolean;
 }
 
 export default function CalculatorsPage() {
@@ -52,7 +51,6 @@ export default function CalculatorsPage() {
       href: '/calculators/pregnancy-week-calculator',
       icon: Baby,
       category: 'Pregnancy',
-      comingSoon: true,
     },
     {
       title: 'Conception Date Calculator',
@@ -60,7 +58,6 @@ export default function CalculatorsPage() {
       href: '/calculators/conception-date-calculator',
       icon: Heart,
       category: 'Pregnancy',
-      comingSoon: true,
     },
     {
       title: 'Weight Gain Calculator',
@@ -105,11 +102,25 @@ export default function CalculatorsPage() {
     },
     {
       title: 'Prenatal Vitamin Calculator',
-      description: 'Get personalized vitamin and mineral recommendations for pregnancy',
+      description: 'Get personalized vitamin and mineral recommendations for pregnancy with Indian superfood alternatives',
       href: '/calculators/prenatal-vitamin-calculator',
       icon: Pill,
       category: 'Nutrition',
-      comingSoon: true,
+      popular: true,
+    },
+    {
+      title: 'Calorie Needs Calculator',
+      description: 'Calculate daily calorie requirements using Harris-Benedict equation with pregnancy and breastfeeding factors',
+      href: '/calculators/calorie-needs-calculator',
+      icon: Activity,
+      category: 'Nutrition',
+    },
+    {
+      title: 'Water Intake Calculator',
+      description: 'Calculate daily water requirements with pregnancy factors and track hydration with Hydration Hero streaks',
+      href: '/calculators/water-intake-calculator',
+      icon: Droplets,
+      category: 'Nutrition',
     },
   ];
 
@@ -254,35 +265,10 @@ const CalculatorCard: React.FC<{
   const Icon = calculator.icon;
 
   const handleCardClick = () => {
-    if (cardRef.current && !calculator.comingSoon) {
+    if (cardRef.current) {
       presets.buttonPress(cardRef.current);
     }
   };
-
-  if (calculator.comingSoon) {
-    return (
-      <div
-        ref={cardRef}
-        className="bg-white rounded-xl p-6 border border-primary-green/20 opacity-60 cursor-not-allowed"
-      >
-        <div className="flex items-start justify-between mb-4">
-          <div className="w-12 h-12 bg-primary-green/5 rounded-lg flex items-center justify-center">
-            <Icon className="w-6 h-6 text-primary-green/60" />
-          </div>
-          <span className="bg-primary-beige/20 text-primary-beige text-xs font-medium px-2 py-1 rounded-full">
-            Coming Soon
-          </span>
-        </div>
-        
-        <h3 className="text-lg font-semibold text-text-brown/60 mb-2">
-          {calculator.title}
-        </h3>
-        <p className="text-sm text-text-brown/50 leading-relaxed">
-          {calculator.description}
-        </p>
-      </div>
-    );
-  }
 
   return (
     <Link href={calculator.href} onClick={handleCardClick}>

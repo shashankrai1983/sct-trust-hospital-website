@@ -26,23 +26,7 @@ export const authOptions: NextAuthOptions = {
 
         // Environment variables validation
         const adminEmail = process.env.ADMIN_EMAIL
-        let adminPasswordHash = process.env.ADMIN_PASSWORD_HASH
-
-        // Fallback: Read from .env file directly if environment variable not available
-        if (!adminPasswordHash) {
-          const fs = require('fs')
-          const path = require('path')
-          try {
-            const envPath = path.join(process.cwd(), '.env')
-            const envContent = fs.readFileSync(envPath, 'utf8')
-            const hashMatch = envContent.match(/ADMIN_PASSWORD_HASH=(.+)/)
-            if (hashMatch) {
-              adminPasswordHash = hashMatch[1].trim()
-            }
-          } catch (error) {
-            console.error('Error reading .env file:', error.message)
-          }
-        }
+        const adminPasswordHash = process.env.ADMIN_PASSWORD_HASH
 
         if (!adminEmail || !adminPasswordHash) {
           console.error('Authentication failed: Admin credentials not configured')
@@ -102,20 +86,7 @@ export const authOptions: NextAuthOptions = {
     signIn: '/dashboard/login',
     error: '/dashboard/login'
   },
-  secret: process.env.NEXTAUTH_SECRET || (() => {
-    // Fallback: Read NEXTAUTH_SECRET from .env file directly
-    try {
-      const fs = require('fs')
-      const path = require('path')
-      const envPath = path.join(process.cwd(), '.env')
-      const envContent = fs.readFileSync(envPath, 'utf8')
-      const secretMatch = envContent.match(/NEXTAUTH_SECRET=(.+)/)
-      return secretMatch ? secretMatch[1].trim() : undefined
-    } catch (error) {
-      console.error('Error reading NEXTAUTH_SECRET from .env:', error.message)
-      return undefined
-    }
-  })()
+  secret: process.env.NEXTAUTH_SECRET
 }
 
 export default function handler(req, res){

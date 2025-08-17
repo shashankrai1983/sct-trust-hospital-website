@@ -1,0 +1,360 @@
+# Page snapshot
+
+```yaml
+- main:
+  - heading "SCT Admin" [level=1]
+  - navigation:
+    - link "Appointments Dashboard":
+      - /url: /dashboard
+    - link "Block Dates":
+      - /url: /dashboard/blocked-dates
+  - text: SCT Trust Hospital Admin Dashboard
+  - main:
+    - heading "Dashboard Overview" [level=1]
+    - paragraph: Welcome to SCT Trust Hospital Admin Dashboard
+    - button "Enable Notifications"
+    - button
+    - link:
+      - /url: /dashboard/blocked-dates
+    - term: Total Appointments
+    - definition: "18"
+    - term: Today's Appointments
+    - definition: "10"
+    - term: This Week
+    - definition: "10"
+    - term: This Month
+    - definition: "18"
+    - textbox "Search by name, email, phone, or service..."
+    - button "Clear All"
+    - text: "Filters:"
+    - combobox:
+      - option "All Dates" [selected]
+      - option "2025-09-05"
+      - option "2025-08-30"
+      - option "2025-08-27"
+      - option "2025-08-23"
+      - option "2025-08-22"
+      - option "2025-08-21"
+      - option "2025-08-20"
+      - option "2025-08-19"
+      - option "2025-08-18"
+      - option "2025-08-16"
+    - combobox:
+      - option "All Services" [selected]
+      - option "General Consultation"
+      - option "Infertility Treatment"
+      - option "Other"
+    - button "All (18)"
+    - button "Pending (17)"
+    - button "Visited (1)"
+    - table:
+      - rowgroup:
+        - row "Patient Details Contact Appointment Service Status Message Booked On":
+          - cell "Patient Details"
+          - cell "Contact"
+          - cell "Appointment"
+          - cell "Service"
+          - cell "Status"
+          - cell "Message"
+          - cell "Booked On"
+      - rowgroup:
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-09-05 12:30 PM General Consultation Pending csdfsd 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-09-05 12:30 PM"
+          - cell "General Consultation"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "csdfsd"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-30 06:00 PM Other Pending kjk 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-30 06:00 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "kjk"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-21 12:30 PM Infertility Treatment Pending glb 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-21 12:30 PM"
+          - cell "Infertility Treatment"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "glb"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-21 11:00 AM Other Pending fdsfdsf 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-21 11:00 AM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "fdsfdsf"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-19 11:30 AM Other Pending test 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-19 11:30 AM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "test"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-30 10:30 AM Other Pending refac2 8/17/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-30 10:30 AM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "refac2"
+          - cell "8/17/2025"
+        - row "TU Test User Aug 22 Fix testfix@example.com 1234567890 2025-08-22 08:30 PM General Consultation Pending Test Aug 22 8:30PM booking without captcha 8/17/2025":
+          - cell "TU Test User Aug 22 Fix"
+          - cell "testfix@example.com 1234567890"
+          - cell "2025-08-22 08:30 PM"
+          - cell "General Consultation"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "Test Aug 22 8:30PM booking without captcha"
+          - cell "8/17/2025"
+        - row "TU Test User 4 test4@example.com 1234567890 2025-08-22 09:00 PM General Consultation Pending Test 9PM booking 8/17/2025":
+          - cell "TU Test User 4"
+          - cell "test4@example.com 1234567890"
+          - cell "2025-08-22 09:00 PM"
+          - cell "General Consultation"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "Test 9PM booking"
+          - cell "8/17/2025"
+        - row "TU Test User 3 test3@example.com 1234567890 2025-08-20 11:00 AM General Consultation Pending Test booking on non-holiday 8/17/2025":
+          - cell "TU Test User 3"
+          - cell "test3@example.com 1234567890"
+          - cell "2025-08-20 11:00 AM"
+          - cell "General Consultation"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "Test booking on non-holiday"
+          - cell "8/17/2025"
+        - row "TU Test User test@example.com 1234567890 2025-08-18 10:30 AM General Consultation Pending Test appointment without captcha 8/17/2025":
+          - cell "TU Test User"
+          - cell "test@example.com 1234567890"
+          - cell "2025-08-18 10:30 AM"
+          - cell "General Consultation"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "Test appointment without captcha"
+          - cell "8/17/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-21 06:00 PM Other Pending ewrwer 8/16/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-21 06:00 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "ewrwer"
+          - cell "8/16/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-23 07:00 PM Other Pending technical fixes 8/16/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-23 07:00 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "technical fixes"
+          - cell "8/16/2025"
+        - row "SS Shashank Shekhar Rai workwithsr@gmail.com 08750065555 2025-08-22 12:30 PM Other Pending jhb 8/16/2025":
+          - cell "SS Shashank Shekhar Rai"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-22 12:30 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "jhb"
+          - cell "8/16/2025"
+        - row "S soundnotificationtest3 wizweb@gmail.com 9999293689 2025-08-21 06:30 PM Other Pending rtesrt 8/12/2025":
+          - cell "S soundnotificationtest3"
+          - cell "wizweb@gmail.com 9999293689"
+          - cell "2025-08-21 06:30 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "rtesrt"
+          - cell "8/12/2025"
+        - row "NF notification fix wizweb@gmail.com 9999293689 2025-08-22 08:30 PM Other Pending dsfsdf 8/12/2025":
+          - cell "NF notification fix"
+          - cell "wizweb@gmail.com 9999293689"
+          - cell "2025-08-22 08:30 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "dsfsdf"
+          - cell "8/12/2025"
+        - row "N notification-test wizweb@gmail.com 9999293689 2025-08-21 07:30 PM Other Pending ghjghjghj 8/12/2025":
+          - cell "N notification-test"
+          - cell "wizweb@gmail.com 9999293689"
+          - cell "2025-08-21 07:30 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "ghjghjghj"
+          - cell "8/12/2025"
+        - row "T testnotificationstaging wizweb@gmail.com 9999293689 2025-08-27 07:00 PM Other Pending teststaging notificaiotn 8/12/2025":
+          - cell "T testnotificationstaging"
+          - cell "wizweb@gmail.com 9999293689"
+          - cell "2025-08-27 07:00 PM"
+          - cell "Other"
+          - cell "Pending":
+            - combobox:
+              - option "Pending" [selected]
+              - option "Visited"
+          - cell "teststaging notificaiotn"
+          - cell "8/12/2025"
+        - row "S stagingformcaptachv3fixed workwithsr@gmail.com 08750065555 2025-08-16 12:30 PM Other Visited tet 8/3/2025":
+          - cell "S stagingformcaptachv3fixed"
+          - cell "workwithsr@gmail.com 08750065555"
+          - cell "2025-08-16 12:30 PM"
+          - cell "Other"
+          - cell "Visited":
+            - combobox:
+              - option "Pending"
+              - option "Visited" [selected]
+          - cell "tet"
+          - cell "8/3/2025"
+- contentinfo:
+  - img
+  - heading "Dr. Amita Shukla" [level=3]
+  - paragraph: Gynecologist with 10+ years of experience specializing in High-Risk Pregnancy, Infertility, PCOS/PCOD, Laparoscopy, and Hysteroscopy.
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - link:
+    - /url: "#"
+    - img
+  - heading "Our Services" [level=3]
+  - list:
+    - listitem:
+      - link "High Risk Pregnancy":
+        - /url: /services/high-risk-pregnancy
+    - listitem:
+      - link "Pregnancy Complications":
+        - /url: /services/pregnancy-complications
+    - listitem:
+      - link "Infertility Treatment":
+        - /url: /services/infertility-treatment
+    - listitem:
+      - link "PCOS/PCOD Treatment":
+        - /url: /services/pcos-pcod-treatment
+    - listitem:
+      - link "Advanced Laparoscopy":
+        - /url: /services/laparoscopy
+    - listitem:
+      - link "Antenatal Care":
+        - /url: /services/antenatal-care
+    - listitem:
+      - link "Well Women Health":
+        - /url: /services/well-women-health
+  - heading "Service Areas" [level=3]
+  - list:
+    - listitem:
+      - link "Gynecologist in Gomti Nagar":
+        - /url: /gynecologist-in/gomti-nagar
+    - listitem:
+      - link "Gynecologist in Hazratganj":
+        - /url: /gynecologist-in/hazratganj
+    - listitem:
+      - link "Gynecologist in Jankipuram Extension":
+        - /url: /gynecologist-in/jankipuram-extension
+    - listitem:
+      - link "Gynecologist in Aliganj":
+        - /url: /gynecologist-in/aliganj
+    - listitem:
+      - link "Gynecologist in Mahanagar":
+        - /url: /gynecologist-in/mahanagar
+    - listitem:
+      - link "Gynecologist in Indira Nagar":
+        - /url: /gynecologist-in/indira-nagar
+  - heading "Quick Links" [level=3]
+  - list:
+    - listitem:
+      - link "About Dr. Amita":
+        - /url: /about
+    - listitem:
+      - link "Health Blog":
+        - /url: /blog
+    - listitem:
+      - link "Book Appointment":
+        - /url: /contact
+    - listitem:
+      - link "FAQs":
+        - /url: /faq
+    - listitem:
+      - link "Privacy Policy":
+        - /url: /privacy-policy
+    - listitem:
+      - link "Terms & Conditions":
+        - /url: /terms
+  - heading "Contact Us" [level=3]
+  - list:
+    - listitem:
+      - img
+      - text: SCT Trust Hospital, A-1/7, Sector-H, Aliganj, Lucknow - 226024
+    - listitem:
+      - img
+      - link "+91 8303222222":
+        - /url: tel:+918303222222
+    - listitem:
+      - img
+      - link "amitaobg@gmail.com":
+        - /url: mailto:amitaobg@gmail.com
+    - listitem:
+      - img
+      - paragraph: Open 24 Hours with emergency and NICU facility
+  - heading "Find Us" [level=3]
+  - iframe
+  - paragraph: © 2025 Dr. Amita Shukla. All rights reserved.
+- region "Notifications (F8)":
+  - list
+- alert
+```

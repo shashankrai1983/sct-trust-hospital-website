@@ -10,14 +10,15 @@ import {
   Phone
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { FAQSection as FAQSectionType, ServiceInfo } from '@/types/services';
+import { FAQSection as FAQSectionType } from '@/types/services';
+import { useService } from '@/contexts/service-context';
 
 interface FAQSectionProps {
   data: FAQSectionType;
-  service: ServiceInfo;
 }
 
-export default function FAQSection({ data, service }: FAQSectionProps) {
+export default function FAQSection({ data }: FAQSectionProps) {
+  const service = useService();
   const [openFAQ, setOpenFAQ] = useState<number | null>(null);
 
   const containerVariants = {

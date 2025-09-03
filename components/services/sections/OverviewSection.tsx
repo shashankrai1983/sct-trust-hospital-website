@@ -11,14 +11,15 @@ import {
   Shield
 } from 'lucide-react';
 import { getIcon } from '@/lib/icons';
-import { OverviewSection as OverviewSectionType, ServiceInfo } from '@/types/services';
+import { OverviewSection as OverviewSectionType } from '@/types/services';
+import { useService } from '@/contexts/service-context';
 
 interface OverviewSectionProps {
   data: OverviewSectionType;
-  service: ServiceInfo;
 }
 
-export default function OverviewSection({ data, service }: OverviewSectionProps) {
+export default function OverviewSection({ data }: OverviewSectionProps) {
+  const service = useService();
   const [isHydrated, setIsHydrated] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 

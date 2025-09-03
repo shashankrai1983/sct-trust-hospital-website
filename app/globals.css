@@ -97,7 +97,7 @@
     --theme-primary: #606c38;
     --theme-primary-light: rgba(96, 108, 56, 0.1);
     --theme-primary-medium: rgba(96, 108, 56, 0.2);
-    --theme-secondary: #228B22;
+    --theme-secondary: #3D7F2E;
     --theme-secondary-light: rgba(34, 139, 34, 0.1);
     --theme-secondary-medium: rgba(34, 139, 34, 0.2);
     --theme-accent: rgba(96, 108, 56, 0.05);
@@ -284,6 +284,18 @@
   .btn-green {
     @apply bg-forest-green text-white font-medium py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300 hover:translate-y-[-2px] relative overflow-hidden;
     position: relative;
+    background-color: #3D7F2E !important;
+  }
+  
+  /* Ensure button with btn-green class uses green background regardless of other classes */
+  button.btn-green,
+  .btn-green {
+    background-color: #3D7F2E !important;
+  }
+  
+  button.btn-green:hover,
+  .btn-green:hover {
+    background-color: #2f6224 !important;
   }
   
   .btn-green::before {
@@ -300,7 +312,7 @@
   }
   
   .btn-green:active::before {
-    border-color: #228B22;
+    border-color: #3D7F2E;
     animation: stroke-draw 0.6s ease-in-out forwards;
   }
   
@@ -311,12 +323,12 @@
       border-color: transparent;
     }
     50% {
-      border-color: #228B22;
+      border-color: #3D7F2E;
     }
     100% {
       stroke-dasharray: 1000 1000;
       stroke-dashoffset: 1000;
-      border-color: #228B22;
+      border-color: #3D7F2E;
     }
   }
   
@@ -401,7 +413,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  border: 2px solid #228B22;
+  border: 2px solid #3D7F2E;
   border-radius: 9999px;
   opacity: 0;
   transition: opacity 0.2s;

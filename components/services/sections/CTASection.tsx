@@ -13,14 +13,15 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getIcon } from '@/lib/icons';
-import { CTASection as CTASectionType, ServiceInfo } from '@/types/services';
+import { CTASection as CTASectionType } from '@/types/services';
+import { useService } from '@/contexts/service-context';
 
 interface CTASectionProps {
   data: CTASectionType;
-  service: ServiceInfo;
 }
 
-export default function CTASection({ data, service }: CTASectionProps) {
+export default function CTASection({ data }: CTASectionProps) {
+  const service = useService();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -71,11 +72,11 @@ export default function CTASection({ data, service }: CTASectionProps) {
             </motion.div>
             
             <motion.h2 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white"
               variants={itemVariants}
             >
               {data.title}<br />
-              <span className="text-accent-cream">
+              <span className="text-white">
                 {data.subtitle || `${service.name}?`}
               </span>
             </motion.h2>
@@ -172,7 +173,7 @@ export default function CTASection({ data, service }: CTASectionProps) {
             variants={itemVariants}
           >
             <div className="text-center">
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="text-2xl font-bold mb-4 text-white">
                 Medical Emergency?
               </h3>
               <p className="text-white/90 mb-6">

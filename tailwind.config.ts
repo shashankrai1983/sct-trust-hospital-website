@@ -53,7 +53,7 @@ const config: Config = {
         'accent-cream': '#fefae0',
         'text-brown': '#283618',
         'primary-green': '#606c38',
-        'forest-green': '#228B22',
+        'forest-green': '#3D7F2E',
         'bg-offwhite': '#fefae0',
       },
       backgroundImage: {

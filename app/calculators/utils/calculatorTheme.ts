@@ -4,7 +4,7 @@
 export const calculatorTheme = {
   // Primary Colors
   primary: '#606c38',        // primary-green
-  secondary: '#228B22',      // forest-green
+  secondary: '#3D7F2E',      // forest-green
   accent: '#fefae0',         // accent-cream
   highlight: '#dda15e',      // primary-beige
   text: '#283618',          // text-brown
@@ -31,8 +31,8 @@ export const calculatorTheme = {
     entryFrom: '#fefae0',    // accent-cream
     entryTo: '#606c38',      // primary-green
     highlightGlow: 'rgba(96, 108, 56, 0.2)',
-    particleColor: '#228B22', // forest-green
-    pulseColor: 'rgba(34, 139, 34, 0.3)',
+    particleColor: '#3D7F2E', // forest-green
+    pulseColor: 'rgba(61, 127, 46, 0.3)',
   },
 
   // CSS Classes for consistent styling

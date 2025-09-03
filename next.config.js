@@ -97,7 +97,18 @@ const nextConfig = {
 
   // SEO Redirects
   async redirects() {
-    return []
+    return [
+      {
+        source: '/amita.html',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/testimonials.html',
+        destination: '/',
+        permanent: true,
+      },
+    ]
   },
 
   // SEO Rewrites

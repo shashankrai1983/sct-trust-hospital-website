@@ -668,7 +668,7 @@ export const antenatalCareData: ServicePageData = {
   },
 
   config: {
-    theme: "primary",
+    theme: "forest",
     showEmergencyBanner: false,
     customSections: ["process", "treatments", "riskFactors", "differentiators"]
   }

@@ -17,14 +17,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { GridPattern } from '@/components/ui/grid-pattern';
 import { getIcon } from '@/lib/icons';
-import { HeroSection as HeroSectionType, ServiceInfo } from '@/types/services';
+import { HeroSection as HeroSectionType } from '@/types/services';
+import { useService } from '@/contexts/service-context';
 
 interface HeroSectionProps {
   data: HeroSectionType;
-  service: ServiceInfo;
 }
 
-export default function HeroSection({ data, service }: HeroSectionProps) {
+export default function HeroSection({ data }: HeroSectionProps) {
+  const service = useService();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {

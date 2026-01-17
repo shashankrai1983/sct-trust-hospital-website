@@ -13,6 +13,8 @@ Crawl-delay: 1
 Sitemap: https://dramitashukla.com/sitemap.xml
 Sitemap: https://dramitashukla.com/sitemap-pages.xml
 Sitemap: https://dramitashukla.com/sitemap-services.xml
+Sitemap: https://dramitashukla.com/sitemap-locations.xml
+Sitemap: https://dramitashukla.com/sitemap-blog.xml
 
 # Block AI scrapers for medical content protection
 User-agent: ChatGPT-User
